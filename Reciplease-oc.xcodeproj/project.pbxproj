@@ -1,0 +1,640 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E6C78A52842D7240050C53A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A42842D7240050C53A /* AppDelegate.swift */; };
+		6E6C78A72842D7240050C53A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A62842D7240050C53A /* SceneDelegate.swift */; };
+		6E6C78A92842D7240050C53A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A82842D7240050C53A /* ViewController.swift */; };
+		6E6C78AC2842D7240050C53A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6C78AA2842D7240050C53A /* Main.storyboard */; };
+		6E6C78AF2842D7240050C53A /* Reciplease_oc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78AD2842D7240050C53A /* Reciplease_oc.xcdatamodeld */; };
+		6E6C78B12842D72E0050C53A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E6C78B02842D72E0050C53A /* Assets.xcassets */; };
+		6E6C78B42842D72E0050C53A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6C78B22842D72E0050C53A /* LaunchScreen.storyboard */; };
+		6E6C78BF2842D72F0050C53A /* Reciplease_ocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */; };
+		6E6C78C92842D72F0050C53A /* Reciplease_ocUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78C82842D72F0050C53A /* Reciplease_ocUITests.swift */; };
+		6E6C78CB2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E6C78BB2842D72F0050C53A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E6C78992842D7240050C53A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E6C78A02842D7240050C53A;
+			remoteInfo = "Reciplease-oc";
+		};
+		6E6C78C52842D72F0050C53A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E6C78992842D7240050C53A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E6C78A02842D7240050C53A;
+			remoteInfo = "Reciplease-oc";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6E6C78A12842D7240050C53A /* Reciplease-oc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reciplease-oc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6C78A42842D7240050C53A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6E6C78A62842D7240050C53A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6E6C78A82842D7240050C53A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E6C78AB2842D7240050C53A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6E6C78AE2842D7240050C53A /* Reciplease_oc.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reciplease_oc.xcdatamodel; sourceTree = "<group>"; };
+		6E6C78B02842D72E0050C53A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E6C78B32842D72E0050C53A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6E6C78B52842D72E0050C53A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E6C78BA2842D72F0050C53A /* Reciplease-ocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reciplease-ocTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocTests.swift; sourceTree = "<group>"; };
+		6E6C78C42842D72F0050C53A /* Reciplease-ocUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reciplease-ocUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6C78C82842D72F0050C53A /* Reciplease_ocUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocUITests.swift; sourceTree = "<group>"; };
+		6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E6C789E2842D7240050C53A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78B72842D72F0050C53A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78C12842D72F0050C53A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E6C78982842D7240050C53A = {
+			isa = PBXGroup;
+			children = (
+				6E6C78A32842D7240050C53A /* Reciplease-oc */,
+				6E6C78BD2842D72F0050C53A /* Reciplease-ocTests */,
+				6E6C78C72842D72F0050C53A /* Reciplease-ocUITests */,
+				6E6C78A22842D7240050C53A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E6C78A22842D7240050C53A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E6C78A12842D7240050C53A /* Reciplease-oc.app */,
+				6E6C78BA2842D72F0050C53A /* Reciplease-ocTests.xctest */,
+				6E6C78C42842D72F0050C53A /* Reciplease-ocUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E6C78A32842D7240050C53A /* Reciplease-oc */ = {
+			isa = PBXGroup;
+			children = (
+				6E6C78A42842D7240050C53A /* AppDelegate.swift */,
+				6E6C78A62842D7240050C53A /* SceneDelegate.swift */,
+				6E6C78A82842D7240050C53A /* ViewController.swift */,
+				6E6C78AA2842D7240050C53A /* Main.storyboard */,
+				6E6C78B02842D72E0050C53A /* Assets.xcassets */,
+				6E6C78B22842D72E0050C53A /* LaunchScreen.storyboard */,
+				6E6C78B52842D72E0050C53A /* Info.plist */,
+				6E6C78AD2842D7240050C53A /* Reciplease_oc.xcdatamodeld */,
+			);
+			path = "Reciplease-oc";
+			sourceTree = "<group>";
+		};
+		6E6C78BD2842D72F0050C53A /* Reciplease-ocTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */,
+			);
+			path = "Reciplease-ocTests";
+			sourceTree = "<group>";
+		};
+		6E6C78C72842D72F0050C53A /* Reciplease-ocUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6E6C78C82842D72F0050C53A /* Reciplease_ocUITests.swift */,
+				6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */,
+			);
+			path = "Reciplease-ocUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E6C78A02842D7240050C53A /* Reciplease-oc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E6C78CE2842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-oc" */;
+			buildPhases = (
+				6E6C789D2842D7240050C53A /* Sources */,
+				6E6C789E2842D7240050C53A /* Frameworks */,
+				6E6C789F2842D7240050C53A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Reciplease-oc";
+			productName = "Reciplease-oc";
+			productReference = 6E6C78A12842D7240050C53A /* Reciplease-oc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6E6C78B92842D72F0050C53A /* Reciplease-ocTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E6C78D12842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-ocTests" */;
+			buildPhases = (
+				6E6C78B62842D72F0050C53A /* Sources */,
+				6E6C78B72842D72F0050C53A /* Frameworks */,
+				6E6C78B82842D72F0050C53A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E6C78BC2842D72F0050C53A /* PBXTargetDependency */,
+			);
+			name = "Reciplease-ocTests";
+			productName = "Reciplease-ocTests";
+			productReference = 6E6C78BA2842D72F0050C53A /* Reciplease-ocTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6E6C78C32842D72F0050C53A /* Reciplease-ocUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E6C78D42842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-ocUITests" */;
+			buildPhases = (
+				6E6C78C02842D72F0050C53A /* Sources */,
+				6E6C78C12842D72F0050C53A /* Frameworks */,
+				6E6C78C22842D72F0050C53A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E6C78C62842D72F0050C53A /* PBXTargetDependency */,
+			);
+			name = "Reciplease-ocUITests";
+			productName = "Reciplease-ocUITests";
+			productReference = 6E6C78C42842D72F0050C53A /* Reciplease-ocUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E6C78992842D7240050C53A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					6E6C78A02842D7240050C53A = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					6E6C78B92842D72F0050C53A = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 6E6C78A02842D7240050C53A;
+					};
+					6E6C78C32842D72F0050C53A = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 6E6C78A02842D7240050C53A;
+					};
+				};
+			};
+			buildConfigurationList = 6E6C789C2842D7240050C53A /* Build configuration list for PBXProject "Reciplease-oc" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6E6C78982842D7240050C53A;
+			productRefGroup = 6E6C78A22842D7240050C53A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E6C78A02842D7240050C53A /* Reciplease-oc */,
+				6E6C78B92842D72F0050C53A /* Reciplease-ocTests */,
+				6E6C78C32842D72F0050C53A /* Reciplease-ocUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E6C789F2842D7240050C53A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6C78B42842D72E0050C53A /* LaunchScreen.storyboard in Resources */,
+				6E6C78B12842D72E0050C53A /* Assets.xcassets in Resources */,
+				6E6C78AC2842D7240050C53A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78B82842D72F0050C53A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78C22842D72F0050C53A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E6C789D2842D7240050C53A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6C78AF2842D7240050C53A /* Reciplease_oc.xcdatamodeld in Sources */,
+				6E6C78A92842D7240050C53A /* ViewController.swift in Sources */,
+				6E6C78A52842D7240050C53A /* AppDelegate.swift in Sources */,
+				6E6C78A72842D7240050C53A /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78B62842D72F0050C53A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6C78BF2842D72F0050C53A /* Reciplease_ocTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E6C78C02842D72F0050C53A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6C78C92842D72F0050C53A /* Reciplease_ocUITests.swift in Sources */,
+				6E6C78CB2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E6C78BC2842D72F0050C53A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E6C78A02842D7240050C53A /* Reciplease-oc */;
+			targetProxy = 6E6C78BB2842D72F0050C53A /* PBXContainerItemProxy */;
+		};
+		6E6C78C62842D72F0050C53A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E6C78A02842D7240050C53A /* Reciplease-oc */;
+			targetProxy = 6E6C78C52842D72F0050C53A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E6C78AA2842D7240050C53A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E6C78AB2842D7240050C53A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6E6C78B22842D72E0050C53A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E6C78B32842D72E0050C53A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E6C78CC2842D72F0050C53A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6E6C78CD2842D72F0050C53A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E6C78CF2842D72F0050C53A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Reciplease-oc/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-oc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E6C78D02842D72F0050C53A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Reciplease-oc/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-oc";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6E6C78D22842D72F0050C53A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-ocTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease-oc.app/Reciplease-oc";
+			};
+			name = Debug;
+		};
+		6E6C78D32842D72F0050C53A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-ocTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease-oc.app/Reciplease-oc";
+			};
+			name = Release;
+		};
+		6E6C78D52842D72F0050C53A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-ocUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Reciplease-oc";
+			};
+			name = Debug;
+		};
+		6E6C78D62842D72F0050C53A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.honoreadeline.Reciplease-ocUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Reciplease-oc";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E6C789C2842D7240050C53A /* Build configuration list for PBXProject "Reciplease-oc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6C78CC2842D72F0050C53A /* Debug */,
+				6E6C78CD2842D72F0050C53A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E6C78CE2842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-oc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6C78CF2842D72F0050C53A /* Debug */,
+				6E6C78D02842D72F0050C53A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E6C78D12842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-ocTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6C78D22842D72F0050C53A /* Debug */,
+				6E6C78D32842D72F0050C53A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E6C78D42842D72F0050C53A /* Build configuration list for PBXNativeTarget "Reciplease-ocUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6C78D52842D72F0050C53A /* Debug */,
+				6E6C78D62842D72F0050C53A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6E6C78AD2842D7240050C53A /* Reciplease_oc.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6E6C78AE2842D7240050C53A /* Reciplease_oc.xcdatamodel */,
+			);
+			currentVersion = 6E6C78AE2842D7240050C53A /* Reciplease_oc.xcdatamodel */;
+			path = Reciplease_oc.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6E6C78992842D7240050C53A /* Project object */;
+}

@@ -19,6 +19,7 @@
 		6E6C78CB2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */; };
 		6E6C78D82842D9F60050C53A /* SearchIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78D72842D9F60050C53A /* SearchIngredientView.swift */; };
 		6E6C78DD2842DA5F0050C53A /* IngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78DC2842DA5F0050C53A /* IngredientTableViewCell.swift */; };
+		6E6C78E02842E0590050C53A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6E6C78DF2842E0590050C53A /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E6C78E02842E0590050C53A /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +178,9 @@
 			dependencies = (
 			);
 			name = "Reciplease-oc";
+			packageProductDependencies = (
+				6E6C78DF2842E0590050C53A /* Alamofire */,
+			);
 			productName = "Reciplease-oc";
 			productReference = 6E6C78A12842D7240050C53A /* Reciplease-oc.app */;
 			productType = "com.apple.product-type.application";
@@ -248,6 +253,9 @@
 				Base,
 			);
 			mainGroup = 6E6C78982842D7240050C53A;
+			packageReferences = (
+				6E6C78DE2842E0590050C53A /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 6E6C78A22842D7240050C53A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -654,6 +662,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6E6C78DE2842E0590050C53A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6E6C78DF2842E0590050C53A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E6C78DE2842E0590050C53A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		6E6C78AD2842D7240050C53A /* Reciplease_oc.xcdatamodeld */ = {

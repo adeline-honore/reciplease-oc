@@ -8,30 +8,20 @@
 import Foundation
 import Alamofire
 
-protocol SearchNetworkProtocol {
-    func callNetwork(router: URLRequestConvertible, completionHandler: @escaping (Data) -> ())
-}
-
-
-class SearchNetwork: SearchNetworkProtocol {
-    func callNetwork(router: URLRequestConvertible, completionHandler: @escaping (Data) -> ()) {
-        
-        do {
-        let urlRequest = try router.asURLRequest()
+class APINetwork: APINetworkProtocol {
+    func callNetwork(router: URLRequestConvertible, completionHandler: @escaping (Result<Data, Error>) -> ()) {
+                
+        AF.request(router).responseData { responseData in
+             let reponseResult = responseData.result
             
-            print(urlRequest)
-            AF.request(urlRequest).validate().responseDecodable(of: RecipesStructure.self) { response in
-            print("response : ")
-                print(response)
-                if let objet = response.value {
-                    print("objet : ")
-                    print(objet)
-                    completionHandler(objet)
-                }
+            switch reponseResult {
+            case .success(let data):
+                completionHandler(.success(data))
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
             
-        } catch {
-            print("eeeddededede")
         }
+        
     }
 }

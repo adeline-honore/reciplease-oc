@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import Alamofire
+
+protocol APINetworkProtocol {
+    func callNetwork(router: URLRequestConvertible, completionHandler: @escaping (Result<Data, Error>) -> ())
+}

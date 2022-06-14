@@ -138,16 +138,16 @@
         <!--Search View Controller-->
         <scene sceneID="Et9-xf-mxd">
             <objects>
-                <viewController id="kYF-Xh-mz8" customClass="SearchViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OGj-tQ-8BX" customClass="SearchIngredientView" customModule="Reciplease" customModuleProvider="target">
+                <viewController id="kYF-Xh-mz8" customClass="SearchViewController" customModule="Reciplease_oc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OGj-tQ-8BX" customClass="SearchIngredientView" customModule="Reciplease_oc" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xVJ-1Y-gBF">
-                                <rect key="frame" x="10" y="294" width="394" height="428"/>
+                                <rect key="frame" x="10" y="294" width="394" height="379"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientTableViewCell" id="b20-uJ-0h6" customClass="IngredientTableViewCell" customModule="Reciplease" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientTableViewCell" id="b20-uJ-0h6" customClass="IngredientTableViewCell" customModule="Reciplease_oc" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="394" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b20-uJ-0h6" id="SpE-Mt-pyt">
@@ -174,9 +174,12 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aka-lQ-GDU">
-                                <rect key="frame" x="30" y="752" width="354" height="31"/>
+                                <rect key="frame" x="30" y="703" width="354" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Clear the list of ingredients"/>
+                                <connections>
+                                    <action selector="didTapClearListIngredientButoon" destination="kYF-Xh-mz8" eventType="touchUpInside" id="7rS-b1-Erx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cg1-vq-1Ak">
                                 <rect key="frame" x="30" y="182" width="354" height="31"/>
@@ -223,7 +226,17 @@
                             <outlet property="searchIngredientTextField" destination="Sd2-8P-6Ur" id="BJt-G5-RTA"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="Pda-RK-mtR"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="omO-wV-eCy"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="Pda-RK-mtR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="VHR-gy-fgF">
+                            <connections>
+                                <action selector="didTapSearchRecipeButton" destination="kYF-Xh-mz8" id="2es-Jj-Cip"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ingredientTableView" destination="xVJ-1Y-gBF" id="J6S-yu-dve"/>
                     </connections>

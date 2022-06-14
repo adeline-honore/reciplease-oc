@@ -6,36 +6,46 @@
 //
 
 import Foundation
-import Alamofire
 
-class SearchIngredientsService {
+protocol SearchIngredientsServiceProtocol {
+    func getData(ingredients: String, completionHandler: @escaping (Result<[Hit], ErrorType>) -> ())
+}
+
+class SearchIngredientsService: SearchIngredientsServiceProtocol {
     
+    private var network: APINetworkProtocol
     
-    private var network: SearchNetwork
-        
-    init(network: SearchNetwork) {
+    init(network: APINetworkProtocol) {
         self.network = network
     }
-     
     
-    func getData(ingredients: String, completionHandler: @escaping (DataResponse<RecipesStructure, AFError>) -> ()) {
+    
+    func getData(ingredients: String, completionHandler: @escaping (Result<[Hit], ErrorType>) -> ()) {
         
-        do {
-            let aaa = network.callNetwork(router: try SearchRouterNetwok.ingredients(ingredients).asURLRequest()) { result in
-            }
+        try? network.callNetwork(router: SearchRouterNetwork.ingredients(ingredients).asURLRequest()) { result in
             
-                AF.request(aaa).validate().responseDecodable(of: RecipesStructure.self) { response in
-                print("response : ")
-                print(response)
-                    
-                    if let object = response.value {
-                        print("objet : ")
-                        print(object)
-                    }
+            switch result {
+            case .success(let data):
+                do {
+                    let recipesResult = try self.transformToRecipes(data: data)
+                    completionHandler(.success(recipesResult.hits))
+                } catch {
+                    completionHandler(.failure(ErrorType.decodingError))
+                }
+                
+            case .failure:
+                completionHandler(.failure(ErrorType.network))
             }
         }
-        catch {
-            fatalError("unable to convert data to JSON")
+    }
+    
+    private func transformToRecipes(data: Data) throws -> RecipesStructure {
+        
+        do {
+            return try JSONDecoder().decode(RecipesStructure.self, from: data)
+        } catch {
+            print(error.localizedDescription)
+            throw ErrorType.decodingError
         }
     }
 }

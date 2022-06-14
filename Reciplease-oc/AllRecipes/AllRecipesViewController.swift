@@ -9,6 +9,7 @@ import UIKit
 
 class AllRecipesViewController: UIViewController {
 
+    var recipes: [Hit]?
     override func viewDidLoad() {
         super.viewDidLoad()
 

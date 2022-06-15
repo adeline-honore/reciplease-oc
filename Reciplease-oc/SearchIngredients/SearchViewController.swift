@@ -102,8 +102,9 @@ class SearchViewController: UIViewController {
     }
     
     private func clearIngredients() {
-        ingredients = [""]
-        ingredientsInString = ""
+        ingredients.removeAll()
+        ingredientsInString.removeAll()
+        ingredientTableView.reloadData()
     }
 }
 
@@ -122,7 +123,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.ingredient.text = ingredients[indexPath.row]
+        cell.ingredient.text = "-  " + ingredients[indexPath.row]
         return cell
     }
 }

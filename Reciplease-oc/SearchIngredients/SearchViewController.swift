@@ -54,19 +54,38 @@ class SearchViewController: UIViewController {
         
         newIngredient = newIngredient.trimmingCharacters(in: .whitespaces)
         
-        // TODO create regex to test newIngredient
+        newIngredient = newIngredient.lowercased()
         
-        if !newIngredient.isEmpty {
+        // method to test newIngredient characters
+        let isValid = validateString(text: newIngredient, with: #"^[a-z]+$"#)
+        
+        if (isValid == true && !newIngredient.isEmpty) {
             ingredients.append(newIngredient)
             ingredientTableView.reloadData()
-            searchIngredientView.searchIngredientTextField.text = ""
-        } else {
-            searchIngredientView.searchIngredientTextField.text = ""
+            searchIngredientView.searchIngredientTextField.text?.removeAll()
+        } else if isValid == false {
+            errorMessage(element: .notAWord)
+            searchIngredientView.searchIngredientTextField.text?.removeAll()
+        } else if newIngredient.isEmpty {
+            searchIngredientView.searchIngredientTextField.text?.removeAll()
             errorMessage(element: .empty)
         }
     }
     
     
+    private func validateString(text: String, with regex: String) -> Bool {
+            // Create the regex
+            guard let gRegex = try? NSRegularExpression(pattern: regex) else {
+                return false
+            }
+            // Create the range
+            let range = NSRange(location: 0, length: text.utf16.count)
+            // Perform the test
+            if gRegex.firstMatch(in: text, options: [], range: range) != nil {
+                return true
+            }
+            return false
+    }
     
     // MARK: - Search Recipes
     @IBAction func didTapSearchRecipeButton() {

@@ -12,6 +12,7 @@ enum ErrorType: Error {
     case empty
     case network
     case noRecipe
+    case notAWord
     // TODO : create error " device no connected"
     
     
@@ -25,6 +26,8 @@ enum ErrorType: Error {
             return "Oups!, no return from API ."
         case .noRecipe:
             return "Oups!, there is no recipe with this (thoose) ingredient(s)"
+        case .notAWord:
+            return "Oups!, word not accepted"
         }
     }
 }

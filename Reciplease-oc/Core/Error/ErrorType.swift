@@ -23,7 +23,7 @@ enum ErrorType: Error {
         case .empty:
             return "Text field is empty, please enter ingredient"
         case .network:
-            return "Oups!, no return from API ."
+            return "Oups!, error happens ."
         case .noRecipe:
             return "Oups!, there is no recipe with this (thoose) ingredient(s)"
         case .notAWord:

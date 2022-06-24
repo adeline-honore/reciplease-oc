@@ -31,17 +31,6 @@ class SearchViewController: UIViewController {
         ingredientTableView.delegate = self
     }
     
-    // MARK: - Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueSearch {
-            let allRecipesVC = segue.destination as? AllRecipesViewController
-            
-            let recipes = sender as? [Hit]
-            allRecipesVC?.recipes = recipes
-        }
-    }
-    
     // MARK: - Add ingredients
     
     @IBAction func didTapAddIngredientButton() {
@@ -52,23 +41,21 @@ class SearchViewController: UIViewController {
         
         guard var newIngredient = searchIngredientView.searchIngredientTextField.text else { return }
         
-        newIngredient = newIngredient.trimmingCharacters(in: .whitespaces)
-        
-        newIngredient = newIngredient.lowercased()
-        
+        newIngredient = newIngredient.trimmingCharacters(in: .whitespaces).lowercased()
+                
         // method to test newIngredient characters
         let isValid = validateString(text: newIngredient, with: #"^[a-z]+$"#)
         
-        if (isValid == true && !newIngredient.isEmpty) {
+        if isValid && !newIngredient.isEmpty {
             ingredients.append(newIngredient)
             ingredientTableView.reloadData()
-            searchIngredientView.searchIngredientTextField.text?.removeAll()
-        } else if isValid == false {
-            errorMessage(element: .notAWord)
             searchIngredientView.searchIngredientTextField.text?.removeAll()
         } else if newIngredient.isEmpty {
             searchIngredientView.searchIngredientTextField.text?.removeAll()
             errorMessage(element: .empty)
+        } else if !isValid {
+            errorMessage(element: .notAWord)
+            searchIngredientView.searchIngredientTextField.text?.removeAll()
         }
     }
     
@@ -107,13 +94,24 @@ class SearchViewController: UIViewController {
         }
     }
     
+    // MARK: - Send Recipes to AllRecipesViewController
     private func sendListOfRecipes(list: [Hit]) {
         if !list.isEmpty {
             allRecipesArray = list
+            performSegue(withIdentifier: segueSearch, sender: nil)
         } else {
             errorMessage(element: .noRecipe)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueSearch {
+            let allRecipesVC = segue.destination as? AllRecipesViewController
+            
+            allRecipesVC?.recipes = allRecipesArray
+        }
+    }
+    
     
     // MARK: - Clear List of Ingredients
     @IBAction func didTapClearListIngredientButoon() {

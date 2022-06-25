@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E3D0D4A286683A100EE82A7 /* RecipesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D0D49286683A100EE82A7 /* RecipesListTableViewCell.swift */; };
 		6E6C78A52842D7240050C53A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A42842D7240050C53A /* AppDelegate.swift */; };
 		6E6C78A72842D7240050C53A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A62842D7240050C53A /* SceneDelegate.swift */; };
 		6E6C78A92842D7240050C53A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A82842D7240050C53A /* SearchViewController.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E3D0D49286683A100EE82A7 /* RecipesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListTableViewCell.swift; sourceTree = "<group>"; };
 		6E6C78A12842D7240050C53A /* Reciplease-oc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reciplease-oc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6C78A42842D7240050C53A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E6C78A62842D7240050C53A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				6EFFB01A284FC0FE00E2424E /* AllRecipesViewController.swift */,
+				6E3D0D49286683A100EE82A7 /* RecipesListTableViewCell.swift */,
 			);
 			path = AllRecipes;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				6EFFB013284FBC2E00E2424E /* RecipesStructure.swift in Sources */,
 				6E6C78D82842D9F60050C53A /* SearchIngredientView.swift in Sources */,
 				6E6C78DD2842DA5F0050C53A /* IngredientTableViewCell.swift in Sources */,
+				6E3D0D4A286683A100EE82A7 /* RecipesListTableViewCell.swift in Sources */,
 				6EFFB017284FBDC000E2424E /* SearchRouterNetwork.swift in Sources */,
 				6E6C78A92842D7240050C53A /* SearchViewController.swift in Sources */,
 				6E6C78A52842D7240050C53A /* AppDelegate.swift in Sources */,

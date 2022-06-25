@@ -19,9 +19,9 @@ class RecipesListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var recipesListIngredientLines: UILabel!
     
+    @IBOutlet weak var datasStackView: UIStackView!
     
-    
-    
+    @IBOutlet weak var datasView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

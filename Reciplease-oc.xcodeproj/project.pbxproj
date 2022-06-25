@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E3D0D4A286683A100EE82A7 /* RecipesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3D0D49286683A100EE82A7 /* RecipesListTableViewCell.swift */; };
+		6E461F3C286737BC00932E79 /* OneRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E461F3B286737BC00932E79 /* OneRecipeViewController.swift */; };
+		6E461F3E286737E500932E79 /* OneRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E461F3D286737E500932E79 /* OneRecipeView.swift */; };
 		6E6C78A52842D7240050C53A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A42842D7240050C53A /* AppDelegate.swift */; };
 		6E6C78A72842D7240050C53A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A62842D7240050C53A /* SceneDelegate.swift */; };
 		6E6C78A92842D7240050C53A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78A82842D7240050C53A /* SearchViewController.swift */; };
@@ -50,6 +52,8 @@
 
 /* Begin PBXFileReference section */
 		6E3D0D49286683A100EE82A7 /* RecipesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesListTableViewCell.swift; sourceTree = "<group>"; };
+		6E461F3B286737BC00932E79 /* OneRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRecipeViewController.swift; sourceTree = "<group>"; };
+		6E461F3D286737E500932E79 /* OneRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRecipeView.swift; sourceTree = "<group>"; };
 		6E6C78A12842D7240050C53A /* Reciplease-oc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reciplease-oc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6C78A42842D7240050C53A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E6C78A62842D7240050C53A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +106,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E461F3A2867378900932E79 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		6E6C78982842D7240050C53A = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +136,7 @@
 		6E6C78A32842D7240050C53A /* Reciplease-oc */ = {
 			isa = PBXGroup;
 			children = (
+				6E461F3A2867378900932E79 /* New Group */,
 				6EFFB01C284FCBA500E2424E /* Core */,
 				6E6C78DB2842DA180050C53A /* SearchIngredients */,
 				6E6C78DA2842DA0F0050C53A /* AllRecipes */,
@@ -160,6 +172,8 @@
 		6E6C78D92842D9FE0050C53A /* OneRecipe */ = {
 			isa = PBXGroup;
 			children = (
+				6E461F3B286737BC00932E79 /* OneRecipeViewController.swift */,
+				6E461F3D286737E500932E79 /* OneRecipeView.swift */,
 			);
 			path = OneRecipe;
 			sourceTree = "<group>";
@@ -351,6 +365,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EFFB019284FBEC700E2424E /* APINetwork.swift in Sources */,
+				6E461F3C286737BC00932E79 /* OneRecipeViewController.swift in Sources */,
+				6E461F3E286737E500932E79 /* OneRecipeView.swift in Sources */,
 				6E6DC49D28592AA900AA5C45 /* UIViewController+Extension.swift in Sources */,
 				6E6C78AF2842D7240050C53A /* Reciplease_oc.xcdatamodeld in Sources */,
 				6EFFB013284FBC2E00E2424E /* RecipesStructure.swift in Sources */,

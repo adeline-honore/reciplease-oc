@@ -11,6 +11,7 @@ enum ErrorType: Error {
     case decodingError
     case empty
     case network
+    case noInstruction
     case noRecipe
     case notAWord
     // TODO : create error " device no connected"
@@ -24,6 +25,8 @@ enum ErrorType: Error {
             return "Text field is empty, please enter ingredient"
         case .network:
             return "Oups!, error happens ."
+        case .noInstruction:
+            return "Oups!, there isn't not instruction for this recipe"
         case .noRecipe:
             return "Oups!, there is no recipe with this (thoose) ingredient(s)"
         case .notAWord:

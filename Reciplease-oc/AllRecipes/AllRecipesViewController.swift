@@ -7,11 +7,18 @@
 
 import UIKit
 
+protocol AllRecipesViewControllerDelegate: AnyObject {
+    func didSelectRecipe(_ recipe: Hit)
+}
+
 class AllRecipesViewController: UIViewController {
     
     // MARK: - Properties
     
     var recipes: [Hit]?
+    var delegate: AllRecipesViewControllerDelegate?
+    var oneRecipe: Hit?
+    private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
     
     
     // MARK: - Outlet
@@ -28,23 +35,28 @@ class AllRecipesViewController: UIViewController {
     }
     
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
     // MARK: - Get Images
     
     func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func manageCellApparence(cell: RecipesListTableViewCell) {
-        //cell.datasStackView.backgroundColor = Color(red: 0.4627, green: 0.8392, blue: 1.0)
-        
+    /*func manageCellApparence(cell: RecipesListTableViewCell) {
         cell.datasView.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 0.5)
-        
+    }*/
+    
+    // MARK: - Send One Recipe to OneRecipeViewController
+    private func sendOneRecipe(recipe: Hit) {
+        oneRecipe = recipe
+            performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueShowOneRecipe {
+            let oneRecipeVC = segue.destination as? OneRecipeViewController
+            
+            oneRecipeVC?.oneRecipe = oneRecipe
+        }
     }
     
 }
@@ -85,7 +97,22 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.recipesListImageView.image = UIImage(data: data)
             }
         }
-        manageCellApparence(cell: cell)
+        cell.datasView.manageDataViewBackground()
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let recipes = recipes else { return }
+        let recipesSelectRow = recipes[indexPath.row]
+        self.delegate?.didSelectRecipe(recipesSelectRow)
+        sendOneRecipe(recipe: recipesSelectRow)
+    }
+}
+
+
+extension UIView {
+    func manageDataViewBackground() {
+        self.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 0.5)
     }
 }

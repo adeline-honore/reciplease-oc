@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SearchIngredientsServiceProtocol {
-    func getData(ingredients: String, completionHandler: @escaping (Result<[Hit], ErrorType>) -> ())
+    func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ())
 }
 
 class SearchIngredientsService: SearchIngredientsServiceProtocol {
@@ -20,7 +20,7 @@ class SearchIngredientsService: SearchIngredientsServiceProtocol {
     }
     
     
-    func getData(ingredients: String, completionHandler: @escaping (Result<[Hit], ErrorType>) -> ()) {
+    func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ()) {
         
         try? network.callNetwork(router: SearchRouterNetwork.ingredients(ingredients).asURLRequest()) { result in
             
@@ -28,7 +28,8 @@ class SearchIngredientsService: SearchIngredientsServiceProtocol {
             case .success(let data):
                 do {
                     let recipesResult = try self.transformToRecipes(data: data)
-                    completionHandler(.success(recipesResult.hits))
+                    let recipes = recipesResult.hits.map { $0.recipe}
+                    completionHandler(.success(recipes))
                 } catch {
                     completionHandler(.failure(ErrorType.decodingError))
                 }

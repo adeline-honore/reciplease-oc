@@ -15,10 +15,11 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Properties
     
-    var recipes: [Hit]?
+    var recipes: [Recipe]?
     var delegate: AllRecipesViewControllerDelegate?
-    var oneRecipe: Hit?
+    var oneRecipe: Recipe?
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
+    var n = 0
     
     
     // MARK: - Outlet
@@ -41,14 +42,11 @@ class AllRecipesViewController: UIViewController {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    /*func manageCellApparence(cell: RecipesListTableViewCell) {
-        cell.datasView.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 0.5)
-    }*/
     
     // MARK: - Send One Recipe to OneRecipeViewController
-    private func sendOneRecipe(recipe: Hit) {
+    private func sendOneRecipe(recipe: Recipe) {
         oneRecipe = recipe
-            performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
+        performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,19 +80,22 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let recipes = recipes else { return UITableViewCell()}
         
         let oneRecipe = recipes[indexPath.row]
-                
-        cell.recipesListTitle.text = oneRecipe.recipe.label
-        cell.recipesListTotalTime.text = String(oneRecipe.recipe.totalTime)
-        cell.recipesListIngredientLines.text = oneRecipe.recipe.ingredientLines.joined(separator: " ")
         
-        guard let pictureUrl = URL(string: oneRecipe.recipe.image) else { return UITableViewCell() }
+        cell.recipesListTitle.text = oneRecipe.label
+        cell.recipesListTotalTime.text = String(oneRecipe.totalTime)
+        cell.recipesListIngredientLines.text = oneRecipe.ingredientLines.joined(separator: " ")
+        
+        guard let pictureUrl = URL(string: oneRecipe.image) else { return UITableViewCell() }
         
         getImageData(from: pictureUrl) { data, response, error in
             guard let data = data, error == nil else { return }
             
             // always update the UI from the main thread
             DispatchQueue.main.async() { [weak self] in
-                cell.recipesListImageView.image = UIImage(data: data)
+                guard let imageRecipe = UIImage(data: data) else {
+                    return
+                }
+                cell.recipesListImageView.image = imageRecipe
             }
         }
         cell.datasView.manageDataViewBackground()
@@ -105,7 +106,6 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let recipes = recipes else { return }
         let recipesSelectRow = recipes[indexPath.row]
-        self.delegate?.didSelectRecipe(recipesSelectRow)
         sendOneRecipe(recipe: recipesSelectRow)
     }
 }

@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
     private var searchIngredientView: SearchIngredientView!
     var searchRecipesService = SearchIngredientsService(network: APINetwork())
     private var segueSearch = "SegueFromSearchToAllRecipes"
-    var allRecipesArray = [Hit]()
+    var allRecipesArray = [Recipe]()
     
     // MARK: - Outlet
     
@@ -95,7 +95,7 @@ class SearchViewController: UIViewController {
     }
     
     // MARK: - Send Recipes to AllRecipesViewController
-    private func sendListOfRecipes(list: [Hit]) {
+    private func sendListOfRecipes(list: [Recipe]) {
         if !list.isEmpty {
             allRecipesArray = list
             performSegue(withIdentifier: segueSearch, sender: nil)

@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import SwiftUI
+import CoreData
 
 class OneRecipeViewController: UIViewController {
     
     // MARK: - Properties
     var oneRecipeView: OneRecipeView!
-    var oneRecipe: Hit?
-    
+    var oneRecipe: Recipe?
     
     
     @IBOutlet weak var oneRecipeIngredientTableView: UITableView!
@@ -31,9 +30,37 @@ class OneRecipeViewController: UIViewController {
         guard let oneRecipe = oneRecipe else {
             return
         }
-        oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.recipe.label
-        oneRecipeView.oneRecipeTime.text = String(oneRecipe.recipe.totalTime)
-        oneRecipeView.oneRecipeDatasView.manageDataViewBackground()
+        oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.label
+        oneRecipeView.oneRecipeTime.text = String(oneRecipe.totalTime)
+        oneRecipeView.oneRecipeDatasView.manageDataViewBackground()        
+    }
+    
+    // MARK: - Add Recipe in Favorite
+    
+    @IBAction func didTapAddAsFavoriteButton() {
+        // TODO mettre un toggle ajouter / retirer étoile
+        // if coreData ne contient pas ce recipe.label alors :
+        
+        // sinon:
+        //removeAsFavorite(recipe: oneRecipe!)
+    }
+    
+    private func addAsFavorite(recipe: Recipe) {
+        let recipeCD = RecipeCD(context: CoreDataStack.sharedInstance.viewContext)
+        recipeCD.label = recipe.label
+        recipeCD.image = recipe.image
+        
+        do {
+            try CoreDataStack.sharedInstance.viewContext.save()
+            print("okkkkk")
+        } catch {
+            print("pas possible sauvegarder ")
+            errorMessage(element: .notSaved)
+        }
+    }
+    
+    private func removeAsFavorite(recipe: Hit) {
+        
     }
     
 
@@ -46,9 +73,9 @@ class OneRecipeViewController: UIViewController {
     private func goToInstructions() {
         
         guard let oneRecipe = oneRecipe,
-              let instructionUrl = URL(string: oneRecipe.recipe.url) else { return }
+              let instructionUrl = URL(string: oneRecipe.url) else { return }
         
-        if !oneRecipe.recipe.url.isEmpty {
+        if !oneRecipe.url.isEmpty {
             UIApplication.shared.open(instructionUrl, options: [:], completionHandler: nil)
         } else {
             errorMessage(element: .noInstruction)
@@ -69,7 +96,7 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let oneRecipe = oneRecipe else {
             return 0
         }
-        let recipesCount = oneRecipe.recipe.ingredientLines.count
+        let recipesCount = oneRecipe.ingredientLines.count
         return recipesCount
     }
     
@@ -79,7 +106,7 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
                   return UITableViewCell()
               }
         
-        cell.ingredient.text = "-  " + oneRecipe.recipe.ingredientLines[indexPath.row]
+        cell.ingredient.text = "-  " + oneRecipe.ingredientLines[indexPath.row]
         return cell
     }
 }

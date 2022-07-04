@@ -14,6 +14,7 @@ enum ErrorType: Error {
     case noInstruction
     case noRecipe
     case notAWord
+    case notSaved
     // TODO : create error " device no connected"
     
     
@@ -31,6 +32,8 @@ enum ErrorType: Error {
             return "Oups!, there is no recipe with this (thoose) ingredient(s)"
         case .notAWord:
             return "Oups!, word not accepted"
+        case .notSaved:
+            return "Oups! this recipe is unabled to be saved"
         }
     }
 }

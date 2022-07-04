@@ -8,37 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
-        <scene sceneID="4Xb-WO-7Rx">
-            <objects>
-                <tableViewController id="LI9-MO-KyI" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="EIk-Wd-Ix4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iXo-7h-HKv">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iXo-7h-HKv" id="1F2-cH-GUS">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="LI9-MO-KyI" id="j9M-2y-2YR"/>
-                            <outlet property="delegate" destination="LI9-MO-KyI" id="VA6-yf-8b8"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Abb-Pb-L33"/>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="tMp-ok-ind"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gQx-WH-ZEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1117" y="-717"/>
-        </scene>
         <!--Favorite-->
         <scene sceneID="p60-iE-QOQ">
             <objects>
@@ -50,12 +19,38 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="LI9-MO-KyI" kind="relationship" relationship="rootViewController" id="L5A-F1-O6F"/>
+                        <segue destination="uDM-4d-Iln" kind="relationship" relationship="rootViewController" id="TNx-Hu-TNR"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QFq-Ra-K2B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="225" y="-717"/>
+        </scene>
+        <!--All Favorite Recipes View Controller-->
+        <scene sceneID="x11-Ns-hEO">
+            <objects>
+                <viewController id="uDM-4d-Iln" customClass="AllFavoriteRecipesViewController" customModule="Reciplease_oc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bbF-F7-P8p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PJV-WJ-JIv">
+                                <rect key="frame" x="54" y="333" width="307" height="231"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="j0M-mu-n7i"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LCu-Wq-sd8"/>
+                    <connections>
+                        <outlet property="recipesListTableView" destination="PJV-WJ-JIv" id="nWb-Vv-Exo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bbW-7U-hmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1089.8550724637682" y="-717.1875"/>
         </scene>
         <!--Search-->
         <scene sceneID="3w5-P3-kAk">
@@ -249,12 +244,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AS-p3-fUk">
-                                <rect key="frame" x="30" y="108" width="354" height="21.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
                                 <rect key="frame" x="0.0" y="156" width="414" height="608"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,16 +375,10 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PGP-I6-M29"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="5AS-p3-fUk" firstAttribute="top" secondItem="PGP-I6-M29" secondAttribute="top" constant="20" id="QRi-yt-87B"/>
-                            <constraint firstItem="PGP-I6-M29" firstAttribute="trailing" secondItem="5AS-p3-fUk" secondAttribute="trailing" constant="30" id="SRm-sp-jMG"/>
-                            <constraint firstItem="5AS-p3-fUk" firstAttribute="leading" secondItem="PGP-I6-M29" secondAttribute="leading" constant="30" id="wSk-EC-foq"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gOJ-CG-FtB"/>
                     <connections>
                         <outlet property="recipesListTableView" destination="gfF-Tg-qWg" id="Ozg-aK-00T"/>
-                        <outlet property="viewTitleLabel" destination="5AS-p3-fUk" id="13x-E8-1wF"/>
                         <segue destination="uRT-dB-7WG" kind="show" identifier="SegueFromAllToOneRecipe" id="Qtr-Bz-lpo"/>
                     </connections>
                 </viewController>

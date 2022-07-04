@@ -19,4 +19,8 @@ extension UIViewController {
     func errorMessage(element: ErrorType) {
         displayAlert(message: element.message)
     }
+    
+    func informationMessage(element: InfoType) {
+        displayAlert(message: element.message)
+    }
 }

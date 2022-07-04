@@ -15,7 +15,6 @@ public enum SearchRouterNetwork: URLRequestConvertible {
         static let apiId = "e6088885"
         static let apiKey = "9d5f4557a5f8754c718afdcf5d463945"
         static let publicType = "public"
-        static var food = "bb"
     }
     
     case type(String)

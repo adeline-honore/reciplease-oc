@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AllRecipesViewControllerDelegate: AnyObject {
-    func didSelectRecipe(_ recipe: Hit)
+    func didSelectRecipe(_ recipe: Recipe)
 }
 
 class AllRecipesViewController: UIViewController {
@@ -19,18 +19,18 @@ class AllRecipesViewController: UIViewController {
     var delegate: AllRecipesViewControllerDelegate?
     var oneRecipe: Recipe?
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
-    var n = 0
     
     
     // MARK: - Outlet
     
     @IBOutlet weak var recipesListTableView: UITableView!
     
-    @IBOutlet weak var viewTitleLabel: UILabel!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewTitleLabel.text = "Recipes with my ingredients"
+        navigationItem.title = "Recipes with my ingredients"
         recipesListTableView.dataSource = self
         recipesListTableView.delegate = self
     }
@@ -107,12 +107,5 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let recipes = recipes else { return }
         let recipesSelectRow = recipes[indexPath.row]
         sendOneRecipe(recipe: recipesSelectRow)
-    }
-}
-
-
-extension UIView {
-    func manageDataViewBackground() {
-        self.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 0.5)
     }
 }

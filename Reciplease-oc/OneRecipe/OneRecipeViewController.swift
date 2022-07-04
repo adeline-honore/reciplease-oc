@@ -6,16 +6,20 @@
 //
 
 import UIKit
-import CoreData
 
 class OneRecipeViewController: UIViewController {
     
     // MARK: - Properties
+    
     var oneRecipeView: OneRecipeView!
     var oneRecipe: Recipe?
+    let repository = RecipesCoreDataManager()
     
     
     @IBOutlet weak var oneRecipeIngredientTableView: UITableView!
+    
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +29,9 @@ class OneRecipeViewController: UIViewController {
         displayOneRecipe()
     }
     
+    
     // MARK: - Display one recipe
+    
     func displayOneRecipe() {
         guard let oneRecipe = oneRecipe else {
             return
@@ -35,37 +41,23 @@ class OneRecipeViewController: UIViewController {
         oneRecipeView.oneRecipeDatasView.manageDataViewBackground()        
     }
     
+    
     // MARK: - Add Recipe in Favorite
     
     @IBAction func didTapAddAsFavoriteButton() {
-        // TODO mettre un toggle ajouter / retirer étoile
-        // if coreData ne contient pas ce recipe.label alors :
         
-        // sinon:
-        //removeAsFavorite(recipe: oneRecipe!)
-    }
-    
-    private func addAsFavorite(recipe: Recipe) {
-        let recipeCD = RecipeCD(context: CoreDataStack.sharedInstance.viewContext)
-        recipeCD.label = recipe.label
-        recipeCD.image = recipe.image
-        
-        do {
-            try CoreDataStack.sharedInstance.viewContext.save()
-            print("okkkkk")
-        } catch {
-            print("pas possible sauvegarder ")
-            errorMessage(element: .notSaved)
+        guard let oneRecipe = oneRecipe else {
+            return
         }
-    }
-    
-    private func removeAsFavorite(recipe: Hit) {
+        repository.addAsFavorite(recipe: oneRecipe, completion: { [weak self] in
+            
+        })
+        informationMessage(element: .savedAsFavorite)
         
     }
     
 
     // MARK: - Go to recipe's instructions
-    
     
     @IBAction func didTapGoToInstructionsButton() {
         goToInstructions()

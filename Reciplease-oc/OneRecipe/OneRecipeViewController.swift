@@ -38,21 +38,30 @@ class OneRecipeViewController: UIViewController {
         }
         oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.label
         oneRecipeView.oneRecipeTime.text = String(oneRecipe.totalTime)
-        oneRecipeView.oneRecipeDatasView.manageDataViewBackground()        
+        //oneRecipeView.oneRecipeDatasView.manageDataViewBackground()        
     }
     
     
     // MARK: - Add Recipe in Favorite
     
     @IBAction func didTapAddAsFavoriteButton() {
-        
+        toggleFavorite()
+    }
+    
+    func toggleFavorite() {
         guard let oneRecipe = oneRecipe else {
             return
         }
-        repository.addAsFavorite(recipe: oneRecipe, completion: { [weak self] in
+        /*repository.addAsFavorite(recipe: oneRecipe, completion: { [weak self] in
             
-        })
-        informationMessage(element: .savedAsFavorite)
+        })*/
+        do {
+            try repository.addAsFavorite(recipeToSave: oneRecipe)
+            informationMessage(element: .savedAsFavorite)
+        } catch {
+            errorMessage(element: .notSaved)
+        }
+        
         
     }
     

@@ -23,32 +23,24 @@ final class RecipesCoreDataManager {
     
     // MARK: - Repository
     
-    func getRecipes(completion: ([RecipeCD]) -> Void) {
+    func getRecipes() throws -> [RecipeCD] {
         let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
         do {
-          let recipesCD = try coreDataStack.viewContext.fetch(request)
-          completion(recipesCD)
+            return try coreDataStack.viewContext.fetch(request)
         } catch {
-          completion([])
+            throw ErrorType.coredataError
         }
     }
     
-    func addAsFavorite(recipe: Recipe, completion: () -> Void) {
-        
-        let recipeToSave = RecipeCD(context: coreDataStack.viewContext)
-        recipeToSave.label = recipe.label
-        recipeToSave.image = recipe.image
-        recipeToSave.totalTime = recipe.totalTime
-        recipeToSave.url = recipe.url
+    func addAsFavorite(recipeToSave: Recipe) throws {
+        var recipe = recipeToSave.getEntity()
+        recipe = RecipeCD(context: coreDataStack.viewContext)
         
         do {
           try coreDataStack.viewContext.save()
-          completion()
         } catch {
-            //ErrorType.notSaved
-          print("We were unable to save !!!")
+            throw ErrorType.notSaved
         }
-        
     }
     
     func removeAsFavorite(recipe: Recipe) {

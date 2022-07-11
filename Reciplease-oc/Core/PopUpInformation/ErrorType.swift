@@ -15,6 +15,7 @@ enum ErrorType: Error {
     case noRecipe
     case notAWord
     case notSaved
+    case coredataError
     // TODO : create error " device no connected"
     
     
@@ -34,6 +35,8 @@ enum ErrorType: Error {
             return "Oups!, word not accepted"
         case .notSaved:
             return "Oups! this recipe is unabled to be saved"
+        case .coredataError:
+            return "Oups!, an error occured from database"
         }
     }
 }

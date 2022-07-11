@@ -45,7 +45,6 @@ class SearchIngredientsService: SearchIngredientsServiceProtocol {
         do {
             return try JSONDecoder().decode(RecipesStructure.self, from: data)
         } catch {
-            print(error.localizedDescription)
             throw ErrorType.decodingError
         }
     }

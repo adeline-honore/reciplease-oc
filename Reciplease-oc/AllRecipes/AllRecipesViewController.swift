@@ -20,6 +20,8 @@ class AllRecipesViewController: UIViewController {
     var oneRecipe: Recipe?
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
     
+    var recipesCD: [RecipeCD]?
+    let repository = RecipesCoreDataManager()
     
     // MARK: - Outlet
     
@@ -44,7 +46,7 @@ class AllRecipesViewController: UIViewController {
     
     
     // MARK: - Send One Recipe to OneRecipeViewController
-    private func sendOneRecipe(recipe: Recipe) {
+    func sendOneRecipe(recipe: Recipe) {
         oneRecipe = recipe
         performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
     }
@@ -74,16 +76,20 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RecipesListTableViewCell.identifier, for: indexPath) as? RecipesListTableViewCell else {
-            return UITableViewCell()
-        }
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
+                    
+        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: .main), forCellReuseIdentifier: RecipeTableViewCell.identifier)
+        
+        cell = RecipeTableViewCell.createCell() ?? RecipeTableViewCell()
+        
         guard let recipes = recipes else { return UITableViewCell()}
         
         let oneRecipe = recipes[indexPath.row]
-        
-        cell.recipesListTitle.text = oneRecipe.label
-        cell.recipesListTotalTime.text = String(oneRecipe.totalTime)
-        cell.recipesListIngredientLines.text = oneRecipe.ingredientLines.joined(separator: " ")
+                
+        cell.titleRecipeCell.text = oneRecipe.label
+        cell.timeRecipeCell.text = String(oneRecipe.totalTime)
+        cell.ingredientsRecipeCell.text = oneRecipe.ingredientLines.joined(separator: " ")
         
         guard let pictureUrl = URL(string: oneRecipe.image) else { return UITableViewCell() }
         
@@ -95,10 +101,10 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let imageRecipe = UIImage(data: data) else {
                     return
                 }
-                cell.recipesListImageView.image = imageRecipe
+                cell.imageRecipeCell.image = imageRecipe
             }
         }
-        cell.datasView.manageDataViewBackground()
+        cell.datasViewRecipeCell.manageDataViewBackground()
         return cell
     }
     

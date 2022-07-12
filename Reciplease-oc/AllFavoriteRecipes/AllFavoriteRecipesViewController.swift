@@ -34,10 +34,6 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
         }
     }
     
-    // TODO
-    private func displayFavoriteRecipes() {
-        
-    }
 }
 
 
@@ -68,6 +64,9 @@ extension AllFavoriteRecipesViewController {
         cell.titleRecipeCell.text = cellTitle
         
         cell.datasViewRecipeCell.manageDataViewBackground()
+        
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavaorite: true)
+        
         return cell
     }
 }

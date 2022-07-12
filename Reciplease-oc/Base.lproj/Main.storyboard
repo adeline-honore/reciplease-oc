@@ -436,6 +436,7 @@
                             <constraint firstItem="zBF-6c-8J6" firstAttribute="top" secondItem="5TM-wN-zSL" secondAttribute="top" id="yfR-E9-5sT"/>
                         </constraints>
                         <connections>
+                            <outlet property="favoriteStar" destination="h82-cG-jbJ" id="WCC-Gt-XlX"/>
                             <outlet property="oneRecipeDatasView" destination="4TM-hb-MmO" id="tQv-bp-dz7"/>
                             <outlet property="oneRecipeImageView" destination="Ly3-Z8-2Ux" id="pLU-87-XhS"/>
                             <outlet property="oneRecipeTime" destination="grq-ma-nRO" id="czj-oz-zj2"/>

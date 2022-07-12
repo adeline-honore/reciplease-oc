@@ -21,6 +21,8 @@ class RecipeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var datasViewRecipeCell: UIView!
     
+    @IBOutlet weak var favoriteStar: UIImageView!
+    
     static let identifier = "recipeCellIdentifier"
     
     

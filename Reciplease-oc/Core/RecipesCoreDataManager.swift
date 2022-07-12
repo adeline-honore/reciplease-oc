@@ -43,7 +43,27 @@ final class RecipesCoreDataManager {
         }
     }
     
-    func removeAsFavorite(recipe: Recipe) {
+    func isExistsInCoreData(title: String) -> Bool {
+        var isExist = false
+        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
+        request.predicate = NSPredicate(format: "label == %@", title)
+        
+        do {
+            let context = coreDataStack.viewContext
+            let count = try context.count(for: request)
+            if count < 1 {
+                isExist = false
+            } else {
+                isExist = true
+            }
+        } catch {
+            ErrorType.coredataError
+        }
+        
+        return isExist
+    }
+    
+    func removeAsFavorite(recipe: Recipe) throws {
         
     }
 }

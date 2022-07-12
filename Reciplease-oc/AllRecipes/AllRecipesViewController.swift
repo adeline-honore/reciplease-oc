@@ -105,6 +105,7 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         cell.datasViewRecipeCell.manageDataViewBackground()
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavaorite: isFavoriteRecipe(recipeLabel: oneRecipe.label))
         return cell
     }
     

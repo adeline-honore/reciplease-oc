@@ -23,4 +23,9 @@ extension UIViewController {
     func informationMessage(element: InfoType) {
         displayAlert(message: element.message)
     }
+    
+    func manageFavoriteStar(imageView: UIImageView, isFavorite: Bool) {
+        imageView.tintColor = isFavorite ? .orange : .gray
+    }
+
 }

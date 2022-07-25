@@ -9,6 +9,6 @@ import UIKit
 
 extension UIView {
     func manageDataViewBackground() {
-        self.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 0.9)
+        backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
     }
 }

@@ -55,7 +55,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LCu-Wq-sd8"/>
                     <connections>
-                        <outlet property="recipesListTableView" destination="PJV-WJ-JIv" id="4qe-yu-I05"/>
+                        <outlet property="recipesTableView" destination="PJV-WJ-JIv" id="zVE-Pk-Sv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbW-7U-hmB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -255,7 +255,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
-                                <rect key="frame" x="0.0" y="156" width="414" height="608"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -271,7 +271,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gOJ-CG-FtB"/>
                     <connections>
-                        <outlet property="recipesListTableView" destination="gfF-Tg-qWg" id="AMu-n6-FFS"/>
+                        <outlet property="recipesTableView" destination="gfF-Tg-qWg" id="AMu-n6-FFS"/>
                         <segue destination="uRT-dB-7WG" kind="show" identifier="SegueFromAllToOneRecipe" id="Qtr-Bz-lpo"/>
                     </connections>
                 </viewController>
@@ -309,19 +309,16 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFZ-Sg-htd">
-                                                        <rect key="frame" x="20" y="40" width="147" height="35"/>
+                                                        <rect key="frame" x="20" y="40" width="123.5" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grq-ma-nRO">
-                                                                <rect key="frame" x="0.0" y="0.0" width="65" height="35"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="65" id="hgM-Hh-ZT5"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="0.0" y="0.0" width="41.5" height="35"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1FW-K3-I28">
-                                                                <rect key="frame" x="65" y="0.5" width="35" height="34"/>
+                                                                <rect key="frame" x="41.5" y="0.5" width="35" height="34"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="35" id="S2B-wG-PWJ"/>
@@ -329,17 +326,21 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-cG-jbJ">
-                                                                <rect key="frame" x="100" y="0.0" width="47" height="35"/>
+                                                                <rect key="frame" x="76.5" y="0.0" width="47" height="35"/>
                                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
                                                                 <connections>
-                                                                    <action selector="didTapAddAsFavoriteButton" destination="uRT-dB-7WG" eventType="touchUpInside" id="R20-wy-Tfu"/>
+                                                                    <action selector="didTapFavoriteButton" destination="uRT-dB-7WG" eventType="touchUpInside" id="R20-wy-Tfu"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="grq-ma-nRO" firstAttribute="top" secondItem="ZFZ-Sg-htd" secondAttribute="top" id="ANg-KX-a2v"/>
+                                                            <constraint firstItem="1FW-K3-I28" firstAttribute="leading" secondItem="grq-ma-nRO" secondAttribute="trailing" id="hAT-HA-KlO"/>
                                                             <constraint firstAttribute="height" constant="35" id="hz0-fW-m2R"/>
+                                                            <constraint firstItem="grq-ma-nRO" firstAttribute="leading" secondItem="ZFZ-Sg-htd" secondAttribute="leading" id="ogT-OC-Zj4"/>
+                                                            <constraint firstAttribute="bottom" secondItem="grq-ma-nRO" secondAttribute="bottom" id="p07-TQ-xTV"/>
                                                         </constraints>
                                                     </stackView>
                                                 </subviews>
@@ -436,7 +437,7 @@
                             <constraint firstItem="zBF-6c-8J6" firstAttribute="top" secondItem="5TM-wN-zSL" secondAttribute="top" id="yfR-E9-5sT"/>
                         </constraints>
                         <connections>
-                            <outlet property="favoriteStar" destination="h82-cG-jbJ" id="WCC-Gt-XlX"/>
+                            <outlet property="favoriteStarButton" destination="h82-cG-jbJ" id="WCC-Gt-XlX"/>
                             <outlet property="oneRecipeDatasView" destination="4TM-hb-MmO" id="tQv-bp-dz7"/>
                             <outlet property="oneRecipeImageView" destination="Ly3-Z8-2Ux" id="pLU-87-XhS"/>
                             <outlet property="oneRecipeTime" destination="grq-ma-nRO" id="czj-oz-zj2"/>
@@ -476,8 +477,8 @@
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="magnifyingglass.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

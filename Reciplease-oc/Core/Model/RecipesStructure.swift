@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct RecipesStructure: Codable {
     
@@ -22,12 +23,4 @@ struct Recipe: Codable {
     let url: String
     let ingredientLines: [String]
     let totalTime: Double
-    
-    func getEntity() -> RecipeCD {
-        let recipeCD = RecipeCD()
-        
-        recipeCD.setValue(label, forKey: "label")
-        
-        return recipeCD
-    }
 }

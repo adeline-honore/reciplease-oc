@@ -12,7 +12,7 @@ class OneRecipeViewController: UIViewController {
     // MARK: - Properties
     
     var oneRecipeView: OneRecipeView!
-    var oneRecipe: Recipe?
+    var recipe: Recipe?
     let repository = RecipesCoreDataManager()
     
     
@@ -26,43 +26,51 @@ class OneRecipeViewController: UIViewController {
         oneRecipeView = view as? OneRecipeView
         oneRecipeIngredientTableView.dataSource = self
         oneRecipeIngredientTableView.delegate = self
-        displayOneRecipe()
+        displayRecipe()
     }
     
     
     // MARK: - Display one recipe
     
-    func displayOneRecipe() {
-        guard let oneRecipe = oneRecipe else {
+    func displayRecipe() {
+        guard let oneRecipe = recipe,
+              let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
             return
         }
         oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.label
         oneRecipeView.oneRecipeTime.text = String(oneRecipe.totalTime)
-        //oneRecipeView.oneRecipeDatasView.manageDataViewBackground()        
+        oneRecipeView.oneRecipeDatasView.manageDataViewBackground()
+        manageFavoriteStar(imageView: favoriteStar, isFavorite: repository.isItFavorite(urlString: oneRecipe.url))
     }
     
     
     // MARK: - Add Recipe in Favorite
     
-    @IBAction func didTapAddAsFavoriteButton() {
+    @IBAction func didTapFavoriteButton() {
         toggleFavorite()
     }
     
     func toggleFavorite() {
-        guard let oneRecipe = oneRecipe else {
+        guard let recipe = recipe,
+              let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
             return
         }
-        /*repository.addAsFavorite(recipe: oneRecipe, completion: { [weak self] in
+        
+        var isFavoriteRecipe = repository.isItFavorite(urlString: recipe.url)
+        
+        if isFavoriteRecipe { // if recipe is saved in Coredata then delete it
             
-        })*/
-        do {
-            try repository.addAsFavorite(recipeToSave: oneRecipe)
-            informationMessage(element: .savedAsFavorite)
-        } catch {
-            errorMessage(element: .notSaved)
+        } else { // if recipe isn't saved in Coredata then save it
+            do {
+                try repository.addAsFavorite(recipeToSave: recipe)
+                isFavoriteRecipe = true
+                manageFavoriteStar(imageView: favoriteStar, isFavorite: true)
+                informationMessage(element: .savedAsFavorite)
+                
+            } catch {
+                errorMessage(element: .notSaved)
+            }
         }
-        
-        
     }
     
 
@@ -73,7 +81,7 @@ class OneRecipeViewController: UIViewController {
     }
     private func goToInstructions() {
         
-        guard let oneRecipe = oneRecipe,
+        guard let oneRecipe = recipe,
               let instructionUrl = URL(string: oneRecipe.url) else { return }
         
         if !oneRecipe.url.isEmpty {
@@ -94,20 +102,20 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let oneRecipe = oneRecipe else {
+        guard let recipe = recipe else {
             return 0
         }
-        let recipesCount = oneRecipe.ingredientLines.count
+        let recipesCount = recipe.ingredientLines.count
         return recipesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.identifier, for: indexPath) as? IngredientTableViewCell,
-              let oneRecipe = oneRecipe else {
+              let recipe = recipe else {
                   return UITableViewCell()
               }
         
-        cell.ingredient.text = "-  " + oneRecipe.ingredientLines[indexPath.row]
+        cell.ingredient.text = "-  " + recipe.ingredientLines[indexPath.row]
         return cell
     }
 }

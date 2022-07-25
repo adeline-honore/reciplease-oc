@@ -32,38 +32,62 @@ final class RecipesCoreDataManager {
         }
     }
     
-    func addAsFavorite(recipeToSave: Recipe) throws {
-        var recipe = recipeToSave.getEntity()
-        recipe = RecipeCD(context: coreDataStack.viewContext)
+    func getEntity(recipe: Recipe) throws {
+        
+        let entity = NSEntityDescription.entity(forEntityName: "RecipeCD",
+                                                in: coreDataStack.viewContext)!
+        
+        let recipeCD = NSManagedObject(entity: entity, insertInto: coreDataStack.viewContext)
+        
+        recipeCD.setValue(recipe.image, forKey: "image")
+        recipeCD.setValue(recipe.label, forKey: "label")
+        recipeCD.setValue(recipe.totalTime, forKey: "totalTime")
+        recipeCD.setValue(recipe.url, forKey: "url")
+    }
+    
+    func isItFavorite(urlString: String) -> Bool {
+        
+        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
+        request.predicate = NSPredicate(format: "url == %@", urlString)
         
         do {
-          try coreDataStack.viewContext.save()
+            let context = coreDataStack.viewContext
+            let count = try context.count(for: request)
+            return count > 0
+        } catch {
+            return false
+        }
+    }
+    
+    func addAsFavorite(recipeToSave: Recipe) throws {
+        
+        do {
+            try getEntity(recipe: recipeToSave)
+            do {
+                try coreDataStack.viewContext.save()
+            } catch {
+                throw ErrorType.notSaved
+            }
         } catch {
             throw ErrorType.notSaved
         }
     }
     
-    func isExistsInCoreData(title: String) -> Bool {
-        var isExist = false
-        let request: NSFetchRequest<RecipeCD> = RecipeCD.fetchRequest()
-        request.predicate = NSPredicate(format: "label == %@", title)
+    
+    
+    func removeAsFavorite(recipeToDelete: RecipeCD) throws {
+       
+        coreDataStack.viewContext.delete(recipeToDelete)
         
         do {
-            let context = coreDataStack.viewContext
-            let count = try context.count(for: request)
-            if count < 1 {
-                isExist = false
-            } else {
-                isExist = true
-            }
-        } catch {
-            ErrorType.coredataError
+            try coreDataStack.viewContext.save()
         }
-        
-        return isExist
+        catch {
+            throw ErrorType.coredataError
+        }
     }
     
-    func removeAsFavorite(recipe: Recipe) throws {
-        
+    func returnViewContext() -> NSManagedObjectContext {
+        coreDataStack.viewContext
     }
 }

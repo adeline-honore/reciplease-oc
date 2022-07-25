@@ -25,7 +25,7 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Outlet
     
-    @IBOutlet weak var recipesListTableView: UITableView!
+    @IBOutlet weak var recipesTableView: UITableView!
     
     
     // MARK: - Life Cycle
@@ -33,15 +33,47 @@ class AllRecipesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Recipes with my ingredients"
-        recipesListTableView.dataSource = self
-        recipesListTableView.delegate = self
+        recipesTableView.dataSource = self
+        recipesTableView.delegate = self
+        configureTableView()
     }
     
+    private func configureTableView() {
+        let cellNib = UINib(nibName: "RecipeTableViewCell", bundle: .main)
+        recipesTableView.register(cellNib, forCellReuseIdentifier: RecipeTableViewCell.identifier)
+        recipesTableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        recipesTableView.reloadData()
+    }
     
     // MARK: - Get Images
     
-    func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    func getImageData(cell: RecipeTableViewCell, from urlString: String) {
+        
+        guard let url = URL(string: urlString) else {
+            // TODO : mettre une url de defaut
+            return
+            
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                self.errorMessage(element: .network)
+                return
+            }
+            
+            // always update the UI from the main thread
+            DispatchQueue.main.async() {
+                guard let imageRecipe = UIImage(data: data) else {
+                    self.errorMessage(element: .network)
+                    return
+                }
+                cell.imageCell.image = imageRecipe
+            }
+        }
+        .resume()
     }
     
     
@@ -55,10 +87,9 @@ class AllRecipesViewController: UIViewController {
         if segue.identifier == segueShowOneRecipe {
             let oneRecipeVC = segue.destination as? OneRecipeViewController
             
-            oneRecipeVC?.oneRecipe = oneRecipe
+            oneRecipeVC?.recipe = oneRecipe
         }
     }
-    
 }
 
 
@@ -77,35 +108,20 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
-                    
-        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: .main), forCellReuseIdentifier: RecipeTableViewCell.identifier)
-        
-        cell = RecipeTableViewCell.createCell() ?? RecipeTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
         
         guard let recipes = recipes else { return UITableViewCell()}
         
-        let oneRecipe = recipes[indexPath.row]
-                
-        cell.titleRecipeCell.text = oneRecipe.label
-        cell.timeRecipeCell.text = String(oneRecipe.totalTime)
-        cell.ingredientsRecipeCell.text = oneRecipe.ingredientLines.joined(separator: " ")
+        let thisRecipe = recipes[indexPath.row]
         
-        guard let pictureUrl = URL(string: oneRecipe.image) else { return UITableViewCell() }
+        cell.configure(titleValue: thisRecipe.label, timeValue: String(thisRecipe.totalTime), ingredientsValue: thisRecipe.ingredientLines.joined(separator: " "))
         
-        getImageData(from: pictureUrl) { data, response, error in
-            guard let data = data, error == nil else { return }
-            
-            // always update the UI from the main thread
-            DispatchQueue.main.async() { [weak self] in
-                guard let imageRecipe = UIImage(data: data) else {
-                    return
-                }
-                cell.imageRecipeCell.image = imageRecipe
-            }
-        }
-        cell.datasViewRecipeCell.manageDataViewBackground()
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavaorite: isFavoriteRecipe(recipeLabel: oneRecipe.label))
+        getImageData(cell: cell, from: thisRecipe.image)
+        
+        cell.datasViewCell.manageDataViewBackground()
+        
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: repository.isItFavorite(urlString: thisRecipe.url))
+        
         return cell
     }
     

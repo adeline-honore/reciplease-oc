@@ -14,8 +14,8 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "My favorite recipes"
-        recipesListTableView.dataSource = self
-        recipesListTableView.delegate = self
+        recipesTableView.dataSource = self
+        recipesTableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,10 +50,7 @@ extension AllFavoriteRecipesViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
-        tableView.register(UINib(nibName: "RecipeTableViewCell", bundle: nil), forCellReuseIdentifier: RecipeTableViewCell.identifier)
-        
-        cell = RecipeTableViewCell.createCell() ?? RecipeTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
         
         guard let recipesCD = recipesCD else { return UITableViewCell()}
         
@@ -61,11 +58,11 @@ extension AllFavoriteRecipesViewController {
         
         guard let cellTitle = oneRecipeCD.label else { return RecipeTableViewCell() }
         
-        cell.titleRecipeCell.text = cellTitle
+        cell.titleCell.text = cellTitle
         
-        cell.datasViewRecipeCell.manageDataViewBackground()
+        cell.datasViewCell.manageDataViewBackground()
         
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavaorite: true)
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: true)
         
         return cell
     }

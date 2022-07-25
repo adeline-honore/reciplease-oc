@@ -11,15 +11,15 @@ class RecipeTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var imageRecipeCell: UIImageView!
+    @IBOutlet weak var imageCell: UIImageView!
 
-    @IBOutlet weak var titleRecipeCell: UILabel!
+    @IBOutlet weak var titleCell: UILabel!
     
-    @IBOutlet weak var timeRecipeCell: UILabel!
+    @IBOutlet weak var timeCell: UILabel!
     
-    @IBOutlet weak var ingredientsRecipeCell: UILabel!
+    @IBOutlet weak var ingredientsCell: UILabel!
     
-    @IBOutlet weak var datasViewRecipeCell: UIView!
+    @IBOutlet weak var datasViewCell: UIView!
     
     @IBOutlet weak var favoriteStar: UIImageView!
     
@@ -36,9 +36,9 @@ class RecipeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    class func createCell() -> RecipeTableViewCell? {
-        let nib = UINib(nibName: "RecipeTableViewCell", bundle: nil)
-        let cell = nib.instantiate(withOwner: self, options: nil).last as? RecipeTableViewCell
-        return cell
+    func configure(titleValue: String, timeValue: String, ingredientsValue: String) {
+        titleCell.text = titleValue
+        timeCell.text = timeValue
+        ingredientsCell.text = ingredientsValue
     }
 }

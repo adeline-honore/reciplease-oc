@@ -17,11 +17,16 @@ class RecipeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var timeCell: UILabel!
     
+    @IBOutlet weak var clockCell: UIImageView!
+    
     @IBOutlet weak var ingredientsCell: UILabel!
     
     @IBOutlet weak var datasViewCell: UIView!
     
     @IBOutlet weak var favoriteStar: UIImageView!
+    
+    @IBOutlet weak var infoStackCell: UIStackView!
+    
     
     static let identifier = "recipeCellIdentifier"
     
@@ -38,7 +43,7 @@ class RecipeTableViewCell: UITableViewCell {
     
     func configure(titleValue: String, timeValue: String, ingredientsValue: String) {
         titleCell.text = titleValue
-        timeCell.text = timeValue
+        timeCell.text = timeValue + " mn  "
         ingredientsCell.text = ingredientsValue
     }
 }

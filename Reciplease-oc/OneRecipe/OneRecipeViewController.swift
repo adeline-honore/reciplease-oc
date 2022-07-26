@@ -41,6 +41,7 @@ class OneRecipeViewController: UIViewController {
         oneRecipeView.oneRecipeTime.text = String(oneRecipe.totalTime)
         oneRecipeView.oneRecipeDatasView.manageDataViewBackground()
         manageFavoriteStar(imageView: favoriteStar, isFavorite: repository.isItFavorite(urlString: oneRecipe.url))
+        manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
     }
     
     

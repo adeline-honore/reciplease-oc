@@ -19,5 +19,9 @@ class OneRecipeView: UIView {
     
     @IBOutlet weak var favoriteStarButton: UIButton!
     
+    @IBOutlet weak var oneRecipeClock: UIImageView!
+    
+    @IBOutlet weak var infoStack: UIStackView!
+    
     static let identifier = "ingredientTableViewCell"
 }

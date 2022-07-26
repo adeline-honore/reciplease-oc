@@ -114,13 +114,15 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let thisRecipe = recipes[indexPath.row]
         
-        cell.configure(titleValue: thisRecipe.label, timeValue: String(thisRecipe.totalTime), ingredientsValue: thisRecipe.ingredientLines.joined(separator: " "))
+        cell.configure(titleValue: thisRecipe.label, timeValue: String(manageTimeDouble(time: thisRecipe.totalTime)), ingredientsValue: thisRecipe.ingredientLines.joined(separator: " "))
         
         getImageData(cell: cell, from: thisRecipe.image)
         
         cell.datasViewCell.manageDataViewBackground()
         
         manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: repository.isItFavorite(urlString: thisRecipe.url))
+        
+        manageTimeView(time: thisRecipe.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
         
         return cell
     }

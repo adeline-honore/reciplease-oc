@@ -18,9 +18,17 @@ struct Hit: Codable {
 }
 
 struct Recipe: Codable {
-    let label: String
-    let image: String
-    let url: String
-    let ingredientLines: [String]
-    let totalTime: Double
+    var label: String
+    var image: String
+    var url: String
+    var ingredientLines: [String]
+    var totalTime: Double
+    
+    init() {
+        label = ""
+        image = ""
+        url = ""
+        ingredientLines = [""]
+        totalTime = 0.0
+    }
 }

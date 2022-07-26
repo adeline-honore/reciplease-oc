@@ -38,7 +38,7 @@ class AllRecipesViewController: UIViewController {
         configureTableView()
     }
     
-    private func configureTableView() {
+    func configureTableView() {
         let cellNib = UINib(nibName: "RecipeTableViewCell", bundle: .main)
         recipesTableView.register(cellNib, forCellReuseIdentifier: RecipeTableViewCell.identifier)
         recipesTableView.rowHeight = UITableView.automaticDimension

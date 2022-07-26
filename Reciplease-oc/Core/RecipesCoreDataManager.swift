@@ -90,4 +90,34 @@ final class RecipesCoreDataManager {
     func returnViewContext() -> NSManagedObjectContext {
         coreDataStack.viewContext
     }
+    
+    func getRecipeFromEntity(entity: RecipeCD) -> Recipe {
+        
+        
+        guard let label = entity.label,
+              let url = entity.url
+              /*let ingredients = entity.ingredients*/ else {
+                  return Recipe()
+              }
+        
+        var recipe: Recipe = Recipe()
+        recipe.label = label
+        recipe.url = url
+        //recipe.ingredientLines = ingredients
+        recipe.totalTime = entity.totalTime
+        
+        return recipe
+    }
+    
+    func getRecipesFromEntities(entities: [RecipeCD]) -> [Recipe] {
+        
+        var recipes = [Recipe]()
+        
+        entities.forEach { recipeCD in
+            let recipeGetting = getRecipeFromEntity(entity: recipeCD)
+                        
+            recipes.append(recipeGetting)
+        }
+        return recipes
+    }
 }

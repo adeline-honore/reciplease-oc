@@ -9,6 +9,8 @@ import UIKit
 
 class AllFavoriteRecipesViewController: AllRecipesViewController {
     
+    private var segueShowOneFavoriteRecipe = "SegueFromAllToOneFavoriteRecipe"
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -16,6 +18,7 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
         navigationItem.title = "My favorite recipes"
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,41 +32,37 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
         
         do {
             recipesCD = try repository.getRecipes()
+            if let recipesCD = recipesCD {
+                recipes = repository.getRecipesFromEntities(entities: recipesCD)
+            }
         } catch {
             errorMessage(element: .coredataError)
         }
     }
     
+    // MARK: - Send One Recipe to OneRecipeViewController
+    func sendOneFavoriteRecipe(recipe: Recipe) {
+        oneRecipe = recipe
+        performSegue(withIdentifier: segueShowOneFavoriteRecipe, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueShowOneFavoriteRecipe {
+            let oneFavoriteRecipeVC = segue.destination as? OneFavoriteRecipeViewController
+            
+            oneFavoriteRecipeVC?.recipe = oneRecipe
+        }
+    }
 }
-
 
 
 // MARK: - Extension of AllRecipesViewController
 extension AllFavoriteRecipesViewController {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let recipesCount = recipesCD?.count else {
-            return 0
-        }
-        return recipesCount
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
-        
-        guard let recipesCD = recipesCD else { return UITableViewCell()}
-        
-        let oneRecipeCD = recipesCD[indexPath.row]
-        
-        guard let cellTitle = oneRecipeCD.label else { return RecipeTableViewCell() }
-        
-        cell.titleCell.text = cellTitle
-        
-        cell.datasViewCell.manageDataViewBackground()
-        
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: true)
-        
-        return cell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let recipes = recipes else { return }
+        let recipesSelectRow = recipes[indexPath.row]
+        sendOneFavoriteRecipe(recipe: recipesSelectRow)
     }
 }

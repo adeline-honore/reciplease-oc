@@ -24,57 +24,53 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zie-zr-L44">
-                        <rect key="frame" x="228.5" y="5" width="71.5" height="35"/>
+                        <rect key="frame" x="198" y="5" width="102" height="35"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-Ar-xf1">
-                                <rect key="frame" x="0.0" y="0.0" width="71.5" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-Ar-xf1">
+                                <rect key="frame" x="0.0" y="14.5" width="62" height="20.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-EP-0wb">
-                                        <rect key="frame" x="0.0" y="0.0" width="71.5" height="25"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lmk-cX-OOT">
-                                                <rect key="frame" x="46.5" y="-0.5" width="25" height="25"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="HTc-kl-lo2"/>
-                                                    <constraint firstAttribute="width" constant="25" id="Ykj-fu-yOB"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqz-Kr-saz">
+                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M90-WX-Tns">
+                                        <rect key="frame" x="41.5" y="0.5" width="20.5" height="19.5"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="lmk-cX-OOT" secondAttribute="trailing" id="6t1-Rb-nkl"/>
-                                            <constraint firstItem="lmk-cX-OOT" firstAttribute="top" secondItem="Wvl-EP-0wb" secondAttribute="top" id="Iuh-G9-vHF"/>
-                                            <constraint firstAttribute="bottom" secondItem="lmk-cX-OOT" secondAttribute="bottom" id="Tpw-eg-3hX"/>
+                                            <constraint firstAttribute="width" secondItem="M90-WX-Tns" secondAttribute="height" multiplier="1:1" id="gsg-h6-lsL"/>
                                         </constraints>
-                                    </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rz9-Rl-l3z">
-                                        <rect key="frame" x="0.0" y="25" width="71.5" height="25"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qqz-Kr-saz">
-                                                <rect key="frame" x="0.0" y="0.0" width="46.5" height="25"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="M90-WX-Tns">
-                                                <rect key="frame" x="46.5" y="0.5" width="25" height="24"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="M90-WX-Tns" secondAttribute="height" multiplier="1:1" id="gsg-h6-lsL"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="Rtl-Ag-0aF"/>
-                                        </constraints>
-                                    </stackView>
+                                    </imageView>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wvl-EP-0wb">
+                                <rect key="frame" x="67" y="0.0" width="35" height="35"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lmk-cX-OOT">
+                                        <rect key="frame" x="0.0" y="-0.5" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="nxh-WS-SZ2"/>
+                                            <constraint firstAttribute="width" constant="35" id="zdY-1g-rme"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="lmk-cX-OOT" firstAttribute="leading" secondItem="Wvl-EP-0wb" secondAttribute="leading" id="9b2-h6-djV"/>
+                                    <constraint firstAttribute="bottom" secondItem="lmk-cX-OOT" secondAttribute="bottom" id="DLg-01-G2t"/>
+                                    <constraint firstAttribute="trailing" secondItem="lmk-cX-OOT" secondAttribute="trailing" id="bcj-Hh-vVy"/>
+                                    <constraint firstItem="lmk-cX-OOT" firstAttribute="top" secondItem="Wvl-EP-0wb" secondAttribute="top" id="vYA-V1-tFL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7n4-Ar-xf1" firstAttribute="leading" secondItem="zie-zr-L44" secondAttribute="leading" id="5gL-cn-nBD"/>
+                            <constraint firstItem="Wvl-EP-0wb" firstAttribute="leading" secondItem="7n4-Ar-xf1" secondAttribute="trailing" constant="5" id="0S8-zP-Hjq"/>
+                            <constraint firstAttribute="bottom" secondItem="Wvl-EP-0wb" secondAttribute="bottom" id="4j7-dp-cws"/>
+                            <constraint firstAttribute="bottom" secondItem="7n4-Ar-xf1" secondAttribute="bottom" id="70D-hK-75Z"/>
+                            <constraint firstAttribute="trailing" secondItem="Wvl-EP-0wb" secondAttribute="trailing" id="8mJ-ri-aI7"/>
                             <constraint firstAttribute="height" constant="35" id="BjC-um-K7k"/>
-                            <constraint firstAttribute="trailing" secondItem="7n4-Ar-xf1" secondAttribute="trailing" id="HbK-Kn-6RI"/>
-                            <constraint firstItem="7n4-Ar-xf1" firstAttribute="top" secondItem="zie-zr-L44" secondAttribute="top" id="IkP-Ic-VhT"/>
+                            <constraint firstItem="Wvl-EP-0wb" firstAttribute="top" secondItem="zie-zr-L44" secondAttribute="top" id="EVJ-gC-WKL"/>
+                            <constraint firstItem="7n4-Ar-xf1" firstAttribute="leading" secondItem="zie-zr-L44" secondAttribute="leading" id="bvh-7r-0XW"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OH7-IG-Cl1">

@@ -47,8 +47,8 @@ class OneRecipeViewController: UIViewController {
         manageFavoriteStar(imageView: favoriteStar, isFavorite: oneRecipe.isFavorite)
         manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
         
-        
-        getImageData(view: oneRecipeView, from: oneRecipe.imageURL)
+        oneRecipeView.oneRecipeImageView.image = oneRecipe.image
+        //getImageData(view: oneRecipeView, from: oneRecipe.imageURL)
         /*
         guard let imageToShow = oneRecipe.imageBianry else {return }
         oneRecipeView.oneRecipeImageView.image = UIImage(data: imageToShow)

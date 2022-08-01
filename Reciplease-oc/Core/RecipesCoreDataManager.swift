@@ -32,7 +32,7 @@ final class RecipesCoreDataManager {
         }
     }
     
-    func getEntity(recipe: Recipe) throws {
+    func getEntity(recipe: RecipeUI) throws {
         
         let entity = NSEntityDescription.entity(forEntityName: "RecipeCD",
                                                 in: coreDataStack.viewContext)!
@@ -40,9 +40,12 @@ final class RecipesCoreDataManager {
         let recipeCD = NSManagedObject(entity: entity, insertInto: coreDataStack.viewContext)
         
         recipeCD.setValue(recipe.image, forKey: "image")
-        recipeCD.setValue(recipe.label, forKey: "label")
+        recipeCD.setValue(recipe.imageBianry, forKey: "img")
+        recipeCD.setValue(recipe.ingredientsList, forKey: "ingredients")
+        recipeCD.setValue(recipe.title, forKey: "label")
         recipeCD.setValue(recipe.totalTime, forKey: "totalTime")
-        recipeCD.setValue(recipe.url, forKey: "url")
+        recipeCD.setValue(recipe.redirection, forKey: "url")
+        
     }
     
     func isItFavorite(urlString: String) -> Bool {
@@ -59,7 +62,7 @@ final class RecipesCoreDataManager {
         }
     }
     
-    func addAsFavorite(recipeToSave: Recipe) throws {
+    func addAsFavorite(recipeToSave: RecipeUI) throws {
         
         do {
             try getEntity(recipe: recipeToSave)
@@ -73,51 +76,7 @@ final class RecipesCoreDataManager {
         }
     }
     
-    
-    
-    func removeAsFavorite(recipeToDelete: RecipeCD) throws {
-       
-        coreDataStack.viewContext.delete(recipeToDelete)
-        
-        do {
-            try coreDataStack.viewContext.save()
-        }
-        catch {
-            throw ErrorType.coredataError
-        }
-    }
-    
-    func returnViewContext() -> NSManagedObjectContext {
-        coreDataStack.viewContext
-    }
-    
-    func getRecipeFromEntity(entity: RecipeCD) -> Recipe {
-        
-        
-        guard let label = entity.label,
-              let url = entity.url
-              /*let ingredients = entity.ingredients*/ else {
-                  return Recipe()
-              }
-        
-        var recipe: Recipe = Recipe()
-        recipe.label = label
-        recipe.url = url
-        //recipe.ingredientLines = ingredients
-        recipe.totalTime = entity.totalTime
-        
-        return recipe
-    }
-    
-    func getRecipesFromEntities(entities: [RecipeCD]) -> [Recipe] {
-        
-        var recipes = [Recipe]()
-        
-        entities.forEach { recipeCD in
-            let recipeGetting = getRecipeFromEntity(entity: recipeCD)
-                        
-            recipes.append(recipeGetting)
-        }
-        return recipes
+    func removeAsFavorite(urlRedirection: String) throws {
+         
     }
 }

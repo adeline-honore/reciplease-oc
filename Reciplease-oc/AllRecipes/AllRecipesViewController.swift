@@ -15,9 +15,10 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Properties
     
-    var recipes: [Recipe]?
+    var recipes: [RecipeUI] = []
+    var recipesStructure: [Recipe] = []
     var delegate: AllRecipesViewControllerDelegate?
-    var oneRecipe: Recipe?
+    var oneRecipe: RecipeUI?
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
     
     var recipesCD: [RecipeCD]?
@@ -45,7 +46,44 @@ class AllRecipesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        recipesStructure.forEach { hit in
+            let recipeUI = mapRecipeStructureToRecipeUI(recipeStructure: hit, id: nil, title: hit.label, imageUrl: hit.image, image: nil, redirection: hit.url, ingredientsList: hit.ingredientLines, totalTime: hit.totalTime, duration: nil, isFavorite: false)
+            
+            recipes.append(recipeUI)
+        }
+        
         recipesTableView.reloadData()
+    }
+    
+    private func mapRecipeStructureToRecipeUI (recipeStructure: Recipe, id: String?, title: String, imageUrl: String?, image: UIImage?, redirection: String, ingredientsList: [String], totalTime: Double, duration: String?, isFavorite: Bool) -> RecipeUI  {
+        
+        var recipe: RecipeUI = RecipeUI()
+        
+        recipe.title = recipeStructure.label
+        recipe.imageURL = recipeStructure.image
+        recipe.redirection = recipeStructure.url
+        recipe.ingredientsList = recipeStructure.ingredientLines
+        recipe.duration = String(manageTimeDouble(time: recipeStructure.totalTime))
+        recipe.isFavorite = repository.isItFavorite(urlString: recipeStructure.url)
+        
+        return recipe
+    }
+    
+    func configureRecipeCell(cell: RecipeTableViewCell, recipe: RecipeUI) {
+        
+        cell.configure(titleValue: recipe.title, timeValue: recipe.duration, ingredientsValue: recipe.ingredientsList.joined(separator: ", "))
+        
+        getImageData(cell: cell, from: recipe.imageURL)
+        
+        //cell.imageCell.image = recipe.image
+        
+        cell.datasViewCell.manageDataViewBackground()
+        
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: recipe.isFavorite)
+        
+        manageTimeView(time: recipe.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
+    
+        
     }
     
     // MARK: - Get Images
@@ -76,9 +114,45 @@ class AllRecipesViewController: UIViewController {
         .resume()
     }
     
+    // MARK: - Get RecipesUI from RecipeCD
+    
+    
+    func getRecipeUIFromEntity(entity: RecipeCD) -> RecipeUI {
+        
+        var recipe: RecipeUI = RecipeUI()
+        
+        //recipe.id = String(entity.id)
+        recipe.title = entity.label ?? ""
+        recipe.imageURL = entity.image ?? ""
+        recipe.imageBianry = entity.img
+        recipe.redirection = entity.url ?? ""
+        recipe.ingredientsList = entity.ingredients ?? [""]
+        recipe.duration = String(entity.totalTime)
+        recipe.isFavorite = true
+        
+        if let imageData = entity.img {
+            recipe.image = UIImage(data: imageData)
+        } else {
+            recipe.image = UIImage(systemName: "star.fill")
+        }
+        
+        return recipe
+    }
+    
+    func getRecipesUIFromEntities(entities: [RecipeCD]) -> [RecipeUI] {
+        
+        var recipes = [RecipeUI]()
+                
+        recipes = entities.map{ (une) -> RecipeUI in
+            return getRecipeUIFromEntity(entity: une)
+        }
+        
+        return recipes
+    }
+    
     
     // MARK: - Send One Recipe to OneRecipeViewController
-    func sendOneRecipe(recipe: Recipe) {
+    func sendOneRecipe(recipe: RecipeUI) {
         oneRecipe = recipe
         performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
     }
@@ -100,36 +174,23 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let recipesCount = recipes?.count else {
-            return 0
-        }
+         let recipesCount = recipes.count
         return recipesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
-        
-        guard let recipes = recipes else { return UITableViewCell()}
-        
+                
         let thisRecipe = recipes[indexPath.row]
         
-        cell.configure(titleValue: thisRecipe.label, timeValue: String(manageTimeDouble(time: thisRecipe.totalTime)), ingredientsValue: thisRecipe.ingredientLines.joined(separator: " "))
-        
-        getImageData(cell: cell, from: thisRecipe.image)
-        
-        cell.datasViewCell.manageDataViewBackground()
-        
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: repository.isItFavorite(urlString: thisRecipe.url))
-        
-        manageTimeView(time: thisRecipe.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
+        configureRecipeCell(cell: cell, recipe: thisRecipe)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let recipes = recipes else { return }
         let recipesSelectRow = recipes[indexPath.row]
         sendOneRecipe(recipe: recipesSelectRow)
     }

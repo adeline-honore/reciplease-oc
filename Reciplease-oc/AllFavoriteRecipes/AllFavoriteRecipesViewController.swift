@@ -23,6 +23,7 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getFavoriteRecipes()
+        recipesTableView.reloadData()
     }
     
     
@@ -33,7 +34,7 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
         do {
             recipesCD = try repository.getRecipes()
             if let recipesCD = recipesCD {
-                recipes = repository.getRecipesFromEntities(entities: recipesCD)
+                recipes = getRecipesUIFromEntities(entities: recipesCD)
             }
         } catch {
             errorMessage(element: .coredataError)
@@ -41,7 +42,7 @@ class AllFavoriteRecipesViewController: AllRecipesViewController {
     }
     
     // MARK: - Send One Recipe to OneRecipeViewController
-    func sendOneFavoriteRecipe(recipe: Recipe) {
+    func sendOneFavoriteRecipe(recipe: RecipeUI) {
         oneRecipe = recipe
         performSegue(withIdentifier: segueShowOneFavoriteRecipe, sender: nil)
     }
@@ -61,7 +62,7 @@ extension AllFavoriteRecipesViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let recipes = recipes else { return }
+        //guard let recipes = recipes else { return }
         let recipesSelectRow = recipes[indexPath.row]
         sendOneFavoriteRecipe(recipe: recipesSelectRow)
     }

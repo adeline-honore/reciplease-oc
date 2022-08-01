@@ -108,7 +108,7 @@ class SearchViewController: UIViewController {
         if segue.identifier == segueSearch {
             let allRecipesVC = segue.destination as? AllRecipesViewController
             
-            allRecipesVC?.recipes = allRecipes
+            allRecipesVC?.recipesStructure = allRecipes
         }
     }
     

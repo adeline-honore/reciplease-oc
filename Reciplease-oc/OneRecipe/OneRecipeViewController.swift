@@ -12,7 +12,7 @@ class OneRecipeViewController: UIViewController {
     // MARK: - Properties
     
     var oneRecipeView: OneRecipeView!
-    var recipe: Recipe?
+    var recipe: RecipeUI?
     let repository = RecipesCoreDataManager()
     
     
@@ -26,6 +26,10 @@ class OneRecipeViewController: UIViewController {
         oneRecipeView = view as? OneRecipeView
         oneRecipeIngredientTableView.dataSource = self
         oneRecipeIngredientTableView.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         displayRecipe()
     }
     
@@ -37,11 +41,43 @@ class OneRecipeViewController: UIViewController {
               let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
             return
         }
-        oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.label
+        oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.title
         oneRecipeView.oneRecipeTime.text = String(manageTimeDouble(time: oneRecipe.totalTime)) + " mn  "
         oneRecipeView.oneRecipeDatasView.manageDataViewBackground()
-        manageFavoriteStar(imageView: favoriteStar, isFavorite: repository.isItFavorite(urlString: oneRecipe.url))
+        manageFavoriteStar(imageView: favoriteStar, isFavorite: oneRecipe.isFavorite)
         manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
+        
+        
+        getImageData(view: oneRecipeView, from: oneRecipe.imageURL)
+        /*
+        guard let imageToShow = oneRecipe.imageBianry else {return }
+        oneRecipeView.oneRecipeImageView.image = UIImage(data: imageToShow)
+         */
+    }
+    
+    func getImageData(view: OneRecipeView,from urlString: String) {
+        
+        guard let url = URL(string: urlString) else {
+            return
+            
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                self.errorMessage(element: .network)
+                return
+            }
+            
+            // always update the UI from the main thread
+            DispatchQueue.main.async() {
+                guard let imageRecipe = UIImage(data: data) else {
+                    self.errorMessage(element: .network)
+                    return
+                }
+                view.oneRecipeImageView.image = imageRecipe
+            }
+        }
+        .resume()
     }
     
     
@@ -52,19 +88,22 @@ class OneRecipeViewController: UIViewController {
     }
     
     func toggleFavorite() {
-        guard let recipe = recipe,
+        guard var recipe = recipe,
               let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
             return
         }
-        
-        var isFavoriteRecipe = repository.isItFavorite(urlString: recipe.url)
-        
-        if isFavoriteRecipe { // if recipe is saved in Coredata then delete it
-            
+                
+        if recipe.isFavorite { // if recipe is saved in Coredata then delete it
+            do {
+                try repository.removeAsFavorite(urlRedirection: recipe.title)
+            } catch {
+                errorMessage(element: .coredataError)
+            }
         } else { // if recipe isn't saved in Coredata then save it
+            recipe.imageBianry = oneRecipeView.oneRecipeImageView.image?.jpegData(compressionQuality: 1.0)
             do {
                 try repository.addAsFavorite(recipeToSave: recipe)
-                isFavoriteRecipe = true
+                recipe.isFavorite = true
                 manageFavoriteStar(imageView: favoriteStar, isFavorite: true)
                 informationMessage(element: .savedAsFavorite)
                 
@@ -83,9 +122,9 @@ class OneRecipeViewController: UIViewController {
     private func goToInstructions() {
         
         guard let oneRecipe = recipe,
-              let instructionUrl = URL(string: oneRecipe.url) else { return }
+              let instructionUrl = URL(string: oneRecipe.redirection) else { return }
         
-        if !oneRecipe.url.isEmpty {
+        if !oneRecipe.redirection.isEmpty {
             UIApplication.shared.open(instructionUrl, options: [:], completionHandler: nil)
         } else {
             errorMessage(element: .noInstruction)
@@ -106,7 +145,7 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let recipe = recipe else {
             return 0
         }
-        let recipesCount = recipe.ingredientLines.count
+        let recipesCount = recipe.ingredientsList.count
         return recipesCount
     }
     
@@ -116,7 +155,7 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
                   return UITableViewCell()
               }
         
-        cell.ingredient.text = "-  " + recipe.ingredientLines[indexPath.row]
+        cell.ingredient.text = "-  " + recipe.ingredientsList[indexPath.row]
         return cell
     }
 }

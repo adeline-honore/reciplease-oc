@@ -47,12 +47,8 @@ class OneRecipeViewController: UIViewController {
         manageFavoriteStar(imageView: favoriteStar, isFavorite: oneRecipe.isFavorite)
         manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
         
-        oneRecipeView.oneRecipeImageView.image = oneRecipe.image
-        //getImageData(view: oneRecipeView, from: oneRecipe.imageURL)
-        /*
-        guard let imageToShow = oneRecipe.imageBianry else {return }
-        oneRecipeView.oneRecipeImageView.image = UIImage(data: imageToShow)
-         */
+        //oneRecipeView.oneRecipeImageView.image = oneRecipe.image
+        getImageData(view: oneRecipeView, from: oneRecipe.imageURL)
     }
     
     func getImageData(view: OneRecipeView,from urlString: String) {
@@ -81,7 +77,7 @@ class OneRecipeViewController: UIViewController {
     }
     
     
-    // MARK: - Add Recipe in Favorite
+    // MARK: - Add and Remove Recipe as Favorite
     
     @IBAction func didTapFavoriteButton() {
         toggleFavorite()
@@ -95,7 +91,10 @@ class OneRecipeViewController: UIViewController {
                 
         if recipe.isFavorite { // if recipe is saved in Coredata then delete it
             do {
-                try repository.removeAsFavorite(urlRedirection: recipe.title)
+                try repository.removeAsFavorite(urlRedirection: recipe.redirection)
+                recipe.isFavorite = false
+                manageFavoriteStar(imageView: favoriteStar, isFavorite: false)
+                informationMessage(element: .deleteFromFavorite)
             } catch {
                 errorMessage(element: .coredataError)
             }
@@ -104,7 +103,8 @@ class OneRecipeViewController: UIViewController {
             do {
                 try repository.addAsFavorite(recipeToSave: recipe)
                 recipe.isFavorite = true
-                manageFavoriteStar(imageView: favoriteStar, isFavorite: true)
+                favoriteStar.tintColor = .orange
+                //manageFavoriteStar(imageView: favoriteStar, isFavorite: true)
                 informationMessage(element: .savedAsFavorite)
                 
             } catch {

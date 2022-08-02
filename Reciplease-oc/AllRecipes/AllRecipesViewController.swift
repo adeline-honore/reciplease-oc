@@ -17,7 +17,6 @@ class AllRecipesViewController: UIViewController {
     
     private var recipes: [RecipeUI] = []
     var recipesStructure: [Recipe] = []
-    //private var delegate: AllRecipesViewControllerDelegate?
     var oneRecipe: RecipeUI?
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
     private let recipesTitle = "Recipes with my ingredients"
@@ -59,8 +58,13 @@ class AllRecipesViewController: UIViewController {
             navigationItem.title = favoriteRecipesTitle
             getFavoriteRecipes()
             
+            if recipes.isEmpty {
+                informationMessage(element: .noFavoriteRecipe)
+            }
+            recipesTableView.reloadData()
         } else {
             navigationItem.title = recipesTitle
+            recipes = []
             recipesStructure.forEach { hit in
                 let recipeUI = mapRecipeStructureToRecipeUI(recipeStructure: hit, title: hit.label, imageUrl: hit.image, image: nil, redirection: hit.url, ingredientsList: hit.ingredientLines, totalTime: hit.totalTime, duration: nil, isFavorite: false)
                 

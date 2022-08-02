@@ -39,7 +39,7 @@ final class RecipesCoreDataManager {
         
         let recipeCD = NSManagedObject(entity: entity, insertInto: coreDataStack.viewContext)
         
-        recipeCD.setValue(recipe.image, forKey: "image")
+        recipeCD.setValue(recipe.imageURL, forKey: "image")
         recipeCD.setValue(recipe.imageBianry, forKey: "img")
         recipeCD.setValue(recipe.ingredientsList, forKey: "ingredients")
         recipeCD.setValue(recipe.title, forKey: "label")
@@ -77,6 +77,22 @@ final class RecipesCoreDataManager {
     }
     
     func removeAsFavorite(urlRedirection: String) throws {
-         
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "RecipeCD")
+        request.predicate = NSPredicate(format:"url = %@", urlRedirection)
+        
+        if let results = try coreDataStack.viewContext.fetch(request) as? [NSManagedObject] {
+            // delete first object:
+            if results.count > 0 {
+                coreDataStack.viewContext.delete(results[0])
+                do {
+                try coreDataStack.viewContext.save()
+                } catch {
+                    throw ErrorType.coredataError
+                }
+            }
+        } else {
+            throw ErrorType.coredataError
+        }
     }
 }

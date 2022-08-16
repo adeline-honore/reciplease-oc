@@ -13,12 +13,15 @@ final class RecipesCoreDataManager {
     // MARK: - Properties
     
     private let coreDataStack: CoreDataStack
+    let managedObjectContext: NSManagedObjectContext
     
     // MARK: - Init
     
-    init(coreDataStack: CoreDataStack = CoreDataStack.sharedInstance) {
+    public init(coreDataStack: CoreDataStack = CoreDataStack.sharedInstance, managedObjectContext: NSManagedObjectContext) {
         self.coreDataStack = coreDataStack
+        self.managedObjectContext = managedObjectContext
     }
+    
     
     
     // MARK: - Repository
@@ -32,7 +35,7 @@ final class RecipesCoreDataManager {
         }
     }
     
-    func getEntity(recipe: RecipeUI) throws {
+    func createEntity(recipe: RecipeUI) throws {
         
         let entity = NSEntityDescription.entity(forEntityName: "RecipeCD",
                                                 in: coreDataStack.viewContext)!
@@ -40,7 +43,7 @@ final class RecipesCoreDataManager {
         let recipeCD = NSManagedObject(entity: entity, insertInto: coreDataStack.viewContext)
         
         recipeCD.setValue(recipe.imageURL, forKey: "image")
-        recipeCD.setValue(recipe.imageBianry, forKey: "img")
+        recipeCD.setValue(recipe.imageBinary, forKey: "img")
         recipeCD.setValue(recipe.ingredientsList, forKey: "ingredients")
         recipeCD.setValue(recipe.title, forKey: "label")
         recipeCD.setValue(recipe.totalTime, forKey: "totalTime")
@@ -65,7 +68,7 @@ final class RecipesCoreDataManager {
     func addAsFavorite(recipeToSave: RecipeUI) throws {
         
         do {
-            try getEntity(recipe: recipeToSave)
+            try createEntity(recipe: recipeToSave)
             do {
                 try coreDataStack.viewContext.save()
             } catch {

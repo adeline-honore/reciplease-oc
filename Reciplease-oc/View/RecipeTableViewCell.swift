@@ -41,9 +41,10 @@ class RecipeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(titleValue: String, timeValue: String, ingredientsValue: String) {
+    func configure(titleValue: String, timeValue: String, ingredientsValue: String, imageValue: UIImage) {
         titleCell.text = titleValue
-        timeCell.text = timeValue + " mn  "
+        timeCell.text = timeValue
         ingredientsCell.text = ingredientsValue
+        imageCell.image = imageValue
     }
 }

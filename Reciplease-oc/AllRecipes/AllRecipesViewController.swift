@@ -15,15 +15,21 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var recipes: [RecipeUI] = []
-    var recipesStructure: [Recipe] = []
-    var oneRecipe: RecipeUI?
+    private var recipesUI: [RecipeUI] = []
+    var recipes: [Recipe] = []
+    var oneRecipeUI: RecipeUI?
+    
     private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
     private let recipesTitle = "Recipes with my ingredients"
     private let favoriteRecipesTitle = "My favorite recipes"
     
+    private let icon = UIImage(imageLiteralResourceName: "icon")
+        
     private var recipesCD: [RecipeCD]?
-    private let repository = RecipesCoreDataManager()
+    private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
+                                                    managedObjectContext: CoreDataStack().mainContext)
+    
+    private var allIngredientsService = AllRecipesService(network: APINetwork())
     
     // MARK: - Outlet
     
@@ -40,148 +46,112 @@ class AllRecipesViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        checkSegue()
+        checkDatasOrigin()
     }
     
     
     // MARK: - TableViewCell configuration
     
-    func configureTableView() {
+    private func configureTableView() {
         let cellNib = UINib(nibName: "RecipeTableViewCell", bundle: .main)
         recipesTableView.register(cellNib, forCellReuseIdentifier: RecipeTableViewCell.identifier)
         recipesTableView.rowHeight = UITableView.automaticDimension
     }
     
-    private func checkSegue() {
+    private func checkDatasOrigin() {
         
-        if recipesStructure.isEmpty {
-            navigationItem.title = favoriteRecipesTitle
-            getFavoriteRecipes()
-            
-            if recipes.isEmpty {
-                informationMessage(element: .noFavoriteRecipe)
-            }
-            recipesTableView.reloadData()
-        } else {
-            navigationItem.title = recipesTitle
-            recipes = []
-            recipesStructure.forEach { hit in
-                let recipeUI = mapRecipeStructureToRecipeUI(recipeStructure: hit, title: hit.label, imageUrl: hit.image, image: nil, redirection: hit.url, ingredientsList: hit.ingredientLines, totalTime: hit.totalTime, duration: nil, isFavorite: false)
-                
-                recipes.append(recipeUI)
-            }
-            recipesTableView.reloadData()
+        if (recipes.isEmpty && recipesUI.isEmpty) {
+            displayCoreDataDatas()
+        } else if (!recipes.isEmpty && recipesUI.isEmpty) {
+            displayNetworkDatas()
         }
+        // else: do not anything because all datas will come from recipesUI
+        
+        recipesTableView.reloadData()
     }
     
-    func configureRecipeCell(cell: RecipeTableViewCell, recipe: RecipeUI) {
+    private func configureRecipeCell(cell: RecipeTableViewCell, recipeUI: RecipeUI) {
         
-        cell.configure(titleValue: recipe.title, timeValue: recipe.duration, ingredientsValue: recipe.ingredientsList.joined(separator: ", "))
+        cell.configure(titleValue: recipeUI.title,
+                       timeValue: recipeUI.duration,
+                       ingredientsValue: recipeUI.ingredientsList.joined(separator: ", "),
+                       imageValue: recipeUI.image ?? icon
+        )
         
-        cell.imageCell.image = recipe.image
+        cell.imageCell.image = recipeUI.image
         
         cell.datasViewCell.manageDataViewBackground()
         
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: recipe.isFavorite)
+        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
         
-        manageTimeView(time: recipe.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
+        manageTimeView(time: recipeUI.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
     }
     
     
     // MARK: - Get RecipeUI from call network
     
-    private func mapRecipeStructureToRecipeUI (recipeStructure: Recipe, title: String, imageUrl: String?, image: UIImage?, redirection: String, ingredientsList: [String], totalTime: Double, duration: String?, isFavorite: Bool) -> RecipeUI  {
+    private func displayNetworkDatas() {
+        navigationItem.title = recipesTitle
         
-        var recipe: RecipeUI = RecipeUI()
-        
-        recipe.title = recipeStructure.label
-        recipe.imageURL = recipeStructure.image
-        recipe.image = getImageFromUrl(from: recipeStructure.image)
-        recipe.redirection = recipeStructure.url
-        recipe.ingredientsList = recipeStructure.ingredientLines
-        recipe.duration = String(manageTimeDouble(time: recipeStructure.totalTime))
-        recipe.isFavorite = repository.isItFavorite(urlString: recipeStructure.url)
-        
-        return recipe
+        recipesUI = recipes.map {
+            RecipeUI(recipe: $0,
+                            duration: manageTimeDouble(time: $0.totalTime),
+                            isFavorite: repository.isItFavorite(urlString: $0.url)
+            )
+        }
     }
     
-    func getImageFromUrl(from urlString: String) -> UIImage {
+    private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int) {
         
-        guard let url = URL(string: urlString) else {
-            return UIImage()
+        allIngredientsService.getImageData(url: urlImage) { result in
+            switch result {
+            case .success(let image):
+                cell.imageCell.image = image
+                self.recipesUI[indexPathRow].image = image
+            case .failure:
+                cell.imageCell.image = self.icon
+            }
         }
-        
-        var image: UIImage = UIImage()
-        // always update the UI from the main thread
-        DispatchQueue.main.async() {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                guard let data = data, error == nil else {
-                    self.errorMessage(element: .network)
-                    return
-                }
-                print(data)
-                guard let imageRecipe = UIImage(data: data) else {
-                    self.errorMessage(element: .network)
-                    return
-                }
-                image = imageRecipe
-            }.resume()
-        }
-        return image
     }
     
     
     // MARK: - Get RecipeUI from CoreData
     
+    private func displayCoreDataDatas() {
+        navigationItem.title = favoriteRecipesTitle
+        getFavoriteRecipes()
+        
+        if recipesUI.isEmpty {
+            informationMessage(element: .noFavoriteRecipe)
+        }
+    }
+    
     private func getFavoriteRecipes() {
         do {
             recipesCD = try repository.getRecipes()
             if let recipesCD = recipesCD {
-                recipes = getRecipesUIFromEntities(entities: recipesCD)
+                recipesUI = getRecipesUIFromEntities(entities: recipesCD)
             }
         } catch {
             errorMessage(element: .coredataError)
         }
     }
     
-    func getRecipeUIFromEntity(entity: RecipeCD) -> RecipeUI {
+    private func getRecipesUIFromEntities(entities: [RecipeCD]) -> [RecipeUI] {
         
-        var recipe: RecipeUI = RecipeUI()
+        var recipesUI = [RecipeUI]()
         
-        recipe.id = String(entity.id.hashValue)
-        recipe.title = entity.label ?? ""
-        recipe.imageURL = entity.image ?? ""
-        recipe.imageBianry = entity.img
-        recipe.redirection = entity.url ?? ""
-        recipe.ingredientsList = entity.ingredients ?? [""]
-        recipe.duration = String(entity.totalTime)
-        recipe.isFavorite = true
-        
-        if let imageData = entity.img {
-            recipe.image = UIImage(data: imageData)
-        } else {
-            // ----------------------------------//////
-            recipe.image = UIImage(systemName: "star.fill")
+        recipesUI = entities.map {
+            RecipeUI(recipeCD: $0, image: UIImage(data: $0.img!)!,isFavorite: repository.isItFavorite(urlString: $0.url ?? ""))
         }
         
-        return recipe
-    }
-    
-    func getRecipesUIFromEntities(entities: [RecipeCD]) -> [RecipeUI] {
-        
-        var recipes = [RecipeUI]()
-                
-        recipes = entities.map{ (entity) -> RecipeUI in
-            return getRecipeUIFromEntity(entity: entity)
-        }
-        
-        return recipes
+        return recipesUI
     }
     
     
     // MARK: - Send One Recipe to OneRecipeViewController
     func sendOneRecipe(recipe: RecipeUI) {
-        oneRecipe = recipe
+        oneRecipeUI = recipe
         performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
     }
     
@@ -189,7 +159,7 @@ class AllRecipesViewController: UIViewController {
         if segue.identifier == segueShowOneRecipe {
             let oneRecipeVC = segue.destination as? OneRecipeViewController
             
-            oneRecipeVC?.recipe = oneRecipe
+            oneRecipeVC?.recipeUI = oneRecipeUI
         }
     }
 }
@@ -202,7 +172,7 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         let recipesCount = recipes.count
+         let recipesCount = recipesUI.count
         return recipesCount
     }
     
@@ -210,16 +180,27 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
                 
-        let thisRecipe = recipes[indexPath.row]
+        let recipeCell = recipesUI[indexPath.row]
         
-        configureRecipeCell(cell: cell, recipe: thisRecipe)
+        if (!recipes.isEmpty && recipeCell.image == nil) {
+            let iindex = recipesUI.firstIndex { recipeUI in
+                recipeCell.redirection == recipeUI.redirection
+            } ?? 0
+            fetchImage(urlImage: recipeCell.imageURL, cell: cell, indexPathRow: iindex)
+        }
         
+        configureRecipeCell(cell: cell, recipeUI: recipeCell)
+                        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UIScreen.main.bounds.size.width / 1.9
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let recipesSelectRow = recipes[indexPath.row]
+        let recipesSelectRow = recipesUI[indexPath.row]
         sendOneRecipe(recipe: recipesSelectRow)
     }
 }

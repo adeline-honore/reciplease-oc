@@ -12,7 +12,7 @@ struct RecipeUI {
     var id: String?
     var title: String
     var imageURL: String
-    var imageBianry: Data?
+    var imageBinary: Data?
     var image: UIImage?
     var redirection: String
     var ingredientsList : [String]
@@ -20,13 +20,24 @@ struct RecipeUI {
     var duration: String
     var isFavorite: Bool
     
-    init() {
-        title = ""
-        imageURL = ""
-        redirection = ""
-        ingredientsList = [""]
-        totalTime = 0.0
-        duration = ""
-        isFavorite = false
+    init(recipe: Recipe, duration: String , isFavorite: Bool) {
+        title = recipe.label
+        imageURL = recipe.image
+        redirection = recipe.url
+        ingredientsList = recipe.ingredientLines
+        totalTime = recipe.totalTime
+        self.duration = duration
+        self.isFavorite = isFavorite
+    }
+    
+    init(recipeCD: RecipeCD,image: UIImage, isFavorite: Bool) {
+        title = recipeCD.label ?? ""
+        imageURL = recipeCD.image ?? ""
+        self.image = image
+        redirection = recipeCD.url ?? ""
+        ingredientsList = recipeCD.ingredients ?? [""]
+        totalTime = recipeCD.totalTime
+        duration = recipeCD.duration ?? ""
+        self.isFavorite = isFavorite
     }
 }

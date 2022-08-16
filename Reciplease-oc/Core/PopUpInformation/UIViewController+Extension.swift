@@ -29,19 +29,16 @@ extension UIViewController {
     }
     
     func manageTimeView(time: Double, labelView: UILabel, clockView: UIView, infoStack: UIStackView) {
-        infoStack.manageDataViewBackground()
         
         if time.isZero {
             labelView.isHidden = true
             clockView.isHidden = true
+        } else {
+            infoStack.manageDataViewBackground()
         }
     }
     
-    func manageTimeDouble(time: Double) -> Int {
-        if time.isZero {
-            return 0
-        } else {
-            return Int(time)
-        }
+    func manageTimeDouble(time: Double) -> String {
+        return (time.isZero) ? "0" : String(Int(time)) + " mn  "
     }
 }

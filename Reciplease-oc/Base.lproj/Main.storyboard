@@ -218,10 +218,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="676"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" rowHeight="200" estimatedRowHeight="200" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="VhL-uT-4dO"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="svs-fP-gCg"/>
                                 <color key="separatorColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                 <connections>
@@ -241,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0R-uH-Sai" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2030" y="-1009"/>
+            <point key="canvasLocation" x="2028.985507246377" y="-1009.1517857142857"/>
         </scene>
         <!--One Recipe View Controller-->
         <scene sceneID="V0Z-YG-h1m">
@@ -270,10 +272,10 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4TM-hb-MmO">
-                                        <rect key="frame" x="20" y="230" width="374" height="80"/>
+                                        <rect key="frame" x="0.0" y="230" width="414" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dg-04-WZk">
-                                                <rect key="frame" x="0.0" y="0.0" width="249" height="75"/>
+                                                <rect key="frame" x="20" y="0.0" width="249" height="75"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="249" id="BDb-tQ-9El"/>
                                                 </constraints>
@@ -282,7 +284,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFZ-Sg-htd">
-                                                <rect key="frame" x="279" y="40" width="95" height="35"/>
+                                                <rect key="frame" x="299" y="40" width="95" height="35"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grq-ma-nRO">
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
@@ -308,10 +310,10 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="ZFZ-Sg-htd" secondAttribute="bottom" constant="5" id="1OH-Ug-d1g"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Arq-iz-I8m"/>
-                                            <constraint firstItem="8Dg-04-WZk" firstAttribute="leading" secondItem="4TM-hb-MmO" secondAttribute="leading" id="Fsb-Nm-hFo"/>
+                                            <constraint firstItem="8Dg-04-WZk" firstAttribute="leading" secondItem="4TM-hb-MmO" secondAttribute="leading" constant="20" id="Fsb-Nm-hFo"/>
                                             <constraint firstItem="8Dg-04-WZk" firstAttribute="top" secondItem="4TM-hb-MmO" secondAttribute="top" id="HBD-Zv-Xp8"/>
                                             <constraint firstAttribute="bottom" secondItem="8Dg-04-WZk" secondAttribute="bottom" constant="5" id="VW5-Of-41b"/>
-                                            <constraint firstAttribute="trailing" secondItem="ZFZ-Sg-htd" secondAttribute="trailing" id="fX9-YX-LeD"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZFZ-Sg-htd" secondAttribute="trailing" constant="20" id="fX9-YX-LeD"/>
                                             <constraint firstItem="ZFZ-Sg-htd" firstAttribute="leading" secondItem="8Dg-04-WZk" secondAttribute="trailing" constant="30" id="vj5-1q-M4E"/>
                                         </constraints>
                                     </view>
@@ -325,8 +327,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Ly3-Z8-2Ux" secondAttribute="bottom" id="ctN-tA-1dv"/>
                                     <constraint firstItem="h82-cG-jbJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dvf-Mr-jc1" secondAttribute="leading" constant="20" symbolic="YES" id="p9M-LO-kCK"/>
                                     <constraint firstItem="Ly3-Z8-2Ux" firstAttribute="leading" secondItem="Dvf-Mr-jc1" secondAttribute="leading" id="vDK-NW-ity"/>
-                                    <constraint firstAttribute="trailing" secondItem="4TM-hb-MmO" secondAttribute="trailing" constant="20" id="x5V-YI-70f"/>
-                                    <constraint firstItem="4TM-hb-MmO" firstAttribute="leading" secondItem="Dvf-Mr-jc1" secondAttribute="leading" constant="20" id="xXU-nC-Msy"/>
+                                    <constraint firstAttribute="trailing" secondItem="4TM-hb-MmO" secondAttribute="trailing" id="x5V-YI-70f"/>
+                                    <constraint firstItem="4TM-hb-MmO" firstAttribute="leading" secondItem="Dvf-Mr-jc1" secondAttribute="leading" id="xXU-nC-Msy"/>
                                     <constraint firstAttribute="trailing" secondItem="Ly3-Z8-2Ux" secondAttribute="trailing" id="zBO-Wg-9C6"/>
                                 </constraints>
                             </view>

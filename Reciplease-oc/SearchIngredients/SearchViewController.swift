@@ -10,7 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     // MARK: - Properties
-    var ingredients: [String] = []
+    private var ingredients: [String] = []
     private var ingredientsInString: String = ""
     private var searchIngredientView: SearchIngredientView!
     private var searchRecipesService = SearchIngredientsService(network: APINetwork())
@@ -108,7 +108,7 @@ class SearchViewController: UIViewController {
         if segue.identifier == segueSearch {
             let allRecipesVC = segue.destination as? AllRecipesViewController
             
-            allRecipesVC?.recipesStructure = allRecipes
+            allRecipesVC?.recipes = allRecipes
         }
     }
     

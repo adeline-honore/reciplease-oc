@@ -34,6 +34,8 @@ extension UIViewController {
             labelView.isHidden = true
             clockView.isHidden = true
         } else {
+            labelView.isHidden = false
+            clockView.isHidden = false
             infoStack.manageDataViewBackground()
         }
     }

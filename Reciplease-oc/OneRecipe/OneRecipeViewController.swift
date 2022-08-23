@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol OneRecipeViewControllerDelegate: AnyObject {
+    func didChangeFavoriteState(urlRedirection: String, recipeChanged: RecipeUI)
+}
+
 class OneRecipeViewController: UIViewController {
     
     // MARK: - Properties
     
     var recipeUI: RecipeUI?
+    weak var delegate: OneRecipeViewControllerDelegate?
     private var oneRecipeView: OneRecipeView!
     private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
                                                     managedObjectContext: CoreDataStack().mainContext)
@@ -31,23 +36,24 @@ class OneRecipeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        displayRecipe()
+        guard let oneRecipe = recipeUI else { return }
+        displayRecipe(thisRecipeUI: oneRecipe)
     }
     
     
     // MARK: - Display one recipe
     
-    private func displayRecipe() {
+    private func displayRecipe(thisRecipeUI: RecipeUI) {
         guard let oneRecipe = recipeUI,
               let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
             return
         }
-        oneRecipeView.oneRecipeTitleLabel.text = oneRecipe.title
         oneRecipeView.oneRecipeTime.text = oneRecipe.duration
-        oneRecipeView.oneRecipeDatasView.manageDataViewBackground()
         manageFavoriteStar(imageView: favoriteStar, isFavorite: oneRecipe.isFavorite)
         manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
         oneRecipeView.oneRecipeImageView.image = oneRecipe.image
+        
+        navigationItem.title = oneRecipe.title
     }
     
     
@@ -67,7 +73,6 @@ class OneRecipeViewController: UIViewController {
             do {
                 try repository.removeAsFavorite(urlRedirection: recipe.redirection)
                 recipe.isFavorite = false
-                manageFavoriteStar(imageView: favoriteStar, isFavorite: false)
                 informationMessage(element: .deleteFromFavorite)
             } catch {
                 errorMessage(element: .coredataError)
@@ -78,13 +83,17 @@ class OneRecipeViewController: UIViewController {
                 try repository.addAsFavorite(recipeToSave: recipe)
                 recipe.isFavorite = true
                 favoriteStar.tintColor = .orange
-                manageFavoriteStar(imageView: favoriteStar, isFavorite: true)
                 informationMessage(element: .savedAsFavorite)
                 
             } catch {
                 errorMessage(element: .notSaved)
             }
         }
+        
+        delegate?.didChangeFavoriteState(urlRedirection: recipe.redirection, recipeChanged: recipe)
+        
+        displayRecipe(thisRecipeUI: recipe)
+        recipeUI = recipe
     }
     
 

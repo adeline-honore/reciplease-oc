@@ -15,15 +15,18 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var recipesUI: [RecipeUI] = []
+    var recipesUI: [RecipeUI] = []
     var recipes: [Recipe] = []
     var oneRecipeUI: RecipeUI?
     
-    private var segueShowOneRecipe = "SegueFromAllToOneRecipe"
+    private let segueShowOneRecipe = "SegueFromAllToOneRecipe"
+    
     private let recipesTitle = "Recipes with my ingredients"
     private let favoriteRecipesTitle = "My favorite recipes"
     
     private let icon = UIImage(imageLiteralResourceName: "icon")
+    
+    private var cacheManager: CacheManager = CacheManager()
         
     private var recipesCD: [RecipeCD]?
     private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
@@ -60,7 +63,7 @@ class AllRecipesViewController: UIViewController {
     
     private func checkDatasOrigin() {
         
-        if (recipes.isEmpty && recipesUI.isEmpty) {
+        if (recipes.isEmpty) {
             displayCoreDataDatas()
         } else if (!recipes.isEmpty && recipesUI.isEmpty) {
             displayNetworkDatas()
@@ -77,9 +80,7 @@ class AllRecipesViewController: UIViewController {
                        ingredientsValue: recipeUI.ingredientsList.joined(separator: ", "),
                        imageValue: recipeUI.image ?? icon
         )
-        
-        cell.imageCell.image = recipeUI.image
-        
+                
         cell.datasViewCell.manageDataViewBackground()
         
         manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
@@ -103,11 +104,17 @@ class AllRecipesViewController: UIViewController {
     
     private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int) {
         
+        if cacheManager.isImageInCache(name: urlImage) {
+            cell.imageCell.image = cacheManager.getCacheImage(name: urlImage)
+            return
+        }
+        
         allIngredientsService.getImageData(url: urlImage) { result in
             switch result {
             case .success(let image):
                 cell.imageCell.image = image
                 self.recipesUI[indexPathRow].image = image
+                    self.cacheManager.addImageInCache(image: image, name: urlImage as NSString)
             case .failure:
                 cell.imageCell.image = self.icon
             }
@@ -158,7 +165,7 @@ class AllRecipesViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueShowOneRecipe {
             let oneRecipeVC = segue.destination as? OneRecipeViewController
-            
+            oneRecipeVC?.delegate = self
             oneRecipeVC?.recipeUI = oneRecipeUI
         }
     }
@@ -179,17 +186,15 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
-                
-        let recipeCell = recipesUI[indexPath.row]
         
-        if (!recipes.isEmpty && recipeCell.image == nil) {
-            let iindex = recipesUI.firstIndex { recipeUI in
-                recipeCell.redirection == recipeUI.redirection
+        if (!recipes.isEmpty && recipesUI[indexPath.row].image == nil) {
+            let index = recipesUI.firstIndex { recipeUI in
+                recipesUI[indexPath.row].redirection == recipeUI.redirection
             } ?? 0
-            fetchImage(urlImage: recipeCell.imageURL, cell: cell, indexPathRow: iindex)
+            fetchImage(urlImage: recipesUI[indexPath.row].imageURL, cell: cell, indexPathRow: index)
         }
         
-        configureRecipeCell(cell: cell, recipeUI: recipeCell)
+        configureRecipeCell(cell: cell, recipeUI: recipesUI[indexPath.row])
                         
         return cell
     }
@@ -202,5 +207,15 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let recipesSelectRow = recipesUI[indexPath.row]
         sendOneRecipe(recipe: recipesSelectRow)
+    }
+}
+
+
+extension AllRecipesViewController: OneRecipeViewControllerDelegate {
+    func didChangeFavoriteState(urlRedirection: String, recipeChanged: RecipeUI) {
+        
+        if let row = self.recipesUI.firstIndex(where: {$0.redirection == urlRedirection}) {
+               recipesUI[row] = recipeChanged
+        }
     }
 }

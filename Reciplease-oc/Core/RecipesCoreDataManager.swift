@@ -42,6 +42,7 @@ final class RecipesCoreDataManager {
         
         let recipeCD = NSManagedObject(entity: entity, insertInto: coreDataStack.viewContext)
         
+        recipeCD.setValue(recipe.duration, forKey: "duration")
         recipeCD.setValue(recipe.imageURL, forKey: "image")
         recipeCD.setValue(recipe.imageBinary, forKey: "img")
         recipeCD.setValue(recipe.ingredientsList, forKey: "ingredients")

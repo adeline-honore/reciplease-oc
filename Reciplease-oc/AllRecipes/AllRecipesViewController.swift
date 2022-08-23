@@ -24,6 +24,9 @@ class AllRecipesViewController: UIViewController {
     private let recipesTitle = "Recipes with my ingredients"
     private let favoriteRecipesTitle = "My favorite recipes"
     
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     private let icon = UIImage(imageLiteralResourceName: "icon")
     
     private var cacheManager: CacheManager = CacheManager()
@@ -50,6 +53,17 @@ class AllRecipesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         checkDatasOrigin()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        let name = Notification.Name("RecipesLoaded")
+        NotificationCenter.default.addObserver(self, selector: #selector(recipesLoaded), name: name, object: nil)
+    }
+    
+    @objc func recipesLoaded() {
+        activityIndicator.isHidden = true
+        recipesTableView.isHidden = false
     }
     
     
@@ -94,6 +108,9 @@ class AllRecipesViewController: UIViewController {
     private func displayNetworkDatas() {
         navigationItem.title = recipesTitle
         
+        recipesTableView.isHidden = true
+        activityIndicator.isHidden = false
+        
         recipesUI = recipes.map {
             RecipeUI(recipe: $0,
                             duration: manageTimeDouble(time: $0.totalTime),
@@ -114,7 +131,10 @@ class AllRecipesViewController: UIViewController {
             case .success(let image):
                 cell.imageCell.image = image
                 self.recipesUI[indexPathRow].image = image
-                    self.cacheManager.addImageInCache(image: image, name: urlImage as NSString)
+                self.cacheManager.addImageInCache(image: image, name: urlImage as NSString)
+                let name = Notification.Name(rawValue: "RecipesLoaded")
+                let notification = Notification(name: name)
+                NotificationCenter.default.post(notification)
             case .failure:
                 cell.imageCell.image = self.icon
             }

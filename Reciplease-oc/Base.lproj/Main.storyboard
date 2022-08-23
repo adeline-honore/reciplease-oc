@@ -302,6 +302,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ZFZ-Sg-htd" secondAttribute="bottom" constant="10" id="1Wz-sd-TuJ"/>
+                                    <constraint firstItem="h82-cG-jbJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Dvf-Mr-jc1" secondAttribute="leading" constant="20" symbolic="YES" id="AsH-i6-uft"/>
                                     <constraint firstItem="h82-cG-jbJ" firstAttribute="top" secondItem="Dvf-Mr-jc1" secondAttribute="top" constant="10" id="CcW-xi-JKF"/>
                                     <constraint firstItem="Ly3-Z8-2Ux" firstAttribute="top" secondItem="Dvf-Mr-jc1" secondAttribute="top" id="aK2-OO-F78"/>
                                     <constraint firstAttribute="trailing" secondItem="h82-cG-jbJ" secondAttribute="trailing" constant="10" id="ao6-Zt-wlq"/>
@@ -412,7 +413,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Qtr-Bz-lpo"/>
         <segue reference="Md8-1i-Rj3"/>
     </inferredMetricsTieBreakers>
     <resources>

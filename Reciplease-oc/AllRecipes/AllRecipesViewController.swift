@@ -29,7 +29,7 @@ class AllRecipesViewController: UIViewController {
     
     private let icon = UIImage(imageLiteralResourceName: "icon")
     
-    private var cacheManager: CacheManager = CacheManager()
+    private var cacheManager = CacheManager.shared
         
     private var recipesCD: [RecipeCD]?
     private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
@@ -57,15 +57,7 @@ class AllRecipesViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        let name = Notification.Name("RecipesLoaded")
-        NotificationCenter.default.addObserver(self, selector: #selector(recipesLoaded), name: name, object: nil)
     }
-    
-    @objc func recipesLoaded() {
-        activityIndicator.isHidden = true
-        recipesTableView.isHidden = false
-    }
-    
     
     // MARK: - TableViewCell configuration
     
@@ -108,9 +100,6 @@ class AllRecipesViewController: UIViewController {
     private func displayNetworkDatas() {
         navigationItem.title = recipesTitle
         
-        recipesTableView.isHidden = true
-        activityIndicator.isHidden = false
-        
         recipesUI = recipes.map {
             RecipeUI(recipe: $0,
                             duration: manageTimeDouble(time: $0.totalTime),
@@ -119,10 +108,12 @@ class AllRecipesViewController: UIViewController {
         }
     }
     
-    private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int) {
+    private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int, redirection: String) {
         
-        if cacheManager.isImageInCache(name: urlImage) {
-            cell.imageCell.image = cacheManager.getCacheImage(name: urlImage)
+        if cacheManager.getCacheImage(name: redirection) != nil {
+            let image = cacheManager.getCacheImage(name: redirection)
+            cell.imageCell.image = image
+            self.recipesUI[indexPathRow].image = image
             return
         }
         
@@ -131,10 +122,7 @@ class AllRecipesViewController: UIViewController {
             case .success(let image):
                 cell.imageCell.image = image
                 self.recipesUI[indexPathRow].image = image
-                self.cacheManager.addImageInCache(image: image, name: urlImage as NSString)
-                let name = Notification.Name(rawValue: "RecipesLoaded")
-                let notification = Notification(name: name)
-                NotificationCenter.default.post(notification)
+                self.cacheManager.addImageInCache(image: image, name: redirection as NSString)
             case .failure:
                 cell.imageCell.image = self.icon
             }
@@ -211,7 +199,7 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
             let index = recipesUI.firstIndex { recipeUI in
                 recipesUI[indexPath.row].redirection == recipeUI.redirection
             } ?? 0
-            fetchImage(urlImage: recipesUI[indexPath.row].imageURL, cell: cell, indexPathRow: index)
+            fetchImage(urlImage: recipesUI[indexPath.row].imageURL, cell: cell, indexPathRow: index, redirection: recipesUI[indexPath.row].redirection)
         }
         
         configureRecipeCell(cell: cell, recipeUI: recipesUI[indexPath.row])

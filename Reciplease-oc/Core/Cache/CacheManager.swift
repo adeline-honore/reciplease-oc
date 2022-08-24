@@ -10,19 +10,18 @@ import UIKit
 
 class CacheManager {
     
-    public var cache = NSCache<NSString, UIImage>()
+    private var cache = NSCache<NSString, UIImage>()
+    static var shared = CacheManager()
+    
+    private init() {}
     
     func addImageInCache(image: UIImage, name: NSString) {
         cache.setObject(image, forKey: name)
     }
     
-    func isImageInCache(name: String) -> Bool {
-        cache.object(forKey: name as NSString) == nil ? false : true
-    }
-    
-    func getCacheImage(name: String) -> UIImage {
-        guard let image = cache.object(forKey: name as NSString) else { return UIImage()}
-        return image
+    func getCacheImage(name: String) -> UIImage? {
+        
+        cache.object(forKey: name as NSString) == nil ? nil : cache.object(forKey: name as NSString)
     }
     
 }

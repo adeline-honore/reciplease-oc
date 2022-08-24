@@ -100,7 +100,7 @@ class TestRecipesCoreDataManager: XCTestCase {
         do {
             
             //1 Adds a new recipe and assigns it to newRecipe
-            //try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
+            try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
             
             //2 Gets all reports currently stored in Core Data and assigns them to getRecipes
             let getRecipes = try coreDataManager.getRecipes()

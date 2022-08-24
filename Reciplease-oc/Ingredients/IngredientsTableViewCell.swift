@@ -1,5 +1,5 @@
 //
-//  IngredientTableViewCell.swift
+//  IngredientsTableViewCell.swift
 //  Reciplease-oc
 //
 //  Created by HONORE Adeline on 29/05/2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IngredientTableViewCell: UITableViewCell {
+class IngredientsTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     

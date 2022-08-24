@@ -1,5 +1,5 @@
 //
-//  SearchRecipes.swift
+//  IngredientsService.swift
 //  Reciplease-oc
 //
 //  Created by HONORE Adeline on 07/06/2022.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol SearchIngredientsServiceProtocol {
+protocol IngredientsServiceProtocol {
     func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ())
 }
 
-class SearchIngredientsService: SearchIngredientsServiceProtocol {
+class IngredientsService: IngredientsServiceProtocol {
     
     private var network: APINetworkProtocol
     
@@ -22,7 +22,7 @@ class SearchIngredientsService: SearchIngredientsServiceProtocol {
     
     func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ()) {
         
-        try? network.callNetwork(router: SearchRouterNetwork.ingredients(ingredients).asURLRequest()) { result in
+        try? network.callNetwork(router: IngredientsRouterNetwork.ingredients(ingredients).asURLRequest()) { result in
             
             switch result {
             case .success(let data):

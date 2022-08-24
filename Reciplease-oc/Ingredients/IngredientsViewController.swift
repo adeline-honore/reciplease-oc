@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  IngredientsViewController.swift
 //  Reciplease-oc
 //
 //  Created by HONORE Adeline on 29/05/2022.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class IngredientsViewController: UIViewController {
     
     // MARK: - Properties
     private var ingredients: [String] = []
     private var ingredientsInString: String = ""
-    private var searchIngredientView: SearchIngredientView!
-    private var searchRecipesService = SearchIngredientsService(network: APINetwork())
+    private var searchIngredientView: IngredientsView!
+    private var searchRecipesService = IngredientsService(network: APINetwork())
     private var segueSearch = "SegueFromSearchToAllRecipes"
     private var allRecipes = [Recipe]()
     
@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchIngredientView = view as? SearchIngredientView
+        searchIngredientView = view as? IngredientsView
         navigationItem.title = "My ingredients"
         ingredientTableView.dataSource = self
         ingredientTableView.delegate = self
@@ -125,8 +125,8 @@ class SearchViewController: UIViewController {
     }
 }
 
-// MARK: - Extension of SearchViewController
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+// MARK: - Extension of IngredientsViewController
+extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -136,7 +136,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientTableViewCell.identifier, for: indexPath) as? IngredientTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTableViewCell.identifier, for: indexPath) as? IngredientsTableViewCell else {
             return UITableViewCell()
         }
         

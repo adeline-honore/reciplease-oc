@@ -1,5 +1,5 @@
 //
-//  SearchRouterNetwork.swift
+//  IngredientsRouterNetwork.swift
 //  Reciplease-oc
 //
 //  Created by HONORE Adeline on 07/06/2022.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-public enum SearchRouterNetwork: URLRequestConvertible {
+public enum IngredientsRouterNetwork: URLRequestConvertible {
     
     enum Constants {
         static let baseURLPath = "https://api.edamam.com/api/recipes/v2"

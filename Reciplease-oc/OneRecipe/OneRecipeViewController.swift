@@ -18,8 +18,9 @@ class OneRecipeViewController: UIViewController {
     var recipeUI: RecipeUI?
     weak var delegate: OneRecipeViewControllerDelegate?
     private var oneRecipeView: OneRecipeView!
-    private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
-                                                    managedObjectContext: CoreDataStack().mainContext)
+    private let repository = RecipesCoreDataManager(
+        coreDataStack: CoreDataStack(),
+        managedObjectContext: CoreDataStack().viewContext)
     
     
     @IBOutlet weak var oneRecipeIngredientTableView: UITableView!

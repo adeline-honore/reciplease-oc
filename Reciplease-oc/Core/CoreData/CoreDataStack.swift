@@ -19,20 +19,11 @@ class CoreDataStack {
       return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
-    public lazy var mainContext: NSManagedObjectContext = {
-        return CoreDataStack.sharedInstance.persistentContainer.viewContext
-    }()
-
-    
-    // MARK: - Singleton
-    
-    static let sharedInstance = CoreDataStack()
     
     // MARK: - Public
     
     var viewContext: NSManagedObjectContext {
-        return CoreDataStack.sharedInstance.persistentContainer.viewContext
-        
+        return persistentContainer.viewContext
     }
     
     public init() {}
@@ -52,35 +43,4 @@ class CoreDataStack {
       return context
     }
     
-    
-    public func saveContext() {
-      saveContext(viewContext)
-    }
-
-    public func saveContext(_ context: NSManagedObjectContext) {
-      if context != viewContext {
-        saveDerivedContext(context)
-        return
-      }
-
-      context.perform {
-        do {
-          try context.save()
-        } catch let error as NSError {
-          fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-      }
-    }
-
-    public func saveDerivedContext(_ context: NSManagedObjectContext) {
-      context.perform {
-        do {
-          try context.save()
-        } catch let error as NSError {
-          fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-
-        self.saveContext(self.viewContext)
-      }
-    }
 }

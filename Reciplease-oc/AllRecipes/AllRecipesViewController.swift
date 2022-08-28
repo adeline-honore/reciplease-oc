@@ -32,8 +32,9 @@ class AllRecipesViewController: UIViewController {
     private var cacheManager = CacheManager.shared
         
     private var recipesCD: [RecipeCD]?
-    private let repository = RecipesCoreDataManager(coreDataStack: CoreDataStack.sharedInstance,
-                                                    managedObjectContext: CoreDataStack().mainContext)
+    private let repository = RecipesCoreDataManager(
+        coreDataStack: CoreDataStack(),
+        managedObjectContext: CoreDataStack().viewContext)
     
     private var allIngredientsService = AllRecipesService(network: APINetwork())
     

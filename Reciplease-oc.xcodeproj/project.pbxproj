@@ -26,7 +26,6 @@
 		6E6C78AF2842D7240050C53A /* Reciplease-oc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78AD2842D7240050C53A /* Reciplease-oc.xcdatamodeld */; };
 		6E6C78B12842D72E0050C53A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E6C78B02842D72E0050C53A /* Assets.xcassets */; };
 		6E6C78B42842D72E0050C53A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6C78B22842D72E0050C53A /* LaunchScreen.storyboard */; };
-		6E6C78BF2842D72F0050C53A /* Reciplease_ocTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */; };
 		6E6C78C92842D72F0050C53A /* Reciplease_ocUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78C82842D72F0050C53A /* Reciplease_ocUITests.swift */; };
 		6E6C78CB2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */; };
 		6E6C78D82842D9F60050C53A /* IngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6C78D72842D9F60050C53A /* IngredientsView.swift */; };
@@ -90,7 +89,6 @@
 		6E6C78B32842D72E0050C53A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E6C78B52842D72E0050C53A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E6C78BA2842D72F0050C53A /* Reciplease-ocTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reciplease-ocTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocTests.swift; sourceTree = "<group>"; };
 		6E6C78C42842D72F0050C53A /* Reciplease-ocUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reciplease-ocUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6C78C82842D72F0050C53A /* Reciplease_ocUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocUITests.swift; sourceTree = "<group>"; };
 		6E6C78CA2842D72F0050C53A /* Reciplease_ocUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reciplease_ocUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 		6E6C78BD2842D72F0050C53A /* Reciplease-ocTests */ = {
 			isa = PBXGroup;
 			children = (
-				6E6C78BE2842D72F0050C53A /* Reciplease_ocTests.swift */,
 				6E1D5B77289A534E008D4C18 /* TestCoreDataStack.swift */,
 				6E1D5B79289A5DC8008D4C18 /* TestRecipesCoreDataManager.swift */,
 			);
@@ -580,7 +577,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E6C78BF2842D72F0050C53A /* Reciplease_ocTests.swift in Sources */,
 				6E1D5B78289A534E008D4C18 /* TestCoreDataStack.swift in Sources */,
 				6E1D5B7A289A5DC8008D4C18 /* TestRecipesCoreDataManager.swift in Sources */,
 			);

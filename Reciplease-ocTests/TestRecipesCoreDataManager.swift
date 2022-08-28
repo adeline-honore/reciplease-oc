@@ -27,46 +27,21 @@ class TestRecipesCoreDataManager: XCTestCase {
         return thisRecipeUI
     }()
     
-    /*
-    override func setUp() {
-        super.setUp()
-        coreDataStack = TestCoreDataStack()
-        coreDataManager = RecipesCoreDataManager(coreDataStack: coreDataStack, managedObjectContext: coreDataStack.mainContext)
-    }*/
-    
     override func setUpWithError() throws {
-            coreDataStack = TestCoreDataStack()
-            coreDataManager = RecipesCoreDataManager(
-                coreDataStack: coreDataStack,
-                managedObjectContext: coreDataStack.mainContext
-            )
-            
-            try super.setUpWithError()
-        }
-    /*
-    override func tearDown() {
-        super.tearDown()
-        coreDataManager = nil
-        coreDataStack = nil
-    }*/
+        coreDataStack = TestCoreDataStack()
+        coreDataManager = RecipesCoreDataManager(
+            coreDataStack: coreDataStack,
+            managedObjectContext: coreDataStack.viewContext
+        )
+        
+        try super.setUpWithError()
+    }
     
     override func tearDownWithError() throws {
-            coreDataStack = nil
-            coreDataManager = nil
-            try super.tearDownWithError()
-        }
-    
-    /*
-    func testCreateRecipeCD() {
-        
-        do {
-            let recipe: () = try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
-            XCTAssertNotNil(recipe, "Recipe should not be nil")
-        } catch {
-            print("error, tests fails !")
-        }
+        coreDataStack = nil
+        coreDataManager = nil
+        try super.tearDownWithError()
     }
-     */
     
     func testRootContextIsSavedAfterAddingRecipe() {
         // 1 Creates a background context and a new instance of RecipesCoreDataManager which uses that context.
@@ -76,11 +51,11 @@ class TestRecipesCoreDataManager: XCTestCase {
         // 2 Creates an expectation that sends a signal to the test case when the Core Data stack sends an NSManagedObjectContextDidSave notification event
         expectation(
             forNotification: .NSManagedObjectContextDidSave,
-            object: coreDataStack.mainContext) { _ in
+            object: coreDataStack.viewContext) { _ in
                 return true
             }
         
-        // 3 It adds a new report inside a perform(_:) block.
+        // 3 It adds a new recipe inside a perform(_:) block.
         derivedContext.perform {
             do {
                 let recipe: () = try self.coreDataManager.addAsFavorite(recipeToSave: self.recipeUI)
@@ -90,7 +65,7 @@ class TestRecipesCoreDataManager: XCTestCase {
             }
         }
         
-        // 4 The test waits for the signal that the report saved. The test fails if it waits longer than two seconds
+        // 4 The test waits for the signal that the recipe saved. The test fails if it waits longer than two seconds
         waitForExpectations(timeout: 2.0) { error in
             XCTAssertNil(error, "Save did not occur")
         }
@@ -99,17 +74,13 @@ class TestRecipesCoreDataManager: XCTestCase {
     func testGetRecipes() {
         do {
             
-            //1 Adds a new recipe and assigns it to newRecipe
             try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
             
-            //2 Gets all reports currently stored in Core Data and assigns them to getRecipes
             let getRecipes = try coreDataManager.getRecipes()
-            //3 Verifies the result of getRecipes is nil. This is a failing test
-            XCTAssertNotNil(getRecipes)
             
-            //4 Asserts the results array is empty
-            XCTAssertTrue(getRecipes.count > 0)
-            //XCTAssertTrue(newReport.id == fetchReports?.first?.id)
+            XCTAssertNotNil(getRecipes)
+            XCTAssertTrue(getRecipes.count == 1)
+            XCTAssertTrue(recipeUI.redirection == getRecipes.first?.url)
         } catch {
             print("error, tests fails !")
         }
@@ -117,14 +88,16 @@ class TestRecipesCoreDataManager: XCTestCase {
     
     func testDeleteRecipe() {
         do {
-            //try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
+            try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
             var fetchRecipes = try coreDataManager.getRecipes()
             
-            XCTAssertTrue(fetchRecipes.count > 0)
-            //XCTAssertTrue(newReport.id == fetchReports?.first?.id)
+            XCTAssertTrue(fetchRecipes.count == 1)
+            XCTAssertTrue(recipeUI.redirection == fetchRecipes.first?.url)
+            
             try coreDataManager.removeAsFavorite(urlRedirection: recipeUI.redirection)
             fetchRecipes = try coreDataManager.getRecipes()
-            //XCTAssertTrue(fetchReports.isEmpty )
+            
+            XCTAssertTrue(fetchRecipes.isEmpty )
         } catch {
             print("error, tests fails !")
         }

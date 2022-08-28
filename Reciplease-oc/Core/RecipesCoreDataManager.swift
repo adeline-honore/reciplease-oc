@@ -17,11 +17,10 @@ final class RecipesCoreDataManager {
     
     // MARK: - Init
     
-    public init(coreDataStack: CoreDataStack = CoreDataStack.sharedInstance, managedObjectContext: NSManagedObjectContext) {
+    public init(coreDataStack: CoreDataStack, managedObjectContext: NSManagedObjectContext) {
         self.coreDataStack = coreDataStack
         self.managedObjectContext = managedObjectContext
     }
-    
     
     
     // MARK: - Repository

@@ -12,23 +12,24 @@ class IngredientsViewController: UIViewController {
     // MARK: - Properties
     private var ingredients: [String] = []
     private var ingredientsInString: String = ""
-    private var searchIngredientView: IngredientsView!
-    private var searchRecipesService = IngredientsService(network: APINetwork())
-    private var segueSearch = "SegueFromSearchToAllRecipes"
+    private var ingredientsView: IngredientsView!
+    private var ingredientsService = IngredientsService(network: APINetwork())
+    private var segueIngreients = "SegueFromIngredientsToAllRecipes"
     private var allRecipes = [Recipe]()
     
     // MARK: - Outlet
     
-    @IBOutlet weak var ingredientTableView: UITableView!
+    @IBOutlet weak var ingredientsTableView: UITableView!
     
     
     // MARK: - View life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchIngredientView = view as? IngredientsView
+        ingredientsView = view as? IngredientsView
+        ingredientsView.activityIndicator.isHidden = true
         navigationItem.title = "My ingredients"
-        ingredientTableView.dataSource = self
-        ingredientTableView.delegate = self
+        ingredientsTableView.dataSource = self
+        ingredientsTableView.delegate = self
     }
     
     // MARK: - Add ingredients
@@ -39,7 +40,7 @@ class IngredientsViewController: UIViewController {
     
     private func addIngredient() {
         
-        guard var newIngredient = searchIngredientView.searchIngredientTextField.text else { return }
+        guard var newIngredient = ingredientsView.searchIngredientTextField.text else { return }
         
         newIngredient = newIngredient.trimmingCharacters(in: .whitespaces).lowercased()
                 
@@ -48,14 +49,14 @@ class IngredientsViewController: UIViewController {
         
         if isValid && !newIngredient.isEmpty {
             ingredients.append(newIngredient)
-            ingredientTableView.reloadData()
-            searchIngredientView.searchIngredientTextField.text?.removeAll()
+            ingredientsTableView.reloadData()
+            ingredientsView.searchIngredientTextField.text?.removeAll()
         } else if newIngredient.isEmpty {
-            searchIngredientView.searchIngredientTextField.text?.removeAll()
+            ingredientsView.searchIngredientTextField.text?.removeAll()
             errorMessage(element: .empty)
         } else if !isValid {
             errorMessage(element: .notAWord)
-            searchIngredientView.searchIngredientTextField.text?.removeAll()
+            ingredientsView.searchIngredientTextField.text?.removeAll()
         }
     }
     
@@ -80,8 +81,10 @@ class IngredientsViewController: UIViewController {
     }
     
     private func searchRecipes(list: String) {
+        ingredientsTableView.isHidden = true
+        ingredientsView.activityIndicator.isHidden = false
         
-        searchRecipesService.getData(ingredients: list) { result in
+        ingredientsService.getData(ingredients: list) { result in
             DispatchQueue.main.async { [weak self] in
                 
                 switch result {
@@ -96,16 +99,19 @@ class IngredientsViewController: UIViewController {
     
     // MARK: - Send Recipes to AllRecipesViewController
     private func sendListOfRecipes(list: [Recipe]) {
+        ingredientsTableView.isHidden = false
+        ingredientsView.activityIndicator.isHidden = true
+        
         if !list.isEmpty {
             allRecipes = list
-            performSegue(withIdentifier: segueSearch, sender: nil)
+            performSegue(withIdentifier: segueIngreients, sender: nil)
         } else {
             errorMessage(element: .noRecipe)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueSearch {
+        if segue.identifier == segueIngreients {
             let allRecipesVC = segue.destination as? AllRecipesViewController
             
             allRecipesVC?.recipes = allRecipes
@@ -121,7 +127,7 @@ class IngredientsViewController: UIViewController {
     private func clearIngredients() {
         ingredients.removeAll()
         ingredientsInString.removeAll()
-        ingredientTableView.reloadData()
+        ingredientsTableView.reloadData()
     }
 }
 

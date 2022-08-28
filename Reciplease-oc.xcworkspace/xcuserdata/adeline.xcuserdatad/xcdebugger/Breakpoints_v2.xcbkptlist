@@ -95,6 +95,21 @@
                   endingLineNumber = "111"
                   offsetFromSymbolStart = "468">
                </Location>
+               <Location
+                  uuid = "64828A4B-84B3-4A89-8269-10E29B765F3F - c89517b67e76d23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Reciplease_ocTests.TestRecipesCoreDataManager.testGetRecipes() -&gt; ()"
+                  moduleName = "Reciplease-ocTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adeline/Desktop/open-classroom/IOS/p10/Reciplease-oc/Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "904">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -172,6 +187,21 @@
                   startingLineNumber = "106"
                   endingLineNumber = "106"
                   offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "7B736DA4-93BA-47F6-94F3-F6FF26BC01C8 - c89517b67e76c78"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Reciplease_ocTests.TestRecipesCoreDataManager.testGetRecipes() -&gt; ()"
+                  moduleName = "Reciplease-ocTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adeline/Desktop/open-classroom/IOS/p10/Reciplease-oc/Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "423">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -284,6 +314,21 @@
                   endingLineNumber = "111"
                   offsetFromSymbolStart = "468">
                </Location>
+               <Location
+                  uuid = "F17DC73A-1A46-4180-9ACC-9ACE5B145917 - c89517b67e76d23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Reciplease_ocTests.TestRecipesCoreDataManager.testGetRecipes() -&gt; ()"
+                  moduleName = "Reciplease-ocTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adeline/Desktop/open-classroom/IOS/p10/Reciplease-oc/Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "904">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -361,6 +406,21 @@
                   startingLineNumber = "113"
                   endingLineNumber = "113"
                   offsetFromSymbolStart = "602">
+               </Location>
+               <Location
+                  uuid = "11EEC094-9E68-4667-8520-AFE6B367F9BF - c89517b67e76d61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Reciplease_ocTests.TestRecipesCoreDataManager.testGetRecipes() -&gt; ()"
+                  moduleName = "Reciplease-ocTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adeline/Desktop/open-classroom/IOS/p10/Reciplease-oc/Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "1044">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -659,6 +719,21 @@
                   endingLineNumber = "108"
                   offsetFromSymbolStart = "287">
                </Location>
+               <Location
+                  uuid = "03D4DF4C-4EE4-4C9D-8105-5FC41A2E21D0 - c89517b67e76cbe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Reciplease_ocTests.TestRecipesCoreDataManager.testGetRecipes() -&gt; ()"
+                  moduleName = "Reciplease-ocTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adeline/Desktop/open-classroom/IOS/p10/Reciplease-oc/Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "705">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -836,6 +911,54 @@
             endingLineNumber = "35"
             landmarkName = "TestRecipesCoreDataManager"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A9EE5FA-5709-485B-A5AE-55E383E6A58B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reciplease-oc/Core/RecipesCoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "addAsFavorite(recipeToSave:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DDED427-B4F3-4C62-8CB2-B74EA96B59ED"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reciplease-oc/Core/RecipesCoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "createEntity(recipe:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AFF8EEEE-C4E1-4624-A78C-865F98D18868"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Reciplease-ocTests/TestRecipesCoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "testDeleteRecipe()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

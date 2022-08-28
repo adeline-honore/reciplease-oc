@@ -14,12 +14,12 @@ public enum FetchImageNetwork {
         
     func asURLRequest(urlString: String) -> URLRequest {
         
-        let myUrl = URL(string: urlString)
+        guard let myUrl = URL(string: urlString) else { return URLRequest(url: URL(fileURLWithPath: "")) }
 
         var request: URLRequest?
         
         do {
-            request = try URLRequest(url: myUrl!, method: .get, headers: .none)
+            request = try URLRequest(url: myUrl, method: .get, headers: .none)
         } catch {
             
         }

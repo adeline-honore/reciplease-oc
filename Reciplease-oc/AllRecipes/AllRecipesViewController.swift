@@ -157,7 +157,7 @@ class AllRecipesViewController: UIViewController {
         var recipesUI = [RecipeUI]()
         
         recipesUI = entities.map {
-            RecipeUI(recipeCD: $0, image: UIImage(data: $0.img!)!,isFavorite: repository.isItFavorite(urlString: $0.url ?? ""))
+            RecipeUI(recipeCD: $0, image: UIImage(data: $0.img ?? Data()) ?? icon,isFavorite: repository.isItFavorite(urlString: $0.url ?? ""))
         }
         
         return recipesUI

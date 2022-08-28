@@ -12,5 +12,6 @@ class IngredientsView: UIView {
     // MARK: - Outlet
     @IBOutlet weak var searchIngredientTextField: UITextField!
 
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
 }

@@ -16,15 +16,15 @@ class TestRecipesCoreDataManager: XCTestCase {
     var coreDataStack: CoreDataStack!
     
     let recipeUI: RecipeUI = {
-        var recipe = RecipeUI()
-        recipe.title = "My pop-corn recipe test"
-        recipe.imageURL = "http//this-is-a-fake-url-for-my-image"
-        recipe.redirection = "http//this-is-a-fake-url-redirection"
-        recipe.ingredientsList = ["corn", "tomato"]
-        recipe.totalTime = 10.0
-        recipe.duration = "10"
-        recipe.isFavorite = false
-        return recipe
+        var thisRecipeUI = RecipeUI(recipe: Recipe(), duration: "10 mn ", isFavorite: false)
+        thisRecipeUI.title = "My pop-corn recipe test"
+        thisRecipeUI.imageURL = "http//this-is-a-fake-url-for-my-image"
+        thisRecipeUI.redirection = "http//this-is-a-fake-url-redirection"
+        thisRecipeUI.ingredientsList = ["corn", "tomato"]
+        thisRecipeUI.totalTime = 10.0
+        thisRecipeUI.duration = "10 mn "
+        thisRecipeUI.isFavorite = false
+        return thisRecipeUI
     }()
     
     /*

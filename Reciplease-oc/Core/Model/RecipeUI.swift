@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 struct RecipeUI {
-    var id: String?
     var title: String
     var imageURL: String
     var imageBinary: Data?

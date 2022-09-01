@@ -86,6 +86,22 @@ class TestRecipesCoreDataManager: XCTestCase {
         }
     }
     
+    func testIsItFavorite() {
+        do {
+            
+            try coreDataManager.addAsFavorite(recipeToSave: recipeUI)
+            
+            let getRecipes = try coreDataManager.getRecipes()
+            
+            XCTAssertNotNil(getRecipes)
+            XCTAssertTrue(getRecipes.count == 1)
+            XCTAssertTrue(recipeUI.redirection == getRecipes.first?.url)
+            XCTAssertTrue(coreDataManager.isItFavorite(urlString: recipeUI.redirection))
+        } catch {
+            print("error, tests fails !")
+        }
+    }
+    
     func testDeleteRecipe() {
         do {
             try coreDataManager.addAsFavorite(recipeToSave: recipeUI)

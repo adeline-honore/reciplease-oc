@@ -43,34 +43,6 @@ class TestRecipesCoreDataManager: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func testRootContextIsSavedAfterAddingRecipe() {
-        // 1 Creates a background context and a new instance of RecipesCoreDataManager which uses that context.
-        let derivedContext = coreDataStack.persistentContainer.newBackgroundContext()
-        coreDataManager = RecipesCoreDataManager(coreDataStack: coreDataStack, managedObjectContext: derivedContext)
-        
-        // 2 Creates an expectation that sends a signal to the test case when the Core Data stack sends an NSManagedObjectContextDidSave notification event
-        expectation(
-            forNotification: .NSManagedObjectContextDidSave,
-            object: coreDataStack.viewContext) { _ in
-                return true
-            }
-        
-        // 3 It adds a new recipe inside a perform(_:) block.
-        derivedContext.perform {
-            do {
-                let recipe: () = try self.coreDataManager.addAsFavorite(recipeToSave: self.recipeUI)
-                XCTAssertNotNil(recipe)
-            } catch {
-                print("error, tests fails !")
-            }
-        }
-        
-        // 4 The test waits for the signal that the recipe saved. The test fails if it waits longer than two seconds
-        waitForExpectations(timeout: 2.0) { error in
-            XCTAssertNil(error, "Save did not occur")
-        }
-    }
-    
     func testGetRecipes() {
         do {
             

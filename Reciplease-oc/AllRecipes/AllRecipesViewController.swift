@@ -60,6 +60,13 @@ class AllRecipesViewController: UIViewController {
         super.loadView()
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        navigationItem.isAccessibilityElement = true
+        
+        oneRecipeUI?.tellRecipeUIInformations()
+    }
+    
     // MARK: - TableViewCell configuration
     
     private func configureTableView() {
@@ -90,7 +97,7 @@ class AllRecipesViewController: UIViewController {
                 
         cell.datasViewCell.manageDataViewBackground()
         
-        manageFavoriteStar(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
+        manageFavoriteStarImageView(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
         
         manageTimeView(time: recipeUI.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
     }
@@ -204,7 +211,7 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         configureRecipeCell(cell: cell, recipeUI: recipesUI[indexPath.row])
-                        
+        
         return cell
     }
     

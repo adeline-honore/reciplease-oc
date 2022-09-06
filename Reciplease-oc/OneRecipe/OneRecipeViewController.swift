@@ -41,16 +41,21 @@ class OneRecipeViewController: UIViewController {
         displayRecipe(thisRecipeUI: oneRecipe)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()        
+        recipeUI?.tellRecipeUIInformations()
+    }
+    
     
     // MARK: - Display one recipe
     
     private func displayRecipe(thisRecipeUI: RecipeUI) {
-        guard let oneRecipe = recipeUI,
-              let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
+        guard let oneRecipe = recipeUI else {
             return
         }
+        
         oneRecipeView.oneRecipeTime.text = oneRecipe.duration
-        manageFavoriteStar(imageView: favoriteStar, isFavorite: oneRecipe.isFavorite)
+        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: oneRecipe.isFavorite)
         manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
         oneRecipeView.oneRecipeImageView.image = oneRecipe.image
         
@@ -65,8 +70,7 @@ class OneRecipeViewController: UIViewController {
     }
     
     private func toggleFavorite() {
-        guard var recipe = recipeUI,
-              let favoriteStar = oneRecipeView.favoriteStarButton.imageView else {
+        guard var recipe = recipeUI else {
             return
         }
                 
@@ -83,9 +87,7 @@ class OneRecipeViewController: UIViewController {
             do {
                 try repository.addAsFavorite(recipeToSave: recipe)
                 recipe.isFavorite = true
-                favoriteStar.tintColor = .orange
                 informationMessage(element: .savedAsFavorite)
-                
             } catch {
                 errorMessage(element: .notSaved)
             }
@@ -93,7 +95,7 @@ class OneRecipeViewController: UIViewController {
         
         delegate?.didChangeFavoriteState(urlRedirection: recipe.redirection, recipeChanged: recipe)
         
-        displayRecipe(thisRecipeUI: recipe)
+        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: recipe.isFavorite)
         recipeUI = recipe
     }
     

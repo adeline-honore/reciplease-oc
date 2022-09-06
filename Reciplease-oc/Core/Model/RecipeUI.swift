@@ -39,4 +39,18 @@ struct RecipeUI {
         duration = recipeCD.duration ?? ""
         self.isFavorite = isFavorite
     }
+    
+    func tellRecipeUIInformations() {
+        title.accessibilityHint = "The label of recipe"
+        title.isAccessibilityElement = true
+        
+        ingredientsList.joined(separator: ", ").accessibilityHint = "The ingredients of recipe"
+        ingredientsList.joined(separator: ", ").isAccessibilityElement = true
+        
+        duration.accessibilityHint = "The time of recipe"
+        duration.isAccessibilityElement = true
+        
+        isFavorite.description.accessibilityHint = " This is\(isFavorite == true ? "" : "not") a favorite recipe"
+        
+    }
 }

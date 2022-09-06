@@ -24,8 +24,12 @@ extension UIViewController {
         displayAlert(message: element.message)
     }
     
-    func manageFavoriteStar(imageView: UIImageView, isFavorite: Bool) {
+    func manageFavoriteStarImageView(imageView: UIImageView, isFavorite: Bool) {
         imageView.tintColor = isFavorite ? .orange : .white
+    }
+    
+    func manageFavoriteStarButton(button: UIButton, isFavorite: Bool) {
+        button.tintColor = isFavorite ? .orange : .white
     }
     
     func manageTimeView(time: Double, labelView: UILabel, clockView: UIView, infoStack: UIStackView) {
@@ -41,6 +45,6 @@ extension UIViewController {
     }
     
     func manageTimeDouble(time: Double) -> String {
-        return (time.isZero) ? "0" : String(Int(time)) + " mn  "
+        time.isZero ? "0" : String(Int(time)) + " mn  "
     }
 }

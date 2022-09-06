@@ -5,9 +5,7 @@
 //  Created by HONORE Adeline on 14/06/2022.
 //
 
-import Foundation
 import UIKit
-
 
 extension UIViewController {
     private func displayAlert(title: String? = nil, message: String) {

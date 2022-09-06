@@ -5,7 +5,6 @@
 //  Created by HONORE Adeline on 14/08/2022.
 //
 
-import Foundation
 import UIKit
 
 protocol AllRecipesServiceProtocol {
@@ -22,16 +21,16 @@ class AllRecipesService: AllRecipesServiceProtocol {
     
     func getImageData(url: String, completionHandler: @escaping (Result<UIImage, ErrorType>) -> ()) {
         
-        network.callNetwork(router: FetchImageNetwork.urlImage(url).asURLRequest(urlString: url)) { result in
-        
+        try? network.callNetwork(router:  FetchImageRouter.urlImage(url).asURLRequest()) { result in
+            
             switch result {
             case .success(let data):
-                    guard let imageToUpload = UIImage(data: data) else { return }
-                    completionHandler(.success(imageToUpload))
+                guard let imageToUpload = UIImage(data: data) else { return }
+                completionHandler(.success(imageToUpload))
+                
             case .failure:
                 completionHandler(.failure(ErrorType.network))
             }
         }
     }
-    
 }

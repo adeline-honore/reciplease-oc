@@ -5,10 +5,16 @@
 //  Created by HONORE Adeline on 22/08/2022.
 //
 
-import Foundation
 import UIKit
 
-class CacheManager {
+protocol CacheManagerProtocol: AnyObject {
+    func addImageInCache(image: UIImage, name: NSString)
+    
+    func getCacheImage(name: String) -> UIImage? 
+}
+
+
+class CacheManager: CacheManagerProtocol {
     
     private var cache = NSCache<NSString, UIImage>()
     static var shared = CacheManager()

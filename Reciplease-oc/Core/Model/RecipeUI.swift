@@ -5,7 +5,6 @@
 //  Created by HONORE Adeline on 28/07/2022.
 //
 
-import Foundation
 import UIKit
 
 struct RecipeUI {

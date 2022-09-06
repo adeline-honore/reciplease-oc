@@ -10,13 +10,9 @@ import UIKit
 class OneRecipeView: UIView {
 
     @IBOutlet weak var oneRecipeImageView: UIImageView!
-    
-    @IBOutlet weak var oneRecipeTitleLabel: UILabel!
-    
+        
     @IBOutlet weak var oneRecipeTime: UILabel!
-    
-    @IBOutlet weak var oneRecipeDatasView: UIView!
-    
+        
     @IBOutlet weak var favoriteStarButton: UIButton!
     
     @IBOutlet weak var oneRecipeClock: UIImageView!

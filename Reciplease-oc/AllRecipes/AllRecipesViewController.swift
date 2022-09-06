@@ -13,35 +13,33 @@ protocol AllRecipesViewControllerDelegate: AnyObject {
 
 class AllRecipesViewController: UIViewController {
     
+    // MARK: - Outlet
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var recipesTableView: UITableView!
+    
+    
     // MARK: - Properties
     
-    var recipesUI: [RecipeUI] = []
+    private var recipesUI: [RecipeUI] = []
     var recipes: [Recipe] = []
-    var oneRecipeUI: RecipeUI?
+    private var oneRecipeUI: RecipeUI?
     
     private let segueShowOneRecipe = "SegueFromAllToOneRecipe"
     
     private let recipesTitle = "Recipes with my ingredients"
     private let favoriteRecipesTitle = "My favorite recipes"
-    
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     private let icon = UIImage(imageLiteralResourceName: "icon")
     
     private var cacheManager = CacheManager.shared
         
     private var recipesCD: [RecipeCD]?
-    private let repository = RecipesCoreDataManager(
+    let repository = RecipesCoreDataManager(
         coreDataStack: CoreDataStack(),
         managedObjectContext: CoreDataStack().viewContext)
     
-    private var allIngredientsService = AllRecipesService(network: APINetwork())
-    
-    // MARK: - Outlet
-    
-    @IBOutlet weak var recipesTableView: UITableView!
-    
+    var allIngredientsService = AllRecipesService(network: APINetwork())
+
     
     // MARK: - Life Cycle
     
@@ -191,7 +189,7 @@ class AllRecipesViewController: UIViewController {
 // MARK: - Extension of AllRecipesViewController
 extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -13,7 +13,7 @@ class IngredientsViewController: UIViewController {
     private var ingredients: [String] = []
     private var ingredientsInString: String = ""
     private var ingredientsView: IngredientsView!
-    private var ingredientsService = IngredientsService(network: APINetwork())
+    var ingredientsService = IngredientsService(network: APINetwork())
     private var segueIngreients = "SegueFromIngredientsToAllRecipes"
     private var allRecipes = [Recipe]()
     
@@ -50,29 +50,27 @@ class IngredientsViewController: UIViewController {
         if isValid && !newIngredient.isEmpty {
             ingredients.append(newIngredient)
             ingredientsTableView.reloadData()
-            ingredientsView.searchIngredientTextField.text?.removeAll()
         } else if newIngredient.isEmpty {
-            ingredientsView.searchIngredientTextField.text?.removeAll()
             errorMessage(element: .empty)
         } else if !isValid {
             errorMessage(element: .notAWord)
-            ingredientsView.searchIngredientTextField.text?.removeAll()
         }
+        ingredientsView.searchIngredientTextField.text?.removeAll()
     }
     
     
     private func validateString(text: String, with regex: String) -> Bool {
-            // Create the regex
-            guard let gRegex = try? NSRegularExpression(pattern: regex) else {
-                return false
-            }
-            // Create the range
-            let range = NSRange(location: 0, length: text.utf16.count)
-            // Perform the test
-            if gRegex.firstMatch(in: text, options: [], range: range) != nil {
-                return true
-            }
+        // Create the regex
+        guard let gRegex = try? NSRegularExpression(pattern: regex) else {
             return false
+        }
+        // Create the range
+        let range = NSRange(location: 0, length: text.utf16.count)
+        // Perform the test
+        if gRegex.firstMatch(in: text, options: [], range: range) != nil {
+            return true
+        }
+        return false
     }
     
     // MARK: - Search Recipes
@@ -92,6 +90,8 @@ class IngredientsViewController: UIViewController {
                     self?.sendListOfRecipes(list: arrayOfHits)
                 case .failure(let error):
                     self?.errorMessage(element: error)
+                    self?.ingredientsTableView.isHidden = false
+                    self?.ingredientsView.activityIndicator.isHidden = true
                 }
             }
         }
@@ -134,7 +134,7 @@ class IngredientsViewController: UIViewController {
 // MARK: - Extension of IngredientsViewController
 extension IngredientsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

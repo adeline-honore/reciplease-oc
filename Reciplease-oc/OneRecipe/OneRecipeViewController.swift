@@ -18,10 +18,12 @@ class OneRecipeViewController: UIViewController {
     var recipeUI: RecipeUI?
     weak var delegate: OneRecipeViewControllerDelegate?
     private var oneRecipeView: OneRecipeView!
-    private let repository = RecipesCoreDataManager(
+    let repository = RecipesCoreDataManager(
         coreDataStack: CoreDataStack(),
         managedObjectContext: CoreDataStack().viewContext)
     
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var oneRecipeIngredientTableView: UITableView!
     
@@ -123,7 +125,7 @@ class OneRecipeViewController: UIViewController {
 // MARK: - Extension of OneRecipeViewController
 extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

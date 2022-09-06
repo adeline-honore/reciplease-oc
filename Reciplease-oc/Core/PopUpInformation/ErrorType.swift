@@ -16,7 +16,6 @@ enum ErrorType: Error {
     case notAWord
     case notSaved
     case coredataError
-    // TODO : create error " device no connected"
     
     
     var message: String {

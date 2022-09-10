@@ -62,7 +62,7 @@ class AllRecipesViewController: UIViewController {
         super.awakeFromNib()
         navigationItem.isAccessibilityElement = true
         
-        oneRecipeUI?.tellRecipeUIInformations()
+        //oneRecipeUI?.tellRecipeUIInformations()
     }
     
     // MARK: - TableViewCell configuration
@@ -98,6 +98,25 @@ class AllRecipesViewController: UIViewController {
         manageFavoriteStarImageView(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
         
         manageTimeView(time: recipeUI.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
+        
+        // VoiceOver
+        cell.imageCell.isAccessibilityElement = false
+        cell.titleCell.isAccessibilityElement = false
+        cell.titleCell.isAccessibilityElement = false
+        cell.clockCell.isAccessibilityElement = false
+        cell.ingredientsCell.isAccessibilityElement = false
+        cell.favoriteStar.isAccessibilityElement = false
+        
+        cell.isAccessibilityElement = true
+        
+        if recipes.isEmpty {
+            cell.accessibilityLabel = "\(recipeUI.title) with as ingredients \(recipeUI.ingredientsList.joined(separator: ", ")), the time of recipe is \(recipeUI.totalTime.isZero ? "not mentioned" : "\(String(format: "%.0f", recipeUI.totalTime)) minutes")"
+            
+        } else {
+            cell.accessibilityLabel = "\(recipeUI.title) with as ingredients \(recipeUI.ingredientsList.joined(separator: ", ")), the time of recipe is \(recipeUI.totalTime.isZero ? "not mentioned" : "\(String(format: "%.0f", recipeUI.totalTime)) minutes"), this is\(recipeUI.isFavorite == true ? "" : "not") a favorite recipe"
+            
+        }
+        
     }
     
     

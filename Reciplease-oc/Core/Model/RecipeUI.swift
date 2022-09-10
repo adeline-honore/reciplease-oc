@@ -46,8 +46,7 @@ struct RecipeUI {
         ingredientsList.joined(separator: ", ").accessibilityHint = "The ingredients of recipe"
         ingredientsList.joined(separator: ", ").isAccessibilityElement = true
         
-        duration.accessibilityHint = "The time of recipe"
-        duration.isAccessibilityElement = true
+        duration.accessibilityHint = "The time of recipe is \(totalTime.isZero ? "not mentioned" : "\(totalTime) minutes")"
         
         isFavorite.description.accessibilityHint = " This is\(isFavorite == true ? "" : "not") a favorite recipe"
         

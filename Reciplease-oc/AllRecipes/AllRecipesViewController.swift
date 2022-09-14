@@ -59,9 +59,7 @@ class AllRecipesViewController: UIViewController {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        navigationItem.isAccessibilityElement = true
-        
-        //oneRecipeUI?.tellRecipeUIInformations()
+        navigationItem.isAccessibilityElement = true        
     }
     
     // MARK: - TableViewCell configuration
@@ -85,15 +83,7 @@ class AllRecipesViewController: UIViewController {
     }
     
     private func configureRecipeCell(cell: RecipeTableViewCell, recipeUI: RecipeUI) {
-        
         cell.configure(recipe: recipeUI)
-                
-        cell.datasView.manageDataViewBackground()
-        
-        manageFavoriteStarImageView(imageView: cell.favoriteStarImageView, isFavorite: recipeUI.isFavorite)
-        
-        manageTimeView(time: recipeUI.totalTime, labelView: cell.timeLabel, clockView: cell.clockImageView, infoStack: cell.infoStackView)
-        
     }
     
     

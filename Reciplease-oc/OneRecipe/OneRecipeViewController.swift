@@ -43,23 +43,19 @@ class OneRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         guard let oneRecipe = recipeUI else { return }
-        displayRecipe(thisRecipeUI: oneRecipe)
+        displayRecipe(recipe: oneRecipe)
     }
     
     
     // MARK: - Display one recipe
     
-    private func displayRecipe(thisRecipeUI: RecipeUI) {
+    private func displayRecipe(recipe: RecipeUI) {
       
-        oneRecipeView.timeLabel.text = thisRecipeUI.duration
-        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: thisRecipeUI.isFavorite)
-        manageTimeView(time: thisRecipeUI.totalTime, labelView: oneRecipeView.timeLabel, clockView: oneRecipeView.clockImageView, infoStack: oneRecipeView.infoStack)
-        oneRecipeView.imageview.image = thisRecipeUI.image
-        
-        navigationItem.title = thisRecipeUI.title
+        navigationItem.title = recipe.title
         
         UIAccessibility.post(notification: .screenChanged, argument: navigationItem)
-        oneRecipeView.configureAccessibility(recipe: thisRecipeUI)
+        oneRecipeView.configureAccessibility(recipe: recipe)
+        oneRecipeView.configure(recipe: recipe)
         
     }
     
@@ -96,7 +92,7 @@ class OneRecipeViewController: UIViewController {
         
         delegate?.didChangeFavoriteState(urlRedirection: recipe.redirection, recipeChanged: recipe)
         
-        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: recipe.isFavorite)
+        oneRecipeView.manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: recipe.isFavorite)
         recipeUI = recipe
     }
     

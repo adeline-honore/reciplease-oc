@@ -48,6 +48,12 @@ class RecipeTableViewCell: UITableViewCell {
         imageview.image = recipe.image
         
         configureAccessibility(recipe: recipe)
+        
+        manageFavoriteStarImageView(imageView: favoriteStarImageView, isFavorite: recipe.isFavorite)
+        
+        manageTimeView(time: recipe.totalTime, timeLabel: timeLabel, clockView: clockImageView, infoStack: infoStackView)
+        
+        datasView.manageDataViewBackground()
     }
 }
 

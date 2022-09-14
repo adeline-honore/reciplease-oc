@@ -35,4 +35,14 @@ extension OneRecipeView {
         
         goToInstructionsButton.accessibilityHint = "Press Intructions Button to go to recipe's instructions"
     }
+    
+    func configure(recipe: RecipeUI) {
+        
+        timeLabel.text = recipe.duration
+        imageview.image = recipe.image
+        
+        manageTimeView(time: recipe.totalTime, timeLabel: timeLabel, clockView: clockImageView, infoStack: infoStack)
+        
+        manageFavoriteStarButton(button: favoriteStarButton, isFavorite: recipe.isFavorite)
+    }
 }

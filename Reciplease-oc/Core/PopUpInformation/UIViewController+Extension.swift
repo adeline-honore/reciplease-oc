@@ -22,26 +22,6 @@ extension UIViewController {
         displayAlert(message: element.message)
     }
     
-    func manageFavoriteStarImageView(imageView: UIImageView, isFavorite: Bool) {
-        imageView.tintColor = isFavorite ? .orange : .white
-    }
-    
-    func manageFavoriteStarButton(button: UIButton, isFavorite: Bool) {
-        button.tintColor = isFavorite ? .orange : .white
-    }
-    
-    func manageTimeView(time: Double, labelView: UILabel, clockView: UIView, infoStack: UIStackView) {
-        
-        if time.isZero {
-            labelView.isHidden = true
-            clockView.isHidden = true
-        } else {
-            labelView.isHidden = false
-            clockView.isHidden = false
-            infoStack.manageDataViewBackground()
-        }
-    }
-    
     func manageTimeDouble(time: Double) -> String {
         time.isZero ? "0" : String(Int(time)) + " mn  "
     }

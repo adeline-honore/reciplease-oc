@@ -10,6 +10,7 @@ import UIKit
 class IngredientsViewController: UIViewController {
     
     // MARK: - Properties
+    private var titleViewController = "My ingredients"
     private var ingredients: [String] = []
     private var ingredientsInString: String = ""
     private var ingredientsView: IngredientsView!
@@ -27,10 +28,19 @@ class IngredientsViewController: UIViewController {
         super.viewDidLoad()
         ingredientsView = view as? IngredientsView
         ingredientsView.activityIndicator.isHidden = true
-        navigationItem.title = "My ingredients"
+        navigationItem.title = titleViewController
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
+        configureAccessibility()
     }
+    
+    private func configureAccessibility()  {
+        navigationItem.accessibilityLabel = titleViewController
+        navigationItem.rightBarButtonItem?.accessibilityLabel = "search button"
+        navigationItem.rightBarButtonItem?.accessibilityHint = "Press search button to find recipes"
+        ingredientsView.configureAccessibility()
+    }
+    
     
     // MARK: - Add ingredients
     
@@ -40,7 +50,7 @@ class IngredientsViewController: UIViewController {
     
     private func addIngredient() {
         
-        guard var newIngredient = ingredientsView.searchIngredientTextField.text else { return }
+        guard var newIngredient = ingredientsView.ingredientsTextField.text else { return }
         
         newIngredient = newIngredient.trimmingCharacters(in: .whitespaces).lowercased()
                 
@@ -55,7 +65,7 @@ class IngredientsViewController: UIViewController {
         } else if !isValid {
             errorMessage(element: .notAWord)
         }
-        ingredientsView.searchIngredientTextField.text?.removeAll()
+        ingredientsView.ingredientsTextField.text?.removeAll()
     }
     
     

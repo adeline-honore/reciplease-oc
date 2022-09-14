@@ -137,14 +137,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="clockCell" destination="M90-WX-Tns" id="Y8v-Ug-D1C"/>
-                <outlet property="datasViewCell" destination="OH7-IG-Cl1" id="Jwg-Ql-D5c"/>
-                <outlet property="favoriteStar" destination="lmk-cX-OOT" id="1Em-Ok-BhH"/>
-                <outlet property="imageCell" destination="g4Y-uC-lKw" id="Pkm-I1-D8J"/>
-                <outlet property="infoStackCell" destination="7n4-Ar-xf1" id="C1I-92-y85"/>
-                <outlet property="ingredientsCell" destination="0mt-Bj-ylA" id="ugL-Xj-xAY"/>
-                <outlet property="timeCell" destination="Qqz-Kr-saz" id="mft-UC-Rxk"/>
-                <outlet property="titleCell" destination="b7d-q9-Rh7" id="1ds-AP-Fee"/>
+                <outlet property="clockImageView" destination="M90-WX-Tns" id="Y8v-Ug-D1C"/>
+                <outlet property="datasView" destination="OH7-IG-Cl1" id="Jwg-Ql-D5c"/>
+                <outlet property="favoriteStarImageView" destination="lmk-cX-OOT" id="1Em-Ok-BhH"/>
+                <outlet property="imageview" destination="g4Y-uC-lKw" id="Pkm-I1-D8J"/>
+                <outlet property="infoStackView" destination="7n4-Ar-xf1" id="C1I-92-y85"/>
+                <outlet property="ingredientsLabel" destination="0mt-Bj-ylA" id="ugL-Xj-xAY"/>
+                <outlet property="timeLabel" destination="Qqz-Kr-saz" id="mft-UC-Rxk"/>
+                <outlet property="titleLabel" destination="b7d-q9-Rh7" id="1ds-AP-Fee"/>
             </connections>
             <point key="canvasLocation" x="76.811594202898561" y="107.14285714285714"/>
         </tableViewCell>

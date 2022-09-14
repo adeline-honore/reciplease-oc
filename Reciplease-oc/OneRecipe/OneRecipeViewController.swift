@@ -32,10 +32,13 @@ class OneRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        oneRecipeView = view as? OneRecipeView
         oneRecipeIngredientTableView.dataSource = self
         oneRecipeIngredientTableView.delegate = self
-        
+    }
+    
+    override func loadView() {
+        super.loadView()
+        oneRecipeView = view as? OneRecipeView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,25 +46,21 @@ class OneRecipeViewController: UIViewController {
         displayRecipe(thisRecipeUI: oneRecipe)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()        
-        recipeUI?.tellRecipeUIInformations()
-    }
-    
     
     // MARK: - Display one recipe
     
     private func displayRecipe(thisRecipeUI: RecipeUI) {
-        guard let oneRecipe = recipeUI else {
-            return
-        }
+      
+        oneRecipeView.timeLabel.text = thisRecipeUI.duration
+        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: thisRecipeUI.isFavorite)
+        manageTimeView(time: thisRecipeUI.totalTime, labelView: oneRecipeView.timeLabel, clockView: oneRecipeView.clockImageView, infoStack: oneRecipeView.infoStack)
+        oneRecipeView.imageview.image = thisRecipeUI.image
         
-        oneRecipeView.oneRecipeTime.text = oneRecipe.duration
-        manageFavoriteStarButton(button: oneRecipeView.favoriteStarButton, isFavorite: oneRecipe.isFavorite)
-        manageTimeView(time: oneRecipe.totalTime, labelView: oneRecipeView.oneRecipeTime, clockView: oneRecipeView.oneRecipeClock, infoStack: oneRecipeView.infoStack)
-        oneRecipeView.oneRecipeImageView.image = oneRecipe.image
+        navigationItem.title = thisRecipeUI.title
         
-        navigationItem.title = oneRecipe.title
+        UIAccessibility.post(notification: .screenChanged, argument: navigationItem)
+        oneRecipeView.configureAccessibility(recipe: thisRecipeUI)
+        
     }
     
     
@@ -85,7 +84,7 @@ class OneRecipeViewController: UIViewController {
                 errorMessage(element: .coredataError)
             }
         } else { // if recipe isn't saved in Coredata then save it
-            recipe.imageBinary = oneRecipeView.oneRecipeImageView.image?.jpegData(compressionQuality: 1.0)
+            recipe.imageBinary = oneRecipeView.imageview.image?.jpegData(compressionQuality: 1.0)
             do {
                 try repository.addAsFavorite(recipeToSave: recipe)
                 recipe.isFavorite = true

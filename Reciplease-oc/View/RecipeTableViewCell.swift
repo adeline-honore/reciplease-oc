@@ -11,21 +11,21 @@ class RecipeTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var imageCell: UIImageView!
+    @IBOutlet weak var imageview: UIImageView!
 
-    @IBOutlet weak var titleCell: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
-    @IBOutlet weak var timeCell: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
-    @IBOutlet weak var clockCell: UIImageView!
+    @IBOutlet weak var clockImageView: UIImageView!
     
-    @IBOutlet weak var ingredientsCell: UILabel!
+    @IBOutlet weak var ingredientsLabel: UILabel!
     
-    @IBOutlet weak var datasViewCell: UIView!
+    @IBOutlet weak var datasView: UIView!
     
-    @IBOutlet weak var favoriteStar: UIImageView!
+    @IBOutlet weak var favoriteStarImageView: UIImageView!
     
-    @IBOutlet weak var infoStackCell: UIStackView!
+    @IBOutlet weak var infoStackView: UIStackView!
     
     
     static let identifier = "recipeCellIdentifier"
@@ -41,10 +41,27 @@ class RecipeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(titleValue: String, timeValue: String, ingredientsValue: String, imageValue: UIImage) {
-        titleCell.text = titleValue
-        timeCell.text = timeValue
-        ingredientsCell.text = ingredientsValue
-        imageCell.image = imageValue
+    func configure(recipe: RecipeUI) {
+        titleLabel.text = recipe.title
+        timeLabel.text = recipe.duration
+        ingredientsLabel.text = recipe.ingredientsList.joined(separator: ", ")
+        imageview.image = recipe.image
+        
+        configureAccessibility(recipe: recipe)
+    }
+}
+
+
+extension RecipeTableViewCell {
+    func configureAccessibility(recipe: RecipeUI) {
+        imageview.isAccessibilityElement = false
+        titleLabel.isAccessibilityElement = false
+        clockImageView.isAccessibilityElement = false
+        ingredientsLabel.isAccessibilityElement = false
+        favoriteStarImageView.isAccessibilityElement = false
+        
+        isAccessibilityElement = true
+        
+        accessibilityLabel = recipe.getAccessibility()
     }
 }

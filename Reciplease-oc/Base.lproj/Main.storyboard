@@ -194,7 +194,11 @@
                         </constraints>
                         <connections>
                             <outlet property="activityIndicator" destination="Tpi-mE-Tx7" id="4xe-zC-yRC"/>
-                            <outlet property="searchIngredientTextField" destination="Sd2-8P-6Ur" id="BJt-G5-RTA"/>
+                            <outlet property="addButton" destination="Cg1-vq-1Ak" id="TeJ-Te-hTw"/>
+                            <outlet property="clearAllButton" destination="aka-lQ-GDU" id="d57-gF-K2K"/>
+                            <outlet property="inMyFridgeLabel" destination="sov-13-RcN" id="4Ak-X2-rNN"/>
+                            <outlet property="ingredientsTextField" destination="Sd2-8P-6Ur" id="BJt-G5-RTA"/>
+                            <outlet property="myIngredientsLabel" destination="9Fu-7c-5CB" id="pV8-eT-Nip"/>
                         </connections>
                     </view>
                     <toolbarItems/>
@@ -221,15 +225,11 @@
             <objects>
                 <viewController id="c3M-E8-Sit" customClass="AllRecipesViewController" customModule="Reciplease_oc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aO6-zv-W47">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="obP-r1-Ube">
-                                <rect key="frame" x="0.0" y="426" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="200" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="671"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="VhL-uT-4dO"/>
@@ -246,7 +246,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="gOJ-CG-FtB"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="obP-r1-Ube" id="fFI-K4-MUf"/>
                         <outlet property="recipesTableView" destination="gfF-Tg-qWg" id="AMu-n6-FFS"/>
                         <segue destination="uRT-dB-7WG" kind="show" identifier="SegueFromAllToOneRecipe" id="Qtr-Bz-lpo"/>
                     </connections>
@@ -260,14 +259,14 @@
             <objects>
                 <viewController id="uRT-dB-7WG" customClass="OneRecipeViewController" customModule="Reciplease_oc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zX9-m8-SgA" customClass="OneRecipeView" customModule="Reciplease_oc" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dvf-Mr-jc1">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="351.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="285.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ly3-Z8-2Ux">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="351.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="285.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-cG-jbJ">
                                         <rect key="frame" x="357" y="10" width="47" height="45"/>
@@ -282,7 +281,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZFZ-Sg-htd">
-                                        <rect key="frame" x="309" y="306.5" width="95" height="35"/>
+                                        <rect key="frame" x="309" y="240.5" width="95" height="35"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grq-ma-nRO">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="35"/>
@@ -318,7 +317,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yob-d1-ECq">
-                                <rect key="frame" x="50" y="728" width="314" height="70"/>
+                                <rect key="frame" x="50" y="684" width="314" height="70"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="i1X-83-HLh"/>
@@ -333,7 +332,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="adC-3r-emU">
-                                <rect key="frame" x="0.0" y="361.5" width="414" height="351.5"/>
+                                <rect key="frame" x="0.0" y="383.5" width="414" height="285.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientTableViewCell" id="oNl-Xz-N4O" customClass="IngredientsTableViewCell" customModule="Reciplease_oc" customModuleProvider="target">
@@ -380,11 +379,12 @@
                             <constraint firstItem="Dvf-Mr-jc1" firstAttribute="top" secondItem="5TM-wN-zSL" secondAttribute="top" id="m2v-Jb-HzH"/>
                         </constraints>
                         <connections>
+                            <outlet property="clockImageView" destination="1FW-K3-I28" id="YH0-pP-5w4"/>
                             <outlet property="favoriteStarButton" destination="h82-cG-jbJ" id="WCC-Gt-XlX"/>
+                            <outlet property="goToInstructionsButton" destination="yob-d1-ECq" id="wks-HG-bIc"/>
+                            <outlet property="imageview" destination="Ly3-Z8-2Ux" id="pLU-87-XhS"/>
                             <outlet property="infoStack" destination="ZFZ-Sg-htd" id="Zcf-JY-e9l"/>
-                            <outlet property="oneRecipeClock" destination="1FW-K3-I28" id="YH0-pP-5w4"/>
-                            <outlet property="oneRecipeImageView" destination="Ly3-Z8-2Ux" id="pLU-87-XhS"/>
-                            <outlet property="oneRecipeTime" destination="grq-ma-nRO" id="czj-oz-zj2"/>
+                            <outlet property="timeLabel" destination="grq-ma-nRO" id="czj-oz-zj2"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ftw-5I-7gR"/>
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Md8-1i-Rj3"/>
+        <segue reference="3fD-Fx-E2p"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="clock" catalog="system" width="128" height="121"/>

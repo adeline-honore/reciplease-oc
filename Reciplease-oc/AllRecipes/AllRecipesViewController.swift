@@ -15,7 +15,6 @@ class AllRecipesViewController: UIViewController {
     
     // MARK: - Outlet
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var recipesTableView: UITableView!
     
     
@@ -87,35 +86,13 @@ class AllRecipesViewController: UIViewController {
     
     private func configureRecipeCell(cell: RecipeTableViewCell, recipeUI: RecipeUI) {
         
-        cell.configure(titleValue: recipeUI.title,
-                       timeValue: recipeUI.duration,
-                       ingredientsValue: recipeUI.ingredientsList.joined(separator: ", "),
-                       imageValue: recipeUI.image ?? icon
-        )
+        cell.configure(recipe: recipeUI)
                 
-        cell.datasViewCell.manageDataViewBackground()
+        cell.datasView.manageDataViewBackground()
         
-        manageFavoriteStarImageView(imageView: cell.favoriteStar, isFavorite: recipeUI.isFavorite)
+        manageFavoriteStarImageView(imageView: cell.favoriteStarImageView, isFavorite: recipeUI.isFavorite)
         
-        manageTimeView(time: recipeUI.totalTime, labelView: cell.timeCell, clockView: cell.clockCell, infoStack: cell.infoStackCell)
-        
-        // VoiceOver
-        cell.imageCell.isAccessibilityElement = false
-        cell.titleCell.isAccessibilityElement = false
-        cell.titleCell.isAccessibilityElement = false
-        cell.clockCell.isAccessibilityElement = false
-        cell.ingredientsCell.isAccessibilityElement = false
-        cell.favoriteStar.isAccessibilityElement = false
-        
-        cell.isAccessibilityElement = true
-        
-        if recipes.isEmpty {
-            cell.accessibilityLabel = "\(recipeUI.title) with as ingredients \(recipeUI.ingredientsList.joined(separator: ", ")), the time of recipe is \(recipeUI.totalTime.isZero ? "not mentioned" : "\(String(format: "%.0f", recipeUI.totalTime)) minutes")"
-            
-        } else {
-            cell.accessibilityLabel = "\(recipeUI.title) with as ingredients \(recipeUI.ingredientsList.joined(separator: ", ")), the time of recipe is \(recipeUI.totalTime.isZero ? "not mentioned" : "\(String(format: "%.0f", recipeUI.totalTime)) minutes"), this is\(recipeUI.isFavorite == true ? "" : "not") a favorite recipe"
-            
-        }
+        manageTimeView(time: recipeUI.totalTime, labelView: cell.timeLabel, clockView: cell.clockImageView, infoStack: cell.infoStackView)
         
     }
     
@@ -137,7 +114,7 @@ class AllRecipesViewController: UIViewController {
         
         if cacheManager.getCacheImage(name: redirection) != nil {
             let image = cacheManager.getCacheImage(name: redirection)
-            cell.imageCell.image = image
+            cell.imageview.image = image
             self.recipesUI[indexPathRow].image = image
             return
         }
@@ -145,11 +122,11 @@ class AllRecipesViewController: UIViewController {
         allIngredientsService.getImageData(url: urlImage) { result in
             switch result {
             case .success(let image):
-                cell.imageCell.image = image
+                cell.imageview.image = image
                 self.recipesUI[indexPathRow].image = image
                 self.cacheManager.addImageInCache(image: image, name: redirection as NSString)
             case .failure:
-                cell.imageCell.image = self.icon
+                cell.imageview.image = self.icon
             }
         }
     }

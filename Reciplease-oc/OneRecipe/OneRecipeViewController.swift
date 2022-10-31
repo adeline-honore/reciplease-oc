@@ -16,6 +16,8 @@ class OneRecipeViewController: UIViewController {
     // MARK: - Properties
     
     var recipeUI: RecipeUI?
+    var recipesUI: [RecipeUI]?
+    var recipesUIIndex: Int?
     weak var delegate: OneRecipeViewControllerDelegate?
     private var oneRecipeView: OneRecipeView!
     let repository = RecipesCoreDataManager(
@@ -42,6 +44,14 @@ class OneRecipeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        guard let recipesUIIndex = recipesUIIndex,
+              let recipesUI = recipesUI else {
+            return
+        }
+        
+        recipeUI = recipesUI[recipesUIIndex]
+        
         guard let oneRecipe = recipeUI else { return }
         displayRecipe(recipe: oneRecipe)
     }
@@ -138,5 +148,13 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.ingredient.text = "-  " + recipeUI.ingredientsList[indexPath.row]
         return cell
+    }
+}
+
+extension OneRecipeViewController: AllRecipesViewControllerDelegate {
+    func didSelectRecipe(_ recipe: Recipe) {}
+    
+    func didChangeRecipesUI(_ recipesUI: [RecipeUI]) {
+        self.recipesUI = recipesUI
     }
 }

@@ -9,6 +9,8 @@ import UIKit
 
 protocol AllRecipesViewControllerDelegate: AnyObject {
     func didSelectRecipe(_ recipe: Recipe)
+    
+    func didChangeRecipesUI(_ recipesUI: [RecipeUI])
 }
 
 class AllRecipesViewController: UIViewController {
@@ -21,6 +23,7 @@ class AllRecipesViewController: UIViewController {
     // MARK: - Properties
     
     private var recipesUI: [RecipeUI] = []
+    private var recipesUIIndex: Int?
     var recipes: [Recipe] = []
     private var oneRecipeUI: RecipeUI?
     
@@ -38,6 +41,8 @@ class AllRecipesViewController: UIViewController {
         managedObjectContext: CoreDataStack().viewContext)
     
     var allIngredientsService = AllRecipesService(network: APINetwork())
+    
+    weak var delegate: AllRecipesViewControllerDelegate?
 
     
     // MARK: - Life Cycle
@@ -74,10 +79,9 @@ class AllRecipesViewController: UIViewController {
         
         if (recipes.isEmpty) {
             displayCoreDataDatas()
-        } else if (!recipes.isEmpty && recipesUI.isEmpty) {
+        } else /*if (!recipes.isEmpty && recipesUI.isEmpty) || (!recipes.isEmpty && !recipesUI.isEmpty)*/ {
             displayNetworkDatas()
         }
-        // else: do not anything because all datas will come from recipesUI
         
         recipesTableView.reloadData()
     }
@@ -98,6 +102,7 @@ class AllRecipesViewController: UIViewController {
                             isFavorite: repository.isItFavorite(urlString: $0.url)
             )
         }
+        delegate?.didChangeRecipesUI(recipesUI)
     }
     
     private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int, redirection: String) {
@@ -128,6 +133,8 @@ class AllRecipesViewController: UIViewController {
         navigationItem.title = favoriteRecipesTitle
         getFavoriteRecipes()
         
+        delegate?.didChangeRecipesUI(recipesUI)
+        
         if recipesUI.isEmpty {
             informationMessage(element: .noFavoriteRecipe)
         }
@@ -157,8 +164,12 @@ class AllRecipesViewController: UIViewController {
     
     
     // MARK: - Send One Recipe to OneRecipeViewController
-    func sendOneRecipe(recipe: RecipeUI) {
-        oneRecipeUI = recipe
+//    func sendOneRecipe(recipe: RecipeUI) {
+//        oneRecipeUI = recipe
+//        performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
+//    }
+    
+    func sendRecipesUI() {
         performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
     }
     
@@ -166,7 +177,9 @@ class AllRecipesViewController: UIViewController {
         if segue.identifier == segueShowOneRecipe {
             let oneRecipeVC = segue.destination as? OneRecipeViewController
             oneRecipeVC?.delegate = self
-            oneRecipeVC?.recipeUI = oneRecipeUI
+            //oneRecipeVC?.recipeUI = oneRecipeUI
+            oneRecipeVC?.recipesUI = recipesUI
+            oneRecipeVC?.recipesUIIndex = recipesUIIndex
         }
     }
 }
@@ -205,8 +218,9 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let recipesSelectRow = recipesUI[indexPath.row]
-        sendOneRecipe(recipe: recipesSelectRow)
+        //let recipesSelectRow = recipesUI[indexPath.row]
+        recipesUIIndex = indexPath.row
+        sendRecipesUI()
     }
 }
 

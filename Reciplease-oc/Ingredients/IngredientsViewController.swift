@@ -16,7 +16,7 @@ class IngredientsViewController: UIViewController {
     private var ingredientsView: IngredientsView!
     var ingredientsService = IngredientsService(network: APINetwork())
     private var segueIngreients = "SegueFromIngredientsToAllRecipes"
-    private var allRecipes = [Recipe]()
+    //private var allRecipes = [Recipe]()
     
     // MARK: - Outlet
     
@@ -85,35 +85,41 @@ class IngredientsViewController: UIViewController {
     
     // MARK: - Search Recipes
     @IBAction func didTapSearchRecipeButton() {
-        searchRecipes(list: ingredients.joined(separator: "-"))
+        //searchRecipes(list: ingredients.joined(separator: "-"))
+        sendListOfRecipes(list: prepareIngredientsList(ingredients: ingredients))
     }
     
-    private func searchRecipes(list: String) {
-        ingredientsTableView.isHidden = true
-        ingredientsView.activityIndicator.isHidden = false
-        
-        ingredientsService.getData(ingredients: list) { result in
-            DispatchQueue.main.async { [weak self] in
-                
-                switch result {
-                case .success(let arrayOfHits):
-                    self?.sendListOfRecipes(list: arrayOfHits)
-                case .failure(let error):
-                    self?.errorMessage(element: error)
-                    self?.ingredientsTableView.isHidden = false
-                    self?.ingredientsView.activityIndicator.isHidden = true
-                }
-            }
-        }
-    }
+//    private func searchRecipes(list: String) {
+//        ingredientsTableView.isHidden = true
+//        ingredientsView.activityIndicator.isHidden = false
+//        
+//        ingredientsService.getData(ingredients: list, nextUrl: nil) { result in
+//            DispatchQueue.main.async { [weak self] in
+//                
+//                switch result {
+//                case .success(let arrayOfHits):
+//                    self?.sendListOfRecipes(list: arrayOfHits)
+//                case .failure(let error):
+//                    self?.errorMessage(element: error)
+//                    self?.ingredientsTableView.isHidden = false
+//                    self?.ingredientsView.activityIndicator.isHidden = true
+//                }
+//            }
+//        }
+//    }
     
     // MARK: - Send Recipes to AllRecipesViewController
-    private func sendListOfRecipes(list: [Recipe]) {
+    
+    private func prepareIngredientsList(ingredients: [String]) -> String {
+        ingredients.joined(separator: "-")
+    }
+    
+    private func sendListOfRecipes(list: String/*[Recipe]*/) {
         ingredientsTableView.isHidden = false
         ingredientsView.activityIndicator.isHidden = true
         
         if !list.isEmpty {
-            allRecipes = list
+            ingredientsInString = list
             performSegue(withIdentifier: segueIngreients, sender: nil)
         } else {
             errorMessage(element: .noRecipe)
@@ -124,7 +130,7 @@ class IngredientsViewController: UIViewController {
         if segue.identifier == segueIngreients {
             let allRecipesVC = segue.destination as? AllRecipesViewController
             
-            allRecipesVC?.recipes = allRecipes
+            allRecipesVC?.ingredientsList = ingredientsInString
         }
     }
     

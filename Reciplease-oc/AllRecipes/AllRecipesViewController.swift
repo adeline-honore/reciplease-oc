@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol AllRecipesViewControllerDelegate: AnyObject {
-    func didSelectRecipe(_ recipe: Recipe)
-    
-    func didChangeRecipesUI(_ recipesUI: [RecipeUI])
-}
 
 class AllRecipesViewController: UIViewController {
     
@@ -25,7 +20,7 @@ class AllRecipesViewController: UIViewController {
     private var recipesUI: [RecipeUI] = []
     private var recipesUIIndex: Int?
     var recipes: [Recipe] = []
-    private var oneRecipeUI: RecipeUI?
+    var ingredientsList: String = ""
     
     private let segueShowOneRecipe = "SegueFromAllToOneRecipe"
     
@@ -34,7 +29,7 @@ class AllRecipesViewController: UIViewController {
     private let icon = UIImage(imageLiteralResourceName: "icon")
     
     private var cacheManager = CacheManager.shared
-        
+    
     private var recipesCD: [RecipeCD]?
     let repository = RecipesCoreDataManager(
         coreDataStack: CoreDataStack(),
@@ -42,8 +37,8 @@ class AllRecipesViewController: UIViewController {
     
     var allIngredientsService = AllRecipesService(network: APINetwork())
     
-    weak var delegate: AllRecipesViewControllerDelegate?
-
+    var service = IngredientsService(network: APINetwork())
+//    weak var allRecipesViewControllerDelegate: AllRecipesViewControllerDelegate?
     
     // MARK: - Life Cycle
     
@@ -58,13 +53,9 @@ class AllRecipesViewController: UIViewController {
         checkDatasOrigin()
     }
     
-    override func loadView() {
-        super.loadView()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        navigationItem.isAccessibilityElement = true        
+        navigationItem.isAccessibilityElement = true
     }
     
     // MARK: - TableViewCell configuration
@@ -77,13 +68,13 @@ class AllRecipesViewController: UIViewController {
     
     private func checkDatasOrigin() {
         
-        if (recipes.isEmpty) {
+        if ingredientsList.isEmpty {
             displayCoreDataDatas()
-        } else /*if (!recipes.isEmpty && recipesUI.isEmpty) || (!recipes.isEmpty && !recipesUI.isEmpty)*/ {
+        } else if (!ingredientsList.isEmpty && recipes.isEmpty) {
             displayNetworkDatas()
+        } else {
+            recipesTableView.reloadData()
         }
-        
-        recipesTableView.reloadData()
     }
     
     private func configureRecipeCell(cell: RecipeTableViewCell, recipeUI: RecipeUI) {
@@ -96,13 +87,53 @@ class AllRecipesViewController: UIViewController {
     private func displayNetworkDatas() {
         navigationItem.title = recipesTitle
         
-        recipesUI = recipes.map {
-            RecipeUI(recipe: $0,
-                            duration: manageTimeDouble(time: $0.totalTime),
-                            isFavorite: repository.isItFavorite(urlString: $0.url)
-            )
+        recipesTableView.isHidden = true
+        //ingredientsView.activityIndicator.isHidden = false
+        
+        
+        service.getData(ingredients: ingredientsList) { result in
+            DispatchQueue.main.async { [weak self] in
+                
+                guard let self = self else {
+                    return
+                }
+                
+                switch result {
+                case .success(let arrayOfHits):
+                    
+                    self.recipes = arrayOfHits
+                    let recipesUIData = arrayOfHits.map {
+                        RecipeUI(recipe: $0,
+                                 duration: self.manageTimeDouble(time: $0.totalTime),
+                                 isFavorite: self.repository.isItFavorite(urlString: $0.url)
+                        )
+                    }
+                    
+                    self.recipesUI += recipesUIData
+                                        
+                    self.recipesTableView.reloadData()
+                    self.recipesTableView.tableFooterView = nil
+                    self.recipesTableView.isHidden = false
+                    
+                case .failure(let error):
+                    self.errorMessage(element: error)
+                    self.recipesTableView.isHidden = false
+                    //self.ingredientsView.activityIndicator.isHidden = true
+                }
+            }
         }
-        delegate?.didChangeRecipesUI(recipesUI)
+    }
+    
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
     }
     
     private func fetchImage(urlImage: String, cell: RecipeTableViewCell, indexPathRow: Int, redirection: String) {
@@ -133,7 +164,7 @@ class AllRecipesViewController: UIViewController {
         navigationItem.title = favoriteRecipesTitle
         getFavoriteRecipes()
         
-        delegate?.didChangeRecipesUI(recipesUI)
+        recipesTableView.reloadData()
         
         if recipesUI.isEmpty {
             informationMessage(element: .noFavoriteRecipe)
@@ -164,10 +195,6 @@ class AllRecipesViewController: UIViewController {
     
     
     // MARK: - Send One Recipe to OneRecipeViewController
-//    func sendOneRecipe(recipe: RecipeUI) {
-//        oneRecipeUI = recipe
-//        performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
-//    }
     
     func sendRecipesUI() {
         performSegue(withIdentifier: segueShowOneRecipe, sender: nil)
@@ -177,7 +204,6 @@ class AllRecipesViewController: UIViewController {
         if segue.identifier == segueShowOneRecipe {
             let oneRecipeVC = segue.destination as? OneRecipeViewController
             oneRecipeVC?.delegate = self
-            //oneRecipeVC?.recipeUI = oneRecipeUI
             oneRecipeVC?.recipesUI = recipesUI
             oneRecipeVC?.recipesUIIndex = recipesUIIndex
         }
@@ -192,7 +218,7 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         let recipesCount = recipesUI.count
+        let recipesCount = recipesUI.count
         return recipesCount
     }
     
@@ -200,10 +226,11 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: RecipeTableViewCell.identifier) as? RecipeTableViewCell ?? RecipeTableViewCell()
         
-        if (!recipes.isEmpty && recipesUI[indexPath.row].image == nil) {
+        if (!ingredientsList.isEmpty && recipesUI[indexPath.row].image == nil) {
             let index = recipesUI.firstIndex { recipeUI in
                 recipesUI[indexPath.row].redirection == recipeUI.redirection
             } ?? 0
+            
             fetchImage(urlImage: recipesUI[indexPath.row].imageURL, cell: cell, indexPathRow: index, redirection: recipesUI[indexPath.row].redirection)
         }
         
@@ -218,7 +245,6 @@ extension AllRecipesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //let recipesSelectRow = recipesUI[indexPath.row]
         recipesUIIndex = indexPath.row
         sendRecipesUI()
     }
@@ -229,7 +255,25 @@ extension AllRecipesViewController: OneRecipeViewControllerDelegate {
     func didChangeFavoriteState(urlRedirection: String, recipeChanged: RecipeUI) {
         
         if let row = self.recipesUI.firstIndex(where: {$0.redirection == urlRedirection}) {
-               recipesUI[row] = recipeChanged
+            recipesUI[row] = recipeChanged
+        }
+    }
+}
+
+extension AllRecipesViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let position = scrollView.contentOffset.y
+        let contentSize: CGSize = recipesTableView.contentSize
+        
+        if position > contentSize.height - 100 - scrollView.frame.size.height {
+            
+            // TO DO mettre un warning pour ne pas appeler plusieurs fois loadRecipes()
+            
+            recipesTableView.tableFooterView = createSpinnerFooter()
+            
+            displayNetworkDatas()
         }
     }
 }

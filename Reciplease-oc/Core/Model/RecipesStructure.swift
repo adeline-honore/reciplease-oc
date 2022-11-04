@@ -9,7 +9,17 @@ import Foundation
 
 struct RecipesStructure: Codable {
     
+    let _links: Links
+    
     let hits: [Hit]
+}
+
+struct Links: Codable {
+    let next: Next
+}
+
+struct Next: Codable {
+    let href: String
 }
 
 struct Hit: Codable {

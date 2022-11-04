@@ -150,11 +150,3 @@ extension OneRecipeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-extension OneRecipeViewController: AllRecipesViewControllerDelegate {
-    func didSelectRecipe(_ recipe: Recipe) {}
-    
-    func didChangeRecipesUI(_ recipesUI: [RecipeUI]) {
-        self.recipesUI = recipesUI
-    }
-}

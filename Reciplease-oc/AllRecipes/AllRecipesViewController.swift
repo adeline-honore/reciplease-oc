@@ -40,6 +40,8 @@ class AllRecipesViewController: UIViewController {
     var service = IngredientsService(network: APINetwork())
 //    weak var allRecipesViewControllerDelegate: AllRecipesViewControllerDelegate?
     
+    private var loadMoreRecipes: Bool = true
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -115,10 +117,14 @@ class AllRecipesViewController: UIViewController {
                     self.recipesTableView.tableFooterView = nil
                     self.recipesTableView.isHidden = false
                     
+                    self.loadMoreRecipes = true
+                    
                 case .failure(let error):
                     self.errorMessage(element: error)
                     self.recipesTableView.isHidden = false
                     //self.ingredientsView.activityIndicator.isHidden = true
+                    self.createSpinnerFooter()
+                    self.loadMoreRecipes = true
                 }
             }
         }
@@ -267,9 +273,9 @@ extension AllRecipesViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         let contentSize: CGSize = recipesTableView.contentSize
         
-        if position > contentSize.height - 100 - scrollView.frame.size.height {
+        if position > contentSize.height - 100 - scrollView.frame.size.height && loadMoreRecipes {
             
-            // TO DO mettre un warning pour ne pas appeler plusieurs fois loadRecipes()
+            loadMoreRecipes = false
             
             recipesTableView.tableFooterView = createSpinnerFooter()
             

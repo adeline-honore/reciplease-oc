@@ -54,6 +54,8 @@ class OneRecipeViewController: UIViewController {
         
         guard let oneRecipe = recipeUI else { return }
         displayRecipe(recipe: oneRecipe)
+        
+        delegate?.didChangeFavoriteState(urlRedirection: oneRecipe.redirection, recipeChanged: oneRecipe)
     }
     
     

@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1A087518-00D9-4A16-ABDE-E086933FE938"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease-oc/OneRecipe/OneRecipeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "toggleFavorite()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "50322C26-1B2E-4507-8B44-63CEE39F1B77"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -33,22 +17,6 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "prepareUrlRequest(ingredients:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8BB22C2F-5B84-43F0-8F47-DAFB8687FAE3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease-oc/OneRecipe/OneRecipeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -103,22 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F46CBB8B-30E5-4CFB-9743-B7581D0A6A8C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease-oc/OneRecipe/OneRecipeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D0BF31F3-C3C5-4026-A1C3-30D48AF57AF0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -126,25 +78,9 @@
             filePath = "Reciplease-oc/OneRecipe/OneRecipeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "displayRecipe(recipe:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "97F0B310-C23D-4E2D-BD9C-0FCBED12D634"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Reciplease-oc/AllRecipes/AllRecipesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

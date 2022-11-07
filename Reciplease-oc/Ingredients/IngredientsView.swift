@@ -20,8 +20,6 @@ class IngredientsView: UIView {
     
     @IBOutlet weak var myIngredientsLabel: UILabel!
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
 }
 
 extension IngredientsView {
@@ -36,9 +34,5 @@ extension IngredientsView {
         addButton.accessibilityHint = "Press Add Button to add an ingredient"
         
         clearAllButton.accessibilityHint = "Press Clear All Buton to remove all ingredients"
-        
-        if activityIndicator.isAnimating {
-            activityIndicator.accessibilityHint = "loading recipes "
-        }
     }
 }

@@ -14,6 +14,7 @@ class AllRecipesViewController: UIViewController {
     
     @IBOutlet weak var recipesTableView: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Properties
     
@@ -37,9 +38,6 @@ class AllRecipesViewController: UIViewController {
     
     var allIngredientsService = AllRecipesService(network: APINetwork())
     
-    var service = IngredientsService(network: APINetwork())
-//    weak var allRecipesViewControllerDelegate: AllRecipesViewControllerDelegate?
-    
     private var loadMoreRecipes: Bool = true
     
     // MARK: - Life Cycle
@@ -49,6 +47,7 @@ class AllRecipesViewController: UIViewController {
         recipesTableView.dataSource = self
         recipesTableView.delegate = self
         configureTableView()
+        activityIndicator.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,10 +89,10 @@ class AllRecipesViewController: UIViewController {
         navigationItem.title = recipesTitle
         
         recipesTableView.isHidden = true
-        //ingredientsView.activityIndicator.isHidden = false
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         
-        
-        service.getData(ingredients: ingredientsList) { result in
+        allIngredientsService.getData(ingredients: ingredientsList) { result in
             DispatchQueue.main.async { [weak self] in
                 
                 guard let self = self else {
@@ -116,14 +115,15 @@ class AllRecipesViewController: UIViewController {
                     self.recipesTableView.reloadData()
                     self.recipesTableView.tableFooterView = nil
                     self.recipesTableView.isHidden = false
+                    self.activityIndicator.isHidden = true
                     
                     self.loadMoreRecipes = true
                     
                 case .failure(let error):
                     self.errorMessage(element: error)
                     self.recipesTableView.isHidden = false
-                    //self.ingredientsView.activityIndicator.isHidden = true
-                    self.createSpinnerFooter()
+                    self.activityIndicator.isHidden = true
+                    self.recipesTableView.tableFooterView = nil
                     self.loadMoreRecipes = true
                 }
             }

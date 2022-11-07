@@ -14,9 +14,7 @@ class IngredientsViewController: UIViewController {
     private var ingredients: [String] = []
     private var ingredientsInString: String = ""
     private var ingredientsView: IngredientsView!
-    var ingredientsService = IngredientsService(network: APINetwork())
     private var segueIngreients = "SegueFromIngredientsToAllRecipes"
-    //private var allRecipes = [Recipe]()
     
     // MARK: - Outlet
     
@@ -27,7 +25,6 @@ class IngredientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientsView = view as? IngredientsView
-        ingredientsView.activityIndicator.isHidden = true
         navigationItem.title = titleViewController
         ingredientsTableView.dataSource = self
         ingredientsTableView.delegate = self
@@ -85,28 +82,9 @@ class IngredientsViewController: UIViewController {
     
     // MARK: - Search Recipes
     @IBAction func didTapSearchRecipeButton() {
-        //searchRecipes(list: ingredients.joined(separator: "-"))
         sendListOfRecipes(list: prepareIngredientsList(ingredients: ingredients))
     }
     
-//    private func searchRecipes(list: String) {
-//        ingredientsTableView.isHidden = true
-//        ingredientsView.activityIndicator.isHidden = false
-//        
-//        ingredientsService.getData(ingredients: list, nextUrl: nil) { result in
-//            DispatchQueue.main.async { [weak self] in
-//                
-//                switch result {
-//                case .success(let arrayOfHits):
-//                    self?.sendListOfRecipes(list: arrayOfHits)
-//                case .failure(let error):
-//                    self?.errorMessage(element: error)
-//                    self?.ingredientsTableView.isHidden = false
-//                    self?.ingredientsView.activityIndicator.isHidden = true
-//                }
-//            }
-//        }
-//    }
     
     // MARK: - Send Recipes to AllRecipesViewController
     
@@ -114,9 +92,8 @@ class IngredientsViewController: UIViewController {
         ingredients.joined(separator: "-")
     }
     
-    private func sendListOfRecipes(list: String/*[Recipe]*/) {
+    private func sendListOfRecipes(list: String) {
         ingredientsTableView.isHidden = false
-        ingredientsView.activityIndicator.isHidden = true
         
         if !list.isEmpty {
             ingredientsInString = list

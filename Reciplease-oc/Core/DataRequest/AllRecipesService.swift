@@ -1,30 +1,27 @@
 //
-//  IngredientsService.swift
+//  AllRecipesService.swift
 //  Reciplease-oc
 //
-//  Created by HONORE Adeline on 07/06/2022.
+//  Created by HONORE Adeline on 14/08/2022.
 //
 
-import Foundation
+import UIKit
 
-protocol IngredientsServiceProtocol {
+protocol AllRecipesServiceProtocol {
     func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ())
+    func getImageData(url: String, completionHandler: @escaping (Result<UIImage, ErrorType>) -> ())
 }
 
-class IngredientsService: IngredientsServiceProtocol {
+class AllRecipesService: AllRecipesServiceProtocol {
     
     private var network: APINetworkProtocol
-    
     private var nextUrl: String?
     
     init(network: APINetworkProtocol) {
         self.network = network
     }
     
-    
     func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ()) {
-            
-//        try? network.callNetwork(router: IngredientsRouterNetwork.ingredients(ingredients).asURLRequest()) { [weak self] result in
         
         network.callNetwork(router: prepareUrlRequest(ingredients: ingredients)) { [weak self]
             result in
@@ -33,9 +30,6 @@ class IngredientsService: IngredientsServiceProtocol {
                 completionHandler(.failure(ErrorType.network))
                 return
             }
-//            if pagination {
-//                self.isPaginating = true
-//            }
             
             switch result {
             case .success(let data):
@@ -44,8 +38,6 @@ class IngredientsService: IngredientsServiceProtocol {
                     
                     // get url for next recipes
                     self.nextUrl = recipesResult._links.next.href
-                    
-                    // if
                     
                     let recipes = recipesResult.hits.map { $0.recipe}
                     completionHandler(.success(recipes))
@@ -111,8 +103,18 @@ class IngredientsService: IngredientsServiceProtocol {
     }
     
     
-    func getnextUrl(nextUrl: String?) -> String? {
-        return nextUrl
+    func getImageData(url: String, completionHandler: @escaping (Result<UIImage, ErrorType>) -> ()) {
+        
+        try? network.callNetwork(router:  FetchImageRouter.urlImage(url).asURLRequest()) { result in
+            
+            switch result {
+            case .success(let data):
+                guard let imageToUpload = UIImage(data: data) else { return }
+                completionHandler(.success(imageToUpload))
+                
+            case .failure:
+                completionHandler(.failure(ErrorType.network))
+            }
+        }
     }
-    
 }

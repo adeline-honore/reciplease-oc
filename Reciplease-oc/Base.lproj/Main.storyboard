@@ -52,9 +52,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Tpi-mE-Tx7">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xVJ-1Y-gBF">
                                 <rect key="frame" x="30" y="264.5" width="354" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -187,13 +184,10 @@
                             <constraint firstItem="xVJ-1Y-gBF" firstAttribute="top" secondItem="516-KC-Mck" secondAttribute="bottom" constant="15" id="Vpg-tB-9YL"/>
                             <constraint firstItem="LHh-cA-oEy" firstAttribute="leading" secondItem="H7I-Ow-WcY" secondAttribute="leading" constant="10" id="WUV-m5-6qH"/>
                             <constraint firstItem="516-KC-Mck" firstAttribute="top" secondItem="LHh-cA-oEy" secondAttribute="bottom" constant="30" id="X4m-ub-6Kp"/>
-                            <constraint firstItem="Tpi-mE-Tx7" firstAttribute="centerX" secondItem="OGj-tQ-8BX" secondAttribute="centerX" id="d4S-iu-K4F"/>
                             <constraint firstItem="H7I-Ow-WcY" firstAttribute="bottom" secondItem="xVJ-1Y-gBF" secondAttribute="bottom" constant="99.5" id="gg5-Ek-Msj"/>
                             <constraint firstItem="xVJ-1Y-gBF" firstAttribute="leading" secondItem="H7I-Ow-WcY" secondAttribute="leading" constant="30" id="lC5-PO-s1B"/>
-                            <constraint firstItem="Tpi-mE-Tx7" firstAttribute="centerY" secondItem="OGj-tQ-8BX" secondAttribute="centerY" id="ymG-Sf-HW5"/>
                         </constraints>
                         <connections>
-                            <outlet property="activityIndicator" destination="Tpi-mE-Tx7" id="4xe-zC-yRC"/>
                             <outlet property="addButton" destination="Cg1-vq-1Ak" id="TeJ-Te-hTw"/>
                             <outlet property="clearAllButton" destination="aka-lQ-GDU" id="d57-gF-K2K"/>
                             <outlet property="inMyFridgeLabel" destination="sov-13-RcN" id="4Ak-X2-rNN"/>
@@ -228,6 +222,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="cOo-U4-nvt">
+                                <rect key="frame" x="0.0" y="426" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="200" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" id="gfF-Tg-qWg">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,6 +244,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="gOJ-CG-FtB"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="cOo-U4-nvt" id="dB2-cK-C58"/>
                         <outlet property="recipesTableView" destination="gfF-Tg-qWg" id="AMu-n6-FFS"/>
                         <segue destination="uRT-dB-7WG" kind="show" identifier="SegueFromAllToOneRecipe" id="Qtr-Bz-lpo"/>
                     </connections>

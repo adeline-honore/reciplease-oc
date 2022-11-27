@@ -23,8 +23,12 @@ class AllRecipesService: AllRecipesServiceProtocol {
     
     func getData(ingredients: String, completionHandler: @escaping (Result<[Recipe], ErrorType>) -> ()) {
         
-        network.callNetwork(router: prepareUrlRequest(ingredients: ingredients)) { [weak self]
-            result in
+        guard let urlRequest = try? prepareUrlRequest(ingredients: ingredients) else {
+            return completionHandler(.failure(ErrorType.network))
+        }
+        
+        network.callNetwork(router: urlRequest) {
+            [weak self] result in
                 
             guard let self = self else {
                 completionHandler(.failure(ErrorType.network))
@@ -52,39 +56,16 @@ class AllRecipesService: AllRecipesServiceProtocol {
     }
     
     private func transformToRecipes(data: Data) throws -> RecipesStructure {
-        
-        do {
-            return try JSONDecoder().decode(RecipesStructure.self, from: data)
-        } catch {
-            throw ErrorType.decodingError
-        }
+        return try JSONDecoder().decode(RecipesStructure.self, from: data)
     }
     
     
     
-    private func prepareUrlRequest(ingredients: String) -> URLRequest {
-        
-        if nextUrl == nil {
-            do {
-                return try IngredientsRouterNetwork.ingredients(ingredients).asURLRequest()
-            } catch {
-                ErrorType.network
-                return URLRequest(url: URL(string: "")!)
-            }
-            
-        } else {
-            guard let nextUrl = nextUrl else {
-                return URLRequest(url: URL(string: "")!)
-            }
-
-            do {
-                return try createNextUrlRequest(url: nextUrl)
-            }
-            catch {
-                ErrorType.network
-                return URLRequest(url: URL(string: "")!)
-            }
+    private func prepareUrlRequest(ingredients: String) throws -> URLRequest {
+        guard let nextUrl = nextUrl else {
+            return try IngredientsRouterNetwork.ingredients(ingredients).asURLRequest()
         }
+        return try createNextUrlRequest(url: nextUrl)
     }
     
     

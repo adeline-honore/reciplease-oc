@@ -9,11 +9,14 @@ import Foundation
 
 enum TestCase {
     case ingredients
+    case decodeFailure
     
     var resource: String {
         switch self {
         case .ingredients:
             return "Ingredients"
+        case .decodeFailure:
+            return ""
         }
     }
 }

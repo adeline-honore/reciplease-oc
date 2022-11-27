@@ -14,8 +14,8 @@ class IngredientsTestCase: XCTestCase {
     private var allRecipesService: AllRecipesService!
     private let ingredients = "tomato"
     
-    private func initSUT(isFailed: Bool = false) {
-        allRecipesService = AllRecipesService(network: NetworkFake(testCase: .ingredients, isFailed: isFailed))
+    private func initSUT(isFailed: Bool = false, testCase: TestCase = .ingredients) {
+        allRecipesService = AllRecipesService(network: NetworkFake(testCase: testCase, isFailed: isFailed))
     }
     
     override func tearDown() {
@@ -138,6 +138,23 @@ class IngredientsTestCase: XCTestCase {
                 expectation.fulfill()
             case .failure(_):
                 XCTFail()
+            }
+        }
+        wait(for: [expectation], timeout: 0.01)
+    }
+    
+    func testAllRecipesServiceShouldReturnFailure() {
+        // Given
+        initSUT(isFailed: true)
+        // When
+        let expectation = XCTestExpectation(description: "Should return failure")
+        // Then
+        allRecipesService.getData(ingredients: ingredients) { result in
+            switch result {
+            case .success(_):
+                XCTFail()
+            case .failure(_):
+                expectation.fulfill()
             }
         }
         wait(for: [expectation], timeout: 0.01)

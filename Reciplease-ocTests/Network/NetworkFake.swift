@@ -21,20 +21,19 @@ class NetworkFake: APINetworkProtocol {
     }
     
     func callNetwork(router: URLRequestConvertible, completionHandler: @escaping (Result<Data, Error>) -> ()) {
-        
-         guard !isFailed else {
-             completionHandler(.failure(ErrorType.network))
-             return
-         }
+         guard !isFailed else { return completionHandler(.failure(ErrorType.network)) }
          
-         let bundle = Bundle(for: NetworkFake.self)
-         guard let url = bundle.url(forResource: testCase.resource, withExtension: extensionType) else {
-             completionHandler(.failure(ErrorType.network))
-             return
-         }
-         let data = try! Data(contentsOf: url)
-         
-         completionHandler(.success(data))
-     
+        switch testCase {
+        case .ingredients:
+            return completionHandler(.success(prepareData()))
+        case .decodeFailure :
+            return completionHandler(.success("test".data(using: .utf8)!))
+        }
+    }
+    
+    private func prepareData() -> Data {
+        let bundle = Bundle(for: NetworkFake.self)
+        let url = bundle.url(forResource: testCase.resource, withExtension: extensionType)!
+        return try! Data(contentsOf: url)
     }
 }

@@ -11,11 +11,14 @@ enum TestCase {
     case ingredients
     case decodeFailure
     
+    case imageDecodeFailure
+    case image
+    
     var resource: String {
         switch self {
         case .ingredients:
             return "Ingredients"
-        case .decodeFailure:
+        default:
             return ""
         }
     }

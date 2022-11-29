@@ -8,11 +8,13 @@
 import Foundation
 import Alamofire
 @testable import Reciplease_oc
+import UIKit
 
 class NetworkFake: APINetworkProtocol {
     
     private let testCase : TestCase
-    private let extensionType = "json"
+    private let jsonExtensionType = "json"
+    private let imageExtensionType = "png"
     private var isFailed: Bool = false
     
     init(testCase: TestCase, isFailed: Bool = false) {
@@ -26,14 +28,23 @@ class NetworkFake: APINetworkProtocol {
         switch testCase {
         case .ingredients:
             return completionHandler(.success(prepareData()))
-        case .decodeFailure :
+        case .image:
+            return completionHandler(.success(prepareImageData()))
+        case .decodeFailure, .imageDecodeFailure:
             return completionHandler(.success("test".data(using: .utf8)!))
+        
         }
     }
     
     private func prepareData() -> Data {
         let bundle = Bundle(for: NetworkFake.self)
-        let url = bundle.url(forResource: testCase.resource, withExtension: extensionType)!
+        let url = bundle.url(forResource: testCase.resource, withExtension: jsonExtensionType)!
         return try! Data(contentsOf: url)
+    }
+    
+    private func prepareImageData() -> Data {
+        let image = UIImage(named: "icon")
+        let data = image!.jpegData(compressionQuality: 1)
+        return data!
     }
 }

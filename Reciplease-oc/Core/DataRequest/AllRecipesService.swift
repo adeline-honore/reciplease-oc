@@ -87,12 +87,12 @@ class AllRecipesService: AllRecipesServiceProtocol {
     func getImageData(url: String, completionHandler: @escaping (Result<UIImage, ErrorType>) -> ()) {
         
         try? network.callNetwork(router:  FetchImageRouter.urlImage(url).asURLRequest()) { result in
-            
             switch result {
             case .success(let data):
-                guard let imageToUpload = UIImage(data: data) else { return }
+                guard let imageToUpload = UIImage(data: data) else {
+                    return completionHandler(.failure(.decodingError))
+                }
                 completionHandler(.success(imageToUpload))
-                
             case .failure:
                 completionHandler(.failure(ErrorType.network))
             }

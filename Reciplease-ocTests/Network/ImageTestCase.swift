@@ -12,8 +12,8 @@ final class ImageTestCase: XCTestCase {
     
     let urlString = "https://www.google.com"
     
-    private func makeSUT(isFailed: Bool = false, scenerio: TestCase = .image) -> AllRecipesServiceProtocol {
-        let networkFake = NetworkFake(testCase: scenerio, isFailed: isFailed)
+    private func makeSUT(isFailed: Bool = false, scenario: TestCase = .image) -> AllRecipesServiceProtocol {
+        let networkFake = NetworkFake(testCase: scenario, isFailed: isFailed)
         let sut = AllRecipesService(network: networkFake)
         return sut
     }
@@ -38,7 +38,7 @@ final class ImageTestCase: XCTestCase {
     
     func testGetImageDataDecodingError() {
         // Given
-        let sut = makeSUT(scenerio: .imageDecodeFailure)
+        let sut = makeSUT(scenario: .imageDecodeFailure)
         let expectation = XCTestExpectation(description: "Should return failure")
         // When
         sut.getImageData(url: urlString) { result in

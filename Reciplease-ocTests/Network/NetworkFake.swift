@@ -30,7 +30,7 @@ class NetworkFake: APINetworkProtocol {
             return completionHandler(.success(prepareData()))
         case .image:
             return completionHandler(.success(prepareImageData()))
-        case .decodeFailure, .imageDecodeFailure:
+        case .decodeFailure:
             return completionHandler(.success("test".data(using: .utf8)!))
         
         }

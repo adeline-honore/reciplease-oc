@@ -10,7 +10,7 @@ import XCTest
 
 final class ImageTestCase: XCTestCase {
     
-    let urlString = "https://www.google.com"
+    private let urlString = "https://www.google.com"
     
     private func makeSUT(isFailed: Bool = false, scenario: TestCase = .image) -> AllRecipesServiceProtocol {
         let networkFake = NetworkFake(testCase: scenario, isFailed: isFailed)
@@ -38,15 +38,16 @@ final class ImageTestCase: XCTestCase {
     
     func testGetImageDataDecodingError() {
         // Given
-        let sut = makeSUT(scenario: .imageDecodeFailure)
+        let sut = makeSUT(scenario: .decodeFailure)
         let expectation = XCTestExpectation(description: "Should return failure")
         // When
         sut.getImageData(url: urlString) { result in
             switch result {
             case .success(_):
                 XCTFail("Should return failure")
-            case .failure(_):
+            case .failure(let error):
                 // Then
+                XCTAssertEqual(error, ErrorType.decodingError)
                 expectation.fulfill()
             }
         }
@@ -56,7 +57,7 @@ final class ImageTestCase: XCTestCase {
     func testGetImageDataSuccess() {
         // Given
         let sut = makeSUT()
-        let expectation = XCTestExpectation(description: "Should return failure")
+        let expectation = XCTestExpectation(description: "Wait for queue change")
         // When
         sut.getImageData(url: urlString) { result in
             switch result {
@@ -64,7 +65,7 @@ final class ImageTestCase: XCTestCase {
                 // Then
                 expectation.fulfill()
             case .failure(_):
-                XCTFail("This test should fail")
+                XCTFail()
             }
         }
         wait(for: [expectation], timeout: 0.1)

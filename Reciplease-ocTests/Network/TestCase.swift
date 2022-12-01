@@ -11,7 +11,6 @@ enum TestCase {
     case ingredients
     case decodeFailure
     
-    case imageDecodeFailure
     case image
     
     var resource: String {

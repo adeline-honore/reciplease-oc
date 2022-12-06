@@ -11,14 +11,19 @@ import XCTest
 class CacheTestCase: XCTestCase {
     
     // Given
-    private var cacheManager = CacheManagerFake()
+    private var cacheManager: CacheManager!
     private let image = UIImage(named: "icon")
     private let imageName = "imageTest"
     
     
-    override func tearDown() {
-        super.setUp()
-        cacheManager.cache.removeAllObjects()
+    override func setUpWithError() throws {
+        cacheManager = CacheManager.shared
+        try super.setUpWithError()
+    }
+    
+    override func tearDownWithError() throws {
+        cacheManager = nil
+        try super.tearDownWithError()
     }
     
     func testCacheAddImageShouldPostSuccess() {

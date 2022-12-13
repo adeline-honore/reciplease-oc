@@ -9,15 +9,15 @@ import UIKit
 
 protocol CacheManagerProtocol: AnyObject {
     func addImageInCache(image: UIImage, name: NSString)
-    
-    func getCacheImage(name: String) -> UIImage? 
+    func getCacheImage(name: String) -> UIImage?
+    func clear()
 }
 
 
 class CacheManager: CacheManagerProtocol {
     
     private var cache = NSCache<NSString, UIImage>()
-    static var shared = CacheManager()
+    static var shared: CacheManagerProtocol = CacheManager()
     
     private init() {}
     
@@ -30,4 +30,7 @@ class CacheManager: CacheManagerProtocol {
         cache.object(forKey: name as NSString) == nil ? nil : cache.object(forKey: name as NSString)
     }
     
+    func clear() {
+        cache.removeAllObjects()
+    }
 }
